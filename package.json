@@ -1,0 +1,61 @@
+{
+  "name": "frontend-starter-react",
+  "version": "1.0.0",
+  "private": false,
+  "license": "MIT",
+  "scripts": {
+    "start": "cross-env BROWSER=none craco start",
+    "build": "cross-env NODE_ENV=production BUILD_PATH='./docs' craco build",
+    "pretty": "prettier --check src",
+    "lint": "yarn pretty && eslint --max-warnings 0 --ext ts,tsx,json src",
+    "generate-css-types": "tailwindcss-classnames -o src/classnames/tailwind.ts && prettier --write \"src/classnames/tailwind.ts\"",
+    "prestart": "yarn generate-css-types",
+    "prebuild": "yarn generate-css-types",
+    "update": "yarn build && git add . && git commit -m 'update' && git push"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "mobx": "^6.3.3",
+    "mobx-persist-store": "^1.0.4",
+    "mobx-react-lite": "^3.2.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-intl": "^5.20.12",
+    "unfetch": "^4.2.0"
+  },
+  "devDependencies": {
+    "@craco/craco": "^6.3.0",
+    "@types/node": "^16.10.3",
+    "@types/react": "^17.0.27",
+    "@types/react-dom": "^17.0.9",
+    "autoprefixer": "^9",
+    "cross-env": "7.0.3",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-sort-imports-es6-autofix": "^0.6.0",
+    "postcss": "^7",
+    "prettier": "^2.4.1",
+    "react-scripts": "^4.0.3",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "tailwindcss-classnames": "^2.2.4",
+    "typescript": "^4.4.3"
+  }
+}
