@@ -1,22 +1,24 @@
-import { getUserCount } from 'helpers/api'
-import { useEffect, useState } from 'react'
+import * as api from 'helpers/api'
+import { useState } from 'react'
 
 const useApp = () => {
-  const [userCount, setUserCount] = useState<undefined | number>(undefined)
+  const [email, setEmail] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
 
-  const fetchData = async () => {
+  const submitEmail = async () => {
     try {
-      setUserCount(await getUserCount())
+      setLoading(true)
+      await api.submitEmail(email)
     } catch (err) {
+      setError(true)
       console.log(err)
+    } finally {
+      setLoading(false)
     }
   }
 
-  useEffect(() => {
-    fetchData()
-  }, [])
-
-  return { userCount }
+  return { submitEmail, email, loading, error, setEmail }
 }
 
 export default useApp

@@ -1,6 +1,8 @@
-import fetch from 'unfetch'
+import axios from 'axios'
 
-export async function getUserCount() {
-  const data = await (await fetch('https://stats.borodutch.com/count')).json()
-  return data.count
+export async function submitEmail(email: string) {
+  const data = await axios.post('https://backend.book.borodutch.com/email', {
+    email,
+  })
+  return data
 }
