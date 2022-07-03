@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import {
   backgroundColor,
   classnames,
@@ -7,6 +6,7 @@ import {
   maxWidth,
   padding,
 } from 'classnames/tailwind'
+import ChildrenProp from 'models/ChildrenProp'
 
 const root = classnames(
   container('container'),
@@ -15,8 +15,6 @@ const root = classnames(
   maxWidth('max-w-4xl'),
   backgroundColor('bg-black-background')
 )
-const Root: FC = ({ children }) => {
+export default function ({ children }: ChildrenProp) {
   return <div className={root}>{children}</div>
 }
-
-export default Root
