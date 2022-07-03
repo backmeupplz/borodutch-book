@@ -1,79 +1,98 @@
 import { FC } from 'react'
-import { classnames } from 'classnames/tailwind'
+import {
+  backgroundColor,
+  borderColor,
+  borderRadius,
+  borderWidth,
+  classnames,
+  cursor,
+  fontSize,
+  fontWeight,
+  hardwareAcceleration,
+  margin,
+  outlineStyle,
+  padding,
+  placeholderColor,
+  scale,
+  textColor,
+  textDecoration,
+  transitionProperty,
+  transitionTimingFunction,
+  translate,
+} from 'classnames/tailwind'
 import Root from 'components/Root'
 import useApp from 'hooks/useApp'
 
 const text = classnames(
-  'text-primary',
-  'text-2xl',
-  'md:text-4xl',
-  'font-bold',
-  'mb-3',
-  'md:mb-4'
+  textColor('text-primary'),
+  fontSize('text-2xl', 'md:text-4xl'),
+  fontWeight('font-bold'),
+  margin('mb-3', 'md:mb-4')
 )
 const Text: FC = ({ children }) => <p className={text}>{children}</p>
 
-const link = classnames('underline')
+const link = textDecoration('underline')
 const Link: FC<{ url: string }> = ({ children, url }) => (
   <a href={url} className={link} rel="noopener noreferrer" target="_blank">
     {children}
   </a>
 )
 
-const accent = classnames('text-yellow-600')
+const accent = textColor('text-yellow-600')
 const Accent: FC = ({ children }) => <span className={accent}>{children}</span>
 
 const textField = classnames(
-  'px-6',
-  'py-4',
-  'my-4',
-  'bg-transparent',
-  'border',
-  'border-gray-400',
-  'transition-colors',
-  'rounded',
-  'text-primary',
-  'focus:border-primary',
-  'focus:outline-none',
-  'placeholder-gray-400',
-  'mr-4'
+  padding('px-6', 'py-4'),
+  margin('my-4', 'mr-4'),
+  backgroundColor('bg-transparent'),
+  borderWidth('border'),
+  borderColor('border-gray-400', 'focus:border-primary'),
+  transitionProperty('transition-colors'),
+  borderRadius('rounded'),
+  textColor('text-primary'),
+  outlineStyle('focus:outline-none'),
+  placeholderColor('placeholder-gray-400')
 )
 
 const button = (disabled: boolean, loading: boolean) =>
   classnames(
-    'px-6',
-    'py-4',
-    'mb-6',
-    disabled || loading ? 'bg-gray-400' : 'bg-primary',
-    'text-black-background',
-    'rounded',
-    loading
-      ? 'cursor-wait'
-      : disabled
-      ? 'cursor-not-allowed'
-      : 'cursor-pointer',
-    'focus:outline-none',
-    'transition-all',
-    'ease-in-out',
-    disabled ? undefined : 'hover:scale-110',
-    disabled ? undefined : 'hover:translate-x-2',
-    'transform-gpu'
+    padding('px-6', 'py-4'),
+    margin('mb-6'),
+    backgroundColor(disabled || loading ? 'bg-gray-400' : 'bg-primary'),
+    textColor('text-black-background'),
+    borderRadius('rounded'),
+    cursor(
+      loading
+        ? 'cursor-wait'
+        : disabled
+        ? 'cursor-not-allowed'
+        : 'cursor-pointer'
+    ),
+    outlineStyle('focus:outline-none'),
+    transitionProperty('transition-all'),
+    transitionTimingFunction('ease-in-out'),
+    scale(disabled ? undefined : 'hover:scale-110'),
+    translate(disabled ? undefined : 'hover:translate-x-2'),
+    hardwareAcceleration('transform-gpu')
   )
-const Button: FC<{ onClick: () => void; loading: boolean; disabled: boolean }> =
-  ({ onClick, children, loading, disabled }) => (
-    <button
-      className={button(disabled, loading)}
-      onClick={onClick}
-      disabled={loading || disabled}
-    >
-      {children}
-      {loading && ' 🤔'}
-    </button>
-  )
+const Button: FC<{
+  onClick: () => void
+  loading: boolean
+  disabled: boolean
+}> = ({ onClick, children, loading, disabled }) => (
+  <button
+    className={button(disabled, loading)}
+    onClick={onClick}
+    disabled={loading || disabled}
+  >
+    {children}
+    {loading && ' 🤔'}
+  </button>
+)
 
 const App = () => {
   const {
-    submitEmail,
+    submitEmailToApi,
     email,
     loading,
     error,
@@ -110,12 +129,18 @@ const App = () => {
         placeholder="Ваш имейл"
         className={textField}
         value={email}
-        onChange={(e) => {
-          setEmail(e.target.value)
+        onInput={(e) => {
+          if (e.target instanceof HTMLInputElement) {
+            setEmail(e.target.value)
+          }
         }}
         disabled={loading}
       />
-      <Button onClick={submitEmail} loading={loading} disabled={!isEmailValid}>
+      <Button
+        onClick={submitEmailToApi}
+        loading={loading}
+        disabled={!isEmailValid}
+      >
         Оставить почту
       </Button>
       {error && (

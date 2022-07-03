@@ -1,5 +1,5 @@
-import * as api from 'helpers/api'
 import { useEffect, useState } from 'react'
+import submitEmail from 'helpers/submitEmail'
 
 const useApp = () => {
   const [email, setEmail] = useState('')
@@ -18,12 +18,12 @@ const useApp = () => {
     setIsEmailValid(validateEmail(email))
   }, [email])
 
-  const submitEmail = async () => {
+  const submitEmailToApi = async () => {
     setError(false)
     setSuccess(false)
     try {
       setLoading(true)
-      await api.submitEmail(email)
+      await submitEmail(email)
       setEmail('')
       setSuccess(true)
     } catch (err) {
@@ -34,7 +34,15 @@ const useApp = () => {
     }
   }
 
-  return { submitEmail, email, loading, error, setEmail, isEmailValid, success }
+  return {
+    submitEmailToApi,
+    email,
+    loading,
+    error,
+    setEmail,
+    isEmailValid,
+    success,
+  }
 }
 
 export default useApp
