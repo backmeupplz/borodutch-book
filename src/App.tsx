@@ -1,3 +1,6 @@
+import 'react-toastify/dist/ReactToastify.css'
+
+import { ToastContainer } from 'react-toastify'
 import Accent from 'components/Accent'
 import Button from 'components/Button'
 import Link from 'components/Link'
@@ -71,6 +74,7 @@ const App = () => {
           имейл, как только книга поступит в продажу<Accent>!</Accent>
         </Text>
       )}
+      <ToastContainer position="bottom-right" theme="dark" />
     </Root>
   )
 }
