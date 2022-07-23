@@ -1,10 +1,10 @@
 import ChildrenProp from 'models/ChildrenProp'
 import classnames, {
+  TTranslate,
   backgroundColor,
   borderRadius,
   cursor,
   hardwareAcceleration,
-  margin,
   outlineStyle,
   padding,
   scale,
@@ -14,10 +14,9 @@ import classnames, {
   translate,
 } from 'classnames/tailwind'
 
-function button(disabled: boolean, loading: boolean) {
+function button(disabled?: boolean, loading?: boolean) {
   return classnames(
     padding('px-6', 'py-4'),
-    margin('mb-6'),
     backgroundColor(disabled || loading ? 'bg-gray-400' : 'bg-primary'),
     textColor('text-black-background'),
     borderRadius('rounded'),
@@ -32,7 +31,7 @@ function button(disabled: boolean, loading: boolean) {
     transitionProperty('transition-all'),
     transitionTimingFunction('ease-in-out'),
     scale(disabled ? undefined : 'hover:scale-110'),
-    translate(disabled ? undefined : 'hover:translate-x-2'),
+    translate(disabled ? undefined : ('-hover:translate-x-2' as TTranslate)),
     hardwareAcceleration('transform-gpu')
   )
 }
@@ -44,8 +43,8 @@ export default function ({
   disabled,
 }: {
   onClick: () => void
-  loading: boolean
-  disabled: boolean
+  loading?: boolean
+  disabled?: boolean
 } & ChildrenProp) {
   return (
     <button

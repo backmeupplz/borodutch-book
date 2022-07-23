@@ -1,5 +1,7 @@
-export default {
-  rpc: 'https://eth-goerli.g.alchemy.com/v2/uzBLtgwKy4z3LC8uWWQ3tRUBHcnTVQi9',
-  network: 'goerli',
-  appName: 'Borodutch Book',
-}
+import { cleanEnv, str } from 'envalid'
+
+export default cleanEnv(import.meta.env, {
+  VITE_BACKEND_URL: str(),
+  VITE_ENCRYPT_KEY: str(),
+  VITE_ETH_NETWORK: str({ default: 'homestead' }),
+})

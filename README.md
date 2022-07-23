@@ -5,7 +5,8 @@ This is a website for the Borodutch Book.
 ## Local launch
 
 1. Install dependencies with `yarn`
-2. Run the server with `yarn start`
+2. Add environment variables
+3. Run the server with `yarn start`
 
 ## Available Scripts
 

@@ -1,81 +1,58 @@
-import 'react-toastify/dist/ReactToastify.css'
-
 import { ToastContainer } from 'react-toastify'
 import Accent from 'components/Accent'
-import Button from 'components/Button'
+import Banner from 'components/Banner'
 import Link from 'components/Link'
 import Root from 'components/Root'
+import Summary from 'components/Summary'
 import Text from 'components/Text'
-import TextField from 'components/TextField'
-import useApp from 'hooks/useApp'
+import Wallet from 'components/Wallet'
 
 const App = () => {
-  const {
-    submitEmailToApi,
-    email,
-    loading,
-    error,
-    setEmail,
-    isEmailValid,
-    success,
-  } = useApp()
-
   return (
     <Root>
+      <Banner />
       <Text>
         Привет всем<Accent>!</Accent> Это{' '}
         <Link url="https://borodutch.com">Никита</Link>
         <Accent>.</Accent>
       </Text>
       <Text>
-        Я пишу книгу о том, как резко повысить качество своей жизни на основе
-        научных исследований<Accent>!</Accent>
+        Я написал книгу о том, как резко улучшить свою жизнь на основе научных
+        исследований<Accent>!</Accent>
       </Text>
       <Text>
-        Книга состоит из четырех частей: рациональное мышление, внешнее счастье,
-        внутреннее счастье, достижение успеха<Accent>.</Accent>
+        Книга состоит из четырех частей: счастье с другими, счастье с собой,
+        рациональное мышление, достижение успеха<Accent>.</Accent> Ловите
+        содержание<Accent>!</Accent>
       </Text>
+      <Summary />
       <Text>
-        Первая версия готова на 99.5%<Accent>!</Accent> Вносим последние правки,
-        пишем благодарности, подготавливаем каналы дистрибьюции
+        Доступ к книге особенный<Accent>!</Accent>{' '}
+        <Link url="https://opensea.io/collection/wdlaty">
+          Необходимо купить NFT книги на OpenSea
+        </Link>
         <Accent>.</Accent>
       </Text>
       <Text>
-        Хотите получить имейл, когда книгу можно будет купить<Accent>?</Accent>{' '}
-        Оставьте свою почту ниже<Accent>!</Accent>
+        Дальше<Accent>,</Accent> нужно подключить ниже кошелек, который владеет
+        хотя бы одним NFT книги<Accent>.</Accent> После <Accent>—</Accent> жмите
+        на кнопки форматов, которые хотите скачать, подписывайте сообщение и
+        читайте
+        <Accent>!</Accent>
       </Text>
-      <TextField
-        type="email"
-        placeholder="Ваш имейл"
-        value={email}
-        onInput={(e) => {
-          if (e.target instanceof HTMLInputElement) {
-            setEmail(e.target.value)
-          }
-        }}
-        disabled={loading}
-      />
-      <Button
-        onClick={submitEmailToApi}
-        loading={loading}
-        disabled={!isEmailValid}
-      >
-        Оставить почту
-      </Button>
-      {error && (
-        <Text>
-          Ох, что-то пошло не так<Accent>!</Accent>{' '}
-          <Link url="https://t.me/borodutch">Напишите мне</Link> о том, что у
-          вас все сломалось, пожалуйста<Accent>!</Accent>
-        </Text>
-      )}
-      {success && (
-        <Text>
-          Спасибо за то, что оставили свою почту<Accent>!</Accent> Вы получите
-          имейл, как только книга поступит в продажу<Accent>!</Accent>
-        </Text>
-      )}
       <ToastContainer position="bottom-right" theme="dark" />
+      <Wallet />
+      <Text>
+        Я вам полностью доверяю, поэтому, пожалуйста, не пиратьте мою книгу
+        <Accent>!</Accent> Я не против, чтобы вы дали ее почитать своим
+        родственникам, хотя будет еще круче, если вы и им купите экземпляр
+        <Accent>!</Accent>
+      </Text>
+      <Text>
+        Остались вопросы или что-то не работает<Accent>?</Accent>{' '}
+        <Link url="https://t.me/borodutch">Смело пишите мне в Телеграме</Link>
+        <Accent>!</Accent>
+      </Text>
     </Root>
   )
 }

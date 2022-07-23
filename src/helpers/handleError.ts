@@ -7,8 +7,8 @@ export const ProofGenerationErrors = {}
 
 export const ErrorList = {
   wrongNetwork: (userNetwork: string, contractNetwork: string) =>
-    `Looks like you're using ${userNetwork} network, try switching to ${contractNetwork} and connect again`,
-  unknown: 'An unknown error occurred, please, contact us',
+    `Похоже,вы подключены к ${userNetwork} сети, переключитесь на ${contractNetwork} и попробуйте снова`,
+  unknown: 'Неизвестная ошибка! Напишите мне в Телеграме, попрввим!',
   clear: '',
 }
 

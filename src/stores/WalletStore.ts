@@ -1,14 +1,23 @@
 import { Web3Provider } from '@ethersproject/providers'
 import { proxy } from 'valtio'
+import PersistableStore from 'stores/persistence/PersistableStore'
 import env from 'helpers/env'
 import handleError, { ErrorList } from 'helpers/handleError'
 import web3Modal from 'helpers/web3Modal'
 
 let provider: Web3Provider
 
-class WalletStore {
+class WalletStore extends PersistableStore {
   account?: string
   walletLoading = false
+  walletsToNotifiedOfBeingDoxxed = {} as {
+    [address: string]: boolean
+  }
+
+  replacer = (key: string, value: unknown) => {
+    const disallowList = ['account', 'walletLoading']
+    return disallowList.includes(key) ? undefined : value
+  }
 
   get cachedProvider() {
     return web3Modal.cachedProvider
@@ -22,8 +31,10 @@ class WalletStore {
       const instance = await web3Modal.connect()
       provider = new Web3Provider(instance)
       const userNetwork = (await provider.getNetwork()).name
-      if (userNetwork !== env.network && env.network)
-        throw new Error(ErrorList.wrongNetwork(userNetwork, env.network))
+      if (userNetwork !== env.VITE_ETH_NETWORK)
+        throw new Error(
+          ErrorList.wrongNetwork(userNetwork, env.VITE_ETH_NETWORK)
+        )
       this.account = (await provider.listAccounts())[0]
       this.subscribeProvider(instance)
     } catch (error) {
@@ -39,14 +50,9 @@ class WalletStore {
   async signMessage(message: string) {
     if (!provider) throw new Error('No provider')
 
-    this.walletLoading = true
-    try {
-      const signer = provider.getSigner()
-      const signature = await signer.signMessage(message)
-      return signature
-    } finally {
-      this.walletLoading = false
-    }
+    const signer = provider.getSigner()
+    const signature = await signer.signMessage(message)
+    return signature
   }
 
   private async handleAccountChanged() {
@@ -66,7 +72,10 @@ class WalletStore {
     })
 
     provider.on('accountsChanged', (accounts: string[]) => {
-      accounts.length ? void this.handleAccountChanged() : this.clearData()
+      if (!accounts.length) this.clearData()
+
+      this.account = undefined
+      void this.handleAccountChanged()
     })
     provider.on('disconnect', (error: unknown) => {
       if (provider) provider.removeAllListeners()
@@ -85,7 +94,7 @@ class WalletStore {
   }
 }
 
-const walletStore = proxy(new WalletStore())
+const walletStore = proxy(new WalletStore()).makePersistent(true)
 
 if (walletStore.cachedProvider) void walletStore.connect()
 
