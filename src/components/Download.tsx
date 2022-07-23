@@ -8,7 +8,7 @@ import classnames, {
   display,
   flexDirection,
   flexWrap,
-  space,
+  gap,
 } from 'classnames/tailwind'
 import download from 'downloadjs'
 import env from 'helpers/env'
@@ -22,7 +22,7 @@ const state = proxy({
 const container = classnames(
   display('flex'),
   flexDirection('flex-row'),
-  space('space-x-5'),
+  gap('gap-5'),
   flexWrap('flex-wrap')
 )
 function Suspended() {
