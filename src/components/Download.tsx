@@ -73,6 +73,7 @@ export default function () {
   return (
     <Suspense fallback={<Text>Загружаю форматы...</Text>}>
       <Suspended />
+      <Text>(версия с феминитивами и default-female будет чуть позже...)</Text>
     </Suspense>
   )
 }
