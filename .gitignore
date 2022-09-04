@@ -1,6 +1,5 @@
 .DS_Store
 node_modules
-dist
 stats.html
 
 # local env files
@@ -12,14 +11,6 @@ stats.html
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# Editor directories and files
-.idea
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
 
 # yarn
 .pnp.*

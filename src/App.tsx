@@ -1,11 +1,9 @@
-import { ToastContainer } from 'react-toastify'
 import Accent from 'components/Accent'
 import Banner from 'components/Banner'
 import Link from 'components/Link'
 import Root from 'components/Root'
 import Summary from 'components/Summary'
 import Text from 'components/Text'
-import Wallet from 'components/Wallet'
 
 const App = () => {
   return (
@@ -40,8 +38,6 @@ const App = () => {
         читайте
         <Accent>!</Accent>
       </Text>
-      <ToastContainer position="bottom-right" theme="dark" />
-      <Wallet />
       <Text>
         Я вам полностью доверяю, поэтому, пожалуйста, не пиратьте мою книгу
         <Accent>!</Accent> Я не против, чтобы вы дали ее почитать своим
