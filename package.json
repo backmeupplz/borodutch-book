@@ -28,6 +28,7 @@
     ]
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.10",
     "envalid": "^7.3.1",
     "preact": "^10.10.0",
     "valtio": "^1.6.3"

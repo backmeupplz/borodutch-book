@@ -1,4 +1,4 @@
-import Image from 'components/Image'
+import ImageLink from 'components/ImageLink'
 import classnames, { display, flexDirection, space } from 'classnames/tailwind'
 
 const container = classnames(
@@ -9,8 +9,8 @@ const container = classnames(
 export default function () {
   return (
     <div className={container}>
-      <Image src="/images/summary-1.png" alt="summary" />
-      <Image src="/images/summary-2.png" alt="summary continued" />
+      <ImageLink src="/images/summary-1.png" alt="summary" />
+      <ImageLink src="/images/summary-2.png" alt="summary continued" />
     </div>
   )
 }

@@ -570,6 +570,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@heroicons/react@npm:^2.0.10":
+  version: 2.0.10
+  resolution: "@heroicons/react@npm:2.0.10"
+  peerDependencies:
+    react: ">= 16"
+  checksum: 40e0fc0289f7b12239e307d887d3cdbf80c5157a42e5b1c313b291800e9a30a191f6310c2dcc08a8a0132b238ff37e62ecd2f6b1696cf81043d48154566b8643
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.10.4":
   version: 0.10.4
   resolution: "@humanwhocodes/config-array@npm:0.10.4"
@@ -1221,6 +1230,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "borodutch-book@workspace:."
   dependencies:
+    "@heroicons/react": ^2.0.10
     "@preact/preset-vite": ^2.3.0
     "@types/node": ^18.0.6
     "@typescript-eslint/eslint-plugin": ^5.30.7
