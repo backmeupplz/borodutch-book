@@ -2,8 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --background: #f7fafc;
+  --primary: #2d3748;
+  --secondary: #718096;
+}
+
+.dark {
+  --background: #1a202c;
+  --primary: #edf2f7;
+  --secondary: #a0aec0;
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);
 }

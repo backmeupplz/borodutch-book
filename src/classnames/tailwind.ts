@@ -276,6 +276,9 @@ export type TBackgroundColor =
   | 'bg-rose-700'
   | 'bg-rose-800'
   | 'bg-rose-900'
+  | 'bg-background'
+  | 'bg-primary'
+  | 'bg-secondary'
 
 export type TBackgroundPosition =
   | 'bg-bottom'
@@ -977,6 +980,15 @@ export type TGradientColorStops =
   | 'from-rose-900'
   | 'via-rose-900'
   | 'to-rose-900'
+  | 'from-background'
+  | 'via-background'
+  | 'to-background'
+  | 'from-primary'
+  | 'via-primary'
+  | 'to-primary'
+  | 'from-secondary'
+  | 'via-secondary'
+  | 'to-secondary'
 
 export type TBackgrounds =
   | TBackgroundAttachment
@@ -2579,6 +2591,21 @@ export type TBorderColor =
   | 'border-l-rose-900'
   | 'border-x-rose-900'
   | 'border-y-rose-900'
+  | 'border-background'
+  | 'border-t-background'
+  | 'border-r-background'
+  | 'border-b-background'
+  | 'border-l-background'
+  | 'border-primary'
+  | 'border-t-primary'
+  | 'border-r-primary'
+  | 'border-b-primary'
+  | 'border-l-primary'
+  | 'border-secondary'
+  | 'border-t-secondary'
+  | 'border-r-secondary'
+  | 'border-b-secondary'
+  | 'border-l-secondary'
 
 export type TBorderOpacity =
   | 'border-opacity-0'
@@ -3201,6 +3228,9 @@ export type TRingColor =
   | 'ring-rose-700'
   | 'ring-rose-800'
   | 'ring-rose-900'
+  | 'ring-background'
+  | 'ring-primary'
+  | 'ring-secondary'
 
 export type TRingWidth =
   | 'ring-0'
@@ -3455,6 +3485,9 @@ export type TRingOffsetColor =
   | 'ring-offset-rose-700'
   | 'ring-offset-rose-800'
   | 'ring-offset-rose-900'
+  | 'ring-offset-background'
+  | 'ring-offset-primary'
+  | 'ring-offset-secondary'
 
 export type TRingOffsetWidth =
   | 'ring-offset-0'
@@ -3703,6 +3736,9 @@ export type TOutlineColor =
   | 'outline-rose-700'
   | 'outline-rose-800'
   | 'outline-rose-900'
+  | 'outline-background'
+  | 'outline-primary'
+  | 'outline-secondary'
 
 export type TBorders =
   | TBorderStyle
@@ -4002,6 +4038,9 @@ export type TBoxShadowColor =
   | 'shadow-rose-700'
   | 'shadow-rose-800'
   | 'shadow-rose-900'
+  | 'shadow-background'
+  | 'shadow-primary'
+  | 'shadow-secondary'
 
 export type TOpacity =
   | 'opacity-0'
@@ -5540,6 +5579,9 @@ export type TCaretColor =
   | 'caret-rose-700'
   | 'caret-rose-800'
   | 'caret-rose-900'
+  | 'caret-background'
+  | 'caret-primary'
+  | 'caret-secondary'
 
 export type TWillChange =
   | 'will-change-auto'
@@ -5774,6 +5816,9 @@ export type TAccentColor =
   | 'accent-rose-800'
   | 'accent-rose-900'
   | 'accent-auto'
+  | 'accent-background'
+  | 'accent-primary'
+  | 'accent-secondary'
 
 export type TScrollPadding =
   | 'scroll-p-0'
@@ -6999,6 +7044,9 @@ export type TFill =
   | 'fill-fuchsia'
   | 'fill-pink'
   | 'fill-rose'
+  | 'fill-background'
+  | 'fill-primary'
+  | 'fill-secondary'
 
 export type TStroke =
   | 'stroke-inherit'
@@ -7028,6 +7076,9 @@ export type TStroke =
   | 'stroke-fuchsia'
   | 'stroke-pink'
   | 'stroke-rose'
+  | 'stroke-background'
+  | 'stroke-primary'
+  | 'stroke-secondary'
 
 export type TStrokeWidth = 'stroke-0' | 'stroke-1' | 'stroke-2'
 
@@ -7256,7 +7307,11 @@ export type TTextDecorationStyle =
   | 'decoration-dashed'
   | 'decoration-wavy'
 
-export type TFontFamily = 'font-sans' | 'font-serif' | 'font-mono'
+export type TFontFamily =
+  | 'font-sans'
+  | 'font-serif'
+  | 'font-mono'
+  | 'font-title'
 
 export type TFontSize =
   | 'text-xs'
@@ -7536,6 +7591,9 @@ export type TPlaceholderColor =
   | 'placeholder-rose-700'
   | 'placeholder-rose-800'
   | 'placeholder-rose-900'
+  | 'placeholder-background'
+  | 'placeholder-primary'
+  | 'placeholder-secondary'
 
 export type TPlaceholderOpacity =
   | 'placeholder-opacity-0'
@@ -7780,6 +7838,9 @@ export type TTextColor =
   | 'text-rose-700'
   | 'text-rose-800'
   | 'text-rose-900'
+  | 'text-background'
+  | 'text-primary'
+  | 'text-secondary'
 
 export type TTextOpacity =
   | 'text-opacity-0'
@@ -8063,6 +8124,9 @@ export type TTextDecorationColor =
   | 'decoration-rose-700'
   | 'decoration-rose-800'
   | 'decoration-rose-900'
+  | 'decoration-background'
+  | 'decoration-primary'
+  | 'decoration-secondary'
 
 export type TTextDecorationThickness =
   | 'decoration-0'

@@ -2,7 +2,8 @@ import { ListBulletIcon } from '@heroicons/react/24/solid'
 import { LogoText } from 'components/Text'
 import IconButton from 'components/IconButton'
 import Image from 'components/Image'
-import Separator from 'components/Separator'
+import Separator from 'components/Navbar/Separator'
+import ThemeToggle from 'components/Navbar/ThemeToggle'
 import classnames, {
   alignItems,
   backgroundColor,
@@ -24,7 +25,7 @@ const container = classnames(
   flexDirection('flex-col'),
   alignItems('items-stretch'),
   justifyContent('justify-center'),
-  backgroundColor('bg-sky-50'),
+  backgroundColor('bg-background'),
   fontFamily('font-serif')
 )
 const content = classnames(
@@ -32,9 +33,16 @@ const content = classnames(
   flexDirection('flex-row'),
   alignItems('items-center'),
   justifyContent('justify-between'),
-  padding('p-2')
+  padding('px-8', 'py-4')
 )
 const logo = classnames(
+  display('flex'),
+  flexDirection('flex-row'),
+  alignItems('items-center'),
+  justifyContent('justify-center'),
+  gap('gap-x-4')
+)
+const buttons = classnames(
   display('flex'),
   flexDirection('flex-row'),
   alignItems('items-center'),
@@ -49,9 +57,16 @@ export default function () {
           <Image src="/icons/logo.svg" alt="Logo" />
           <LogoText>We Don't Live a Thousand Years</LogoText>
         </div>
-        <IconButton>
-          <ListBulletIcon className={icon} />
-        </IconButton>
+        <div className={buttons}>
+          <ThemeToggle />
+          <IconButton
+            onClick={() => {
+              console.log('Menu clicked')
+            }}
+          >
+            <ListBulletIcon className={icon} />
+          </IconButton>
+        </div>
       </div>
       <Separator />
     </div>

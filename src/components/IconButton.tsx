@@ -12,10 +12,17 @@ const container = classnames(
   padding('p-2'),
   borderRadius('rounded-full'),
   borderWidth('border'),
-  borderColor('border-sky-900'),
+  borderColor('border-primary'),
   cursor('cursor-pointer'),
-  backgroundColor('hover:bg-sky-100', 'active:bg-slate-200')
+  backgroundColor('hover:bg-secondary', 'active:bg-slate-200')
 )
-export default function ({ children }: ChildrenProp) {
-  return <div className={container}>{children}</div>
+export default function ({
+  children,
+  onClick,
+}: ChildrenProp & { onClick: () => void }) {
+  return (
+    <div className={container} onClick={onClick}>
+      {children}
+    </div>
+  )
 }
