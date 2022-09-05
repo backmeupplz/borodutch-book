@@ -1,6 +1,7 @@
 import ChildrenProp from 'models/ChildrenProp'
 import classnames, {
   TTranslate,
+  animation,
   backgroundColor,
   borderRadius,
   cursor,
@@ -18,7 +19,7 @@ function button(disabled?: boolean, loading?: boolean) {
   return classnames(
     padding('px-6', 'py-4'),
     backgroundColor(disabled || loading ? 'bg-gray-400' : 'bg-primary'),
-    textColor('text-black-background'),
+    textColor('text-primary'),
     borderRadius('rounded'),
     cursor(
       loading

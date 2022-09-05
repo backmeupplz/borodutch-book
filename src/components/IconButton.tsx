@@ -6,6 +6,7 @@ import classnames, {
   borderWidth,
   cursor,
   padding,
+  transitionProperty,
 } from 'classnames/tailwind'
 
 const container = classnames(
@@ -14,7 +15,8 @@ const container = classnames(
   borderWidth('border'),
   borderColor('border-primary'),
   cursor('cursor-pointer'),
-  backgroundColor('hover:bg-secondary', 'active:bg-slate-200')
+  backgroundColor('hover:bg-secondary', 'active:bg-slate-200'),
+  transitionProperty('transition-colors')
 )
 export default function ({
   children,

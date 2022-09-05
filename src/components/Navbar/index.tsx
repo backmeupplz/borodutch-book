@@ -9,12 +9,12 @@ import classnames, {
   backgroundColor,
   display,
   flexDirection,
-  fontFamily,
   gap,
   inset,
   justifyContent,
   padding,
   position,
+  transitionProperty,
 } from 'classnames/tailwind'
 import icon from 'classnames/icon'
 
@@ -26,7 +26,7 @@ const container = classnames(
   alignItems('items-stretch'),
   justifyContent('justify-center'),
   backgroundColor('bg-background'),
-  fontFamily('font-serif')
+  transitionProperty('transition-colors')
 )
 const content = classnames(
   display('flex'),
