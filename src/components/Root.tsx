@@ -14,7 +14,7 @@ import ChildrenProp from 'models/ChildrenProp'
 
 const root = classnames(
   container('container'),
-  maxWidth('max-w-4xl'),
+  maxWidth('max-w-2xl'),
   margin('mx-auto'),
   padding('py-4'),
   backgroundColor('bg-background'),

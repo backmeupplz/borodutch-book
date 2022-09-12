@@ -16,6 +16,15 @@ export function Text({ children }: ChildrenProp) {
   return <p className={text}>{children}</p>
 }
 
+const tocChapter = classnames(
+  text,
+  fontWeight('font-bold'),
+  fontSize('text-2xl')
+)
+export function TocChapter({ children }: ChildrenProp) {
+  return <h2 className={tocChapter}>{children}</h2>
+}
+
 const logoText = classnames(
   textColor('text-primary'),
   fontSize('text-xl'),
