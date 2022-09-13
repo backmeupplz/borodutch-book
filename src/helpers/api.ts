@@ -7,8 +7,8 @@ export function fetchToc() {
   ) as Promise<Chapter[]>
 }
 
-export function fetchChapter(index: number) {
-  return fetch(`${env.VITE_BACKEND_URL}/book/chapter/${index}`).then(
+export function fetchChapter(slug: string) {
+  return fetch(`${env.VITE_BACKEND_URL}/book/chapter/${slug}`).then(
     (response) => response.json()
   ) as Promise<Chapter>
 }
