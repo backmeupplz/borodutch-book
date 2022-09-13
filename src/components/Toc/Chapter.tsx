@@ -6,7 +6,6 @@ import UpRightIcon from 'components/UpRightIcon'
 import classnames, {
   alignItems,
   display,
-  divideWidth,
   flexDirection,
   gap,
   justifyContent,
@@ -16,8 +15,7 @@ import classnames, {
 const container = classnames(
   display('flex'),
   flexDirection('flex-col'),
-  alignItems('items-stretch'),
-  divideWidth('divide-y')
+  alignItems('items-stretch')
 )
 const titleContainer = classnames(
   display('flex'),
