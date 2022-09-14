@@ -279,6 +279,8 @@ export type TBackgroundColor =
   | 'bg-background'
   | 'bg-primary'
   | 'bg-secondary'
+  | 'bg-highlighted-background'
+  | 'bg-active-background'
 
 export type TBackgroundPosition =
   | 'bg-bottom'
@@ -989,6 +991,12 @@ export type TGradientColorStops =
   | 'from-secondary'
   | 'via-secondary'
   | 'to-secondary'
+  | 'from-highlighted-background'
+  | 'via-highlighted-background'
+  | 'to-highlighted-background'
+  | 'from-active-background'
+  | 'via-active-background'
+  | 'to-active-background'
 
 export type TBackgrounds =
   | TBackgroundAttachment
@@ -2606,6 +2614,16 @@ export type TBorderColor =
   | 'border-r-secondary'
   | 'border-b-secondary'
   | 'border-l-secondary'
+  | 'border-highlighted-background'
+  | 'border-t-highlighted-background'
+  | 'border-r-highlighted-background'
+  | 'border-b-highlighted-background'
+  | 'border-l-highlighted-background'
+  | 'border-active-background'
+  | 'border-t-active-background'
+  | 'border-r-active-background'
+  | 'border-b-active-background'
+  | 'border-l-active-background'
 
 export type TBorderOpacity =
   | 'border-opacity-0'
@@ -3231,6 +3249,8 @@ export type TRingColor =
   | 'ring-background'
   | 'ring-primary'
   | 'ring-secondary'
+  | 'ring-highlighted-background'
+  | 'ring-active-background'
 
 export type TRingWidth =
   | 'ring-0'
@@ -3488,6 +3508,8 @@ export type TRingOffsetColor =
   | 'ring-offset-background'
   | 'ring-offset-primary'
   | 'ring-offset-secondary'
+  | 'ring-offset-highlighted-background'
+  | 'ring-offset-active-background'
 
 export type TRingOffsetWidth =
   | 'ring-offset-0'
@@ -3739,6 +3761,8 @@ export type TOutlineColor =
   | 'outline-background'
   | 'outline-primary'
   | 'outline-secondary'
+  | 'outline-highlighted-background'
+  | 'outline-active-background'
 
 export type TBorders =
   | TBorderStyle
@@ -4041,6 +4065,8 @@ export type TBoxShadowColor =
   | 'shadow-background'
   | 'shadow-primary'
   | 'shadow-secondary'
+  | 'shadow-highlighted-background'
+  | 'shadow-active-background'
 
 export type TOpacity =
   | 'opacity-0'
@@ -5582,6 +5608,8 @@ export type TCaretColor =
   | 'caret-background'
   | 'caret-primary'
   | 'caret-secondary'
+  | 'caret-highlighted-background'
+  | 'caret-active-background'
 
 export type TWillChange =
   | 'will-change-auto'
@@ -5819,6 +5847,8 @@ export type TAccentColor =
   | 'accent-background'
   | 'accent-primary'
   | 'accent-secondary'
+  | 'accent-highlighted-background'
+  | 'accent-active-background'
 
 export type TScrollPadding =
   | 'scroll-p-0'
@@ -7047,6 +7077,8 @@ export type TFill =
   | 'fill-background'
   | 'fill-primary'
   | 'fill-secondary'
+  | 'fill-highlighted-background'
+  | 'fill-active-background'
 
 export type TStroke =
   | 'stroke-inherit'
@@ -7079,6 +7111,8 @@ export type TStroke =
   | 'stroke-background'
   | 'stroke-primary'
   | 'stroke-secondary'
+  | 'stroke-highlighted-background'
+  | 'stroke-active-background'
 
 export type TStrokeWidth = 'stroke-0' | 'stroke-1' | 'stroke-2'
 
@@ -7594,6 +7628,8 @@ export type TPlaceholderColor =
   | 'placeholder-background'
   | 'placeholder-primary'
   | 'placeholder-secondary'
+  | 'placeholder-highlighted-background'
+  | 'placeholder-active-background'
 
 export type TPlaceholderOpacity =
   | 'placeholder-opacity-0'
@@ -7841,6 +7877,8 @@ export type TTextColor =
   | 'text-background'
   | 'text-primary'
   | 'text-secondary'
+  | 'text-highlighted-background'
+  | 'text-active-background'
 
 export type TTextOpacity =
   | 'text-opacity-0'
@@ -8127,6 +8165,8 @@ export type TTextDecorationColor =
   | 'decoration-background'
   | 'decoration-primary'
   | 'decoration-secondary'
+  | 'decoration-highlighted-background'
+  | 'decoration-active-background'
 
 export type TTextDecorationThickness =
   | 'decoration-0'

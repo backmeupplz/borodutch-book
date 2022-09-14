@@ -1,3 +1,4 @@
+import { Link } from 'wouter'
 import { ListBulletIcon } from '@heroicons/react/24/solid'
 import { LogoText } from 'components/Text'
 import IconButton from 'components/IconButton'
@@ -53,10 +54,10 @@ export default function () {
   return (
     <div className={container}>
       <div className={content}>
-        <div className={logo}>
+        <Link href="/" className={logo}>
           <Image src="/icons/logo.svg" alt="Logo" />
-          <LogoText>We Don't Live a Thousand Years</LogoText>
-        </div>
+          <LogoText>Не Тысячу Лет Живем</LogoText>
+        </Link>
         <div className={buttons}>
           <ThemeToggle />
           <IconButton

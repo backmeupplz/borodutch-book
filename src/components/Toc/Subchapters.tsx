@@ -5,6 +5,7 @@ import Divider from 'components/Toc/Divider'
 import UpRightIcon from 'components/UpRightIcon'
 import classnames, {
   alignItems,
+  backgroundColor,
   borderColor,
   borderRadius,
   borderWidth,
@@ -12,21 +13,29 @@ import classnames, {
   flexDirection,
   gap,
   justifyContent,
+  overflow,
   padding,
+  transitionProperty,
 } from 'classnames/tailwind'
 
-const subchapterContainer = classnames(
-  display('flex'),
-  flexDirection('flex-row'),
-  justifyContent('justify-start'),
-  alignItems('items-center'),
-  padding('p-2'),
-  gap('gap-x-2')
-)
+const subchapterContainer = (padded: boolean) =>
+  classnames(
+    display('flex'),
+    flexDirection('flex-row'),
+    justifyContent('justify-start'),
+    alignItems('items-center'),
+    padding('p-2'),
+    gap('gap-x-2'),
+    backgroundColor(
+      'hover:bg-highlighted-background',
+      'active:bg-active-background'
+    ),
+    padding({ 'pl-4': padded }),
+    transitionProperty('transition-colors')
+  )
 const subSubchapterContainer = classnames(
   display('flex'),
-  flexDirection('flex-col'),
-  padding('pl-4')
+  flexDirection('flex-col')
 )
 function Subchapter({
   chapter,
@@ -37,10 +46,14 @@ function Subchapter({
 }) {
   return (
     <>
-      <Link className={subchapterContainer} href={`/${chapter.slug}`}>
+      <Link
+        className={subchapterContainer(chapter.level > 1)}
+        href={`/${chapter.slug}`}
+      >
         <Text>{chapter.title}</Text>
         <UpRightIcon />
       </Link>
+      {!!chapter.subchapters?.length && <Divider />}
       {!!chapter.subchapters?.length && (
         <div className={subSubchapterContainer}>
           {chapter.subchapters.map((subchapter, i, subchapters) => (
@@ -64,7 +77,7 @@ const container = classnames(
   borderRadius('rounded-xl'),
   borderWidth('border'),
   borderColor('border-secondary'),
-  padding('py-2')
+  overflow('overflow-hidden')
 )
 export default function ({ chapter }: { chapter: Chapter }) {
   return (

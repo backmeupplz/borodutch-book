@@ -1,55 +1,42 @@
-import { Text } from 'components/Text'
-import Accent from 'components/Accent'
-import Banner from 'components/Banner'
-import Link from 'components/Link'
-import Summary from 'components/Summary'
+import { Text, Title } from 'components/Text'
+import Divider from 'components/Toc/Divider'
 import Toc from 'components/Toc'
+import classnames, {
+  alignItems,
+  display,
+  flexDirection,
+  gap,
+  justifyContent,
+  padding,
+} from 'classnames/tailwind'
 
+const container = classnames(
+  display('flex'),
+  flexDirection('flex-col'),
+  justifyContent('justify-center'),
+  alignItems('items-stretch'),
+  gap('gap-y-4'),
+  padding('pt-4', 'pb-8')
+)
 export default function () {
   return (
-    <>
+    <div className={container}>
+      <Title>Описание</Title>
+      <Text>
+        Последние 10 лет я провел в поисках и разборах научных исследований о
+        том, как улучшить свою жизнь. Я выделил четыре сферы жизни, в которых
+        необходимо достичь дзена для того, чтобы стать максимально счастливыми:
+        отношения с другими, отношения с собой, рациональное мышление и рзавитие
+        собственного дела.
+      </Text>
+      <Text>
+        В этой книге я собрал все практические советы, которые почерпнул из тех
+        прочитанных исследований, чтобы вам не пришлось снова проходить мой путь
+        проб и ошибок. Будьте готовы к качественному скачку, пристегните ремни,
+        мы входим в гиперпространство!
+      </Text>
+      <Divider />
       <Toc />
-      <Banner />
-      <Text>
-        Привет всем<Accent>!</Accent> Это{' '}
-        <Link url="https://borodutch.com">Никита</Link>
-        <Accent>.</Accent>
-      </Text>
-      <Text>
-        Я написал книгу о том, как резко улучшить свою жизнь на основе научных
-        исследований<Accent>!</Accent>
-      </Text>
-      <Text>
-        Книга состоит из четырех частей: счастье с другими, счастье с собой,
-        рациональное мышление, достижение успеха<Accent>.</Accent> Ловите
-        содержание<Accent>!</Accent>
-      </Text>
-      <Summary />
-      <Text>
-        Доступ к книге особенный<Accent>!</Accent>{' '}
-        <Link url="https://opensea.io/collection/wdlaty">
-          Необходимо купить NFT книги на OpenSea
-        </Link>
-        <Accent>.</Accent>
-      </Text>
-      <Text>
-        Дальше<Accent>,</Accent> нужно подключить ниже кошелек, который владеет
-        хотя бы одним NFT книги<Accent>.</Accent> После <Accent>—</Accent> жмите
-        на кнопки форматов, которые хотите скачать, подписывайте сообщение и
-        читайте
-        <Accent>!</Accent>
-      </Text>
-      <Text>
-        Я вам полностью доверяю, поэтому, пожалуйста, не пиратьте мою книгу
-        <Accent>!</Accent> Я не против, чтобы вы дали ее почитать своим
-        родственникам, хотя будет еще круче, если вы и им купите экземпляр
-        <Accent>!</Accent>
-      </Text>
-      <Text>
-        Остались вопросы или что-то не работает<Accent>?</Accent>{' '}
-        <Link url="https://t.me/borodutch">Смело пишите мне в Телеграме</Link>
-        <Accent>!</Accent>
-      </Text>
-    </>
+    </div>
   )
 }

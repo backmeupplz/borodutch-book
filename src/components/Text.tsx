@@ -9,20 +9,21 @@ import classnames, {
 
 const text = classnames(
   textColor('text-primary'),
-  fontFamily('font-serif'),
+  fontFamily('font-sans'),
   transitionProperty('transition-colors')
 )
 export function Text({ children }: ChildrenProp) {
   return <p className={text}>{children}</p>
 }
 
-const tocChapter = classnames(
+const title = classnames(
   text,
+  fontFamily('font-serif'),
   fontWeight('font-bold'),
   fontSize('text-2xl')
 )
-export function TocChapter({ children }: ChildrenProp) {
-  return <h2 className={tocChapter}>{children}</h2>
+export function Title({ children }: ChildrenProp) {
+  return <h2 className={title}>{children}</h2>
 }
 
 const logoText = classnames(

@@ -9,6 +9,8 @@ module.exports = {
         background: 'var(--background)',
         primary: 'var(--primary)',
         secondary: 'var(--secondary)',
+        'highlighted-background': 'var(--highlighted-background)',
+        'active-background': 'var(--active-background)',
       },
       fontFamily: {
         sans: ['Open Sans', ...defaultTheme.fontFamily.sans],

@@ -5,13 +5,17 @@
 :root {
   --background: #f7fafc;
   --primary: #2d3748;
-  --secondary: #718096;
+  --secondary: #cfd8dc;
+  --highlighted-background: #edf2f7;
+  --active-background: #e2e8f0;
 }
 
 .dark {
   --background: #1a202c;
   --primary: #edf2f7;
-  --secondary: #a0aec0;
+  --secondary: #37474f;
+  --highlighted-background: #2d3748;
+  --active-background: #4a5568;
 }
 
 body {
