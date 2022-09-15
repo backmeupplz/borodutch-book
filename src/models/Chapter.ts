@@ -5,5 +5,6 @@ export default interface Chapter {
   readonly title: string
   readonly slug: string
   readonly beginning: readonly Content[]
+  readonly content?: readonly Content[]
   readonly subchapters: readonly Chapter[]
 }

@@ -56,7 +56,7 @@ function Subchapter({
       {!!chapter.subchapters?.length && <Divider />}
       {!!chapter.subchapters?.length && (
         <div className={subSubchapterContainer}>
-          {chapter.subchapters.map((subchapter, i, subchapters) => (
+          {chapter.subchapters?.map((subchapter, i, subchapters) => (
             <Subchapter
               chapter={subchapter}
               divider={i < subchapters.length - 1}
@@ -82,7 +82,7 @@ const container = classnames(
 export default function ({ chapter }: { chapter: Chapter }) {
   return (
     <div className={container}>
-      {chapter.subchapters.map((subchapter, i, subchapters) => (
+      {chapter.subchapters?.map((subchapter, i, subchapters) => (
         <Subchapter
           chapter={subchapter}
           key={subchapter.slug}

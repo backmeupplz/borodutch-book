@@ -32,7 +32,7 @@ export default function ({ chapter }: { chapter: Chapter }) {
         <Title>{chapter.title}</Title>
         <UpRightIcon />
       </Link>
-      {!!chapter.subchapters.length && <Subchapters chapter={chapter} />}
+      {!!chapter.subchapters?.length && <Subchapters chapter={chapter} />}
     </div>
   )
 }

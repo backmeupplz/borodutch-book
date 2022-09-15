@@ -2,6 +2,7 @@ import ChildrenProp from 'models/ChildrenProp'
 import classnames, {
   fontFamily,
   fontSize,
+  fontStyle,
   fontWeight,
   textAlign,
   textColor,
@@ -65,6 +66,29 @@ const subtitle = classnames(
 )
 export function Subtitle({ children }: ChildrenProp) {
   return <h3 className={subtitle}>{children}</h3>
+}
+
+const heading = classnames(
+  fontSize('text-xl'),
+  textColor('text-primary'),
+  fontFamily('font-serif'),
+  fontWeight('font-bold'),
+  transitionProperty('transition-colors')
+)
+export function Heading({ children }: ChildrenProp) {
+  return <h4 className={heading}>{children}</h4>
+}
+
+const subheading = classnames(
+  fontSize('text-lg'),
+  textColor('text-primary'),
+  fontFamily('font-sans'),
+  fontWeight('font-bold'),
+  fontStyle('italic'),
+  transitionProperty('transition-colors')
+)
+export function Subheading({ children }: ChildrenProp) {
+  return <h5 className={subheading}>{children}</h5>
 }
 
 const linedTitle = classnames(

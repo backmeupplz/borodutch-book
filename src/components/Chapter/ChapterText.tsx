@@ -1,4 +1,12 @@
-import { LinedText, LinedTitle, Subtitle, Text, text } from 'components/Text'
+import {
+  Heading,
+  LinedText,
+  LinedTitle,
+  Subheading,
+  Subtitle,
+  Text,
+  text,
+} from 'components/Text'
 import Chapter from 'models/Chapter'
 import Content from 'models/Content'
 import DialogueBlock from 'components/Chapter/DialogueBlock'
@@ -20,9 +28,12 @@ import classnames, {
 
 const noWrap = whitespace('whitespace-nowrap')
 const unorderedList = classnames(
+  display('flex'),
+  flexDirection('flex-col'),
   listStyleType('list-disc'),
   listStylePosition('list-inside'),
-  margin('my-1')
+  margin('my-1'),
+  gap('gap-y-1')
 )
 const orderedList = classnames(unorderedList, listStyleType('list-decimal'))
 const superscript = classnames(
@@ -39,21 +50,24 @@ function renderChild(child: Content, key: string) {
   if (child.text) {
     return <span key={key}>{child.text}</span>
   }
-  if (child.class === 'Basic-Paragraph') {
+  if (child.class?.includes('Basic-Paragraph')) {
     return (
       <Text fullWidth key={key}>
         {extractChildren(child.children)}
       </Text>
     )
-  } else if (child.class === 'No-break') {
+  } else if (child.class?.includes('No-break')) {
     return (
       <span className={noWrap} key={key}>
         {extractChildren(child.children)}
       </span>
     )
-  } else if (child.class === 'Bullet-list' || child.class === 'Numbered-list') {
-    return <li className={text()}>{extractChildren(child.children)}</li>
-  } else if (child.class === 'CharOverride-2') {
+  } else if (
+    child.class?.includes('Bullet-list') ||
+    child.class?.includes('Numbered-list')
+  ) {
+    return <li className={text(true)}>{extractChildren(child.children)}</li>
+  } else if (child.class?.includes('CharOverride-2')) {
     return (
       <sup className={superscript}>
         {child.children?.map((supChild, i) =>
@@ -67,27 +81,31 @@ function renderChild(child: Content, key: string) {
         )}
       </sup>
     )
-  } else if (child.class === 'Subheading') {
+  } else if (child.class?.includes('Subheading')) {
     return <Subtitle>{extractChildren(child.children)}</Subtitle>
-  } else if (child.class === 'Lined-block') {
+  } else if (child.class?.includes('Lined-block')) {
     return <LinedBlock>{extractChildren(child.children)}</LinedBlock>
-  } else if (child.class === 'Lined-title-parsed') {
+  } else if (child.class?.includes('Lined-title-parsed')) {
     return <LinedTitle>{extractChildren(child.children)}</LinedTitle>
-  } else if (child.class === 'Lined-parsed') {
+  } else if (child.class?.includes('Lined-parsed')) {
     return <LinedText>{extractChildren(child.children)}</LinedText>
-  } else if (child.class === 'Dialogue-block') {
+  } else if (child.class?.includes('Dialogue-block')) {
     return <DialogueBlock>{extractChildren(child.children)}</DialogueBlock>
-  } else if (child.class === 'Dialogue-parsed') {
+  } else if (child.class?.includes('Dialogue-parsed')) {
     return <Text>{extractChildren(child.children)}</Text>
-  } else if (child.class === 'Separator') {
+  } else if (child.class?.includes('Separator')) {
     return <Separator />
-  } else if (child.tagName === 'UL') {
+  } else if (child.class?.includes('Heading-4')) {
+    return <Heading>{extractChildren(child.children)}</Heading>
+  } else if (child.class?.includes('Heading-5')) {
+    return <Subheading>{extractChildren(child.children)}</Subheading>
+  } else if (child.tagName?.includes('UL')) {
     return (
       <ul key={key} className={unorderedList}>
         {extractChildren(child.children)}
       </ul>
     )
-  } else if (child.tagName === 'OL') {
+  } else if (child.tagName?.includes('OL')) {
     return (
       <ol key={key} className={orderedList}>
         {extractChildren(child.children)}
@@ -99,25 +117,27 @@ function renderChild(child: Content, key: string) {
 }
 
 function extractChildren(contents: readonly Content[] = []) {
+  const allowedClasses = [
+    'Basic-Paragraph',
+    'No-break',
+    'Bullet-list',
+    'Numbered-list',
+    'CharOverride-2',
+    'Subheading',
+    'Lined-title',
+    'Lined-title-parsed',
+    'Lined',
+    'Lined-parsed',
+    'Dialogue',
+    'Dialogue-block',
+    'Dialogue-parsed',
+    'Separator',
+    'Heading-4',
+    'Heading-5',
+  ]
+  const allowedClassesRegex = new RegExp(allowedClasses.join('|'), 'i')
   const filtered = contents.filter(
-    (content) =>
-      !content.class ||
-      [
-        'Basic-Paragraph',
-        'No-break',
-        'Bullet-list',
-        'Numbered-list',
-        'CharOverride-2',
-        'Subheading',
-        'Lined-title',
-        'Lined-title-parsed',
-        'Lined',
-        'Lined-parsed',
-        'Dialogue',
-        'Dialogue-block',
-        'Dialogue-parsed',
-        'Separator',
-      ].includes(content.class)
+    (content) => !content.class || allowedClassesRegex.test(content.class)
   )
   if (contents.length !== filtered.length) {
     const filteredClasses = new Set<string>(
@@ -129,7 +149,13 @@ function extractChildren(contents: readonly Content[] = []) {
     const difference = new Set<string>(
       [...contentClasses].filter((x) => !filteredClasses.has(x))
     )
-    console.log(difference)
+    console.log(
+      filteredClasses,
+      contentClasses,
+      contents.length,
+      filtered.length,
+      difference
+    )
   }
   const result = [] as Content[]
   let currentLinedBlock:
@@ -209,6 +235,8 @@ const container = classnames(
   gap('gap-y-4')
 )
 export default function ({ chapter }: { chapter: Chapter }) {
-  const children = extractChildren(chapter.beginning)
+  const children = extractChildren(
+    chapter.beginning.length ? chapter.beginning : chapter.content
+  )
   return <div className={container}>{children}</div>
 }

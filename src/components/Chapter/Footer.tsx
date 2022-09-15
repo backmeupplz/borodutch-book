@@ -14,6 +14,7 @@ import classnames, {
   margin,
   padding,
 } from 'classnames/tailwind'
+import flattenToc from 'helpers/flattenToc'
 
 const container = classnames(
   display('flex'),
@@ -38,18 +39,7 @@ function FooterSuspended({ chapter }: { chapter: Chapter }) {
   const { toc } = useSnapshot(ChapterStore)
   const slug = chapter.slug
   // flatten toc
-  const tocFlat = toc.reduce(
-    (acc, item) => [
-      ...acc,
-      item,
-      ...(item.subchapters || []),
-      ...(item.subchapters || []).reduce(
-        (acc, item) => [...acc, ...(item.subchapters || [])],
-        [] as Chapter[]
-      ),
-    ],
-    [] as Chapter[]
-  )
+  const tocFlat = flattenToc(toc)
   const index = tocFlat.findIndex((item) => item.slug === slug)
   const next = tocFlat[index + 1]
   return next ? (
