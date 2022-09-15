@@ -6,7 +6,6 @@ import ChapterStore from 'stores/ChapterStore'
 import ChapterText from 'components/Chapter/ChapterText'
 import Divider from 'components/Divider'
 import Footer from 'components/Chapter/Footer'
-import Loading from 'components/Loading'
 import SuspenseWithError from 'components/SuspenseWithError'
 
 const dividerContainer = margin('my-4')

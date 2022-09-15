@@ -1,6 +1,7 @@
-import { Text, text } from 'components/Text'
+import { LinedText, LinedTitle, Subtitle, Text, text } from 'components/Text'
 import Chapter from 'models/Chapter'
 import Content from 'models/Content'
+import LinedBlock from 'components/Chapter/LinedBlock'
 import classnames, {
   cursor,
   display,
@@ -64,6 +65,15 @@ function renderChild(child: Content, key: string) {
         )}
       </sup>
     )
+  } else if (child.class === 'Subheading') {
+    return <Subtitle>{extractChildren(child.children)}</Subtitle>
+  } else if (child.class === 'Lined-block') {
+    console.log(child.children?.[0].class)
+    return <LinedBlock>{extractChildren(child.children)}</LinedBlock>
+  } else if (child.class === 'Lined-title-parsed') {
+    return <LinedTitle>{extractChildren(child.children)}</LinedTitle>
+  } else if (child.class === 'Lined-parsed') {
+    return <LinedText>{extractChildren(child.children)}</LinedText>
   } else if (child.tagName === 'UL') {
     return (
       <ul key={key} className={unorderedList}>
@@ -91,9 +101,45 @@ function extractChildren(contents: readonly Content[] = []) {
         'Bullet-list',
         'Numbered-list',
         'CharOverride-2',
+        'Subheading',
+        'Lined-title',
+        'Lined-title-parsed',
+        'Lined',
+        'Lined-parsed',
       ].includes(content.class)
   )
-  return filtered.map((content, i) => renderChild(content, `${i}`))
+  const result = [] as Content[]
+  let currentLinedBlock:
+    | {
+        class: string
+        children: Content[]
+      }
+    | undefined
+  for (const content of filtered) {
+    if (content.class === 'Lined-title') {
+      currentLinedBlock = {
+        class: 'Lined-block',
+        children: [
+          {
+            class: 'Lined-title-parsed',
+            children: content.children,
+          },
+        ],
+      }
+    } else if (content.class === 'Lined') {
+      currentLinedBlock?.children?.push({
+        class: 'Lined-parsed',
+        children: content.children,
+      })
+    } else {
+      if (currentLinedBlock) {
+        result.push(currentLinedBlock)
+        currentLinedBlock = undefined
+      }
+      result.push(content)
+    }
+  }
+  return result.map((content, i) => renderChild(content, `${i}`))
 }
 
 const container = classnames(

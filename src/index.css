@@ -28,3 +28,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--background);
 }
+
+sup {
+  text-justify: none;
+}

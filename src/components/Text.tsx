@@ -55,6 +55,40 @@ export function Title({ children, large }: ChildrenProp & { large?: boolean }) {
   return <h2 className={title(large)}>{children}</h2>
 }
 
+const subtitle = classnames(
+  textColor('text-primary'),
+  transitionProperty('transition-colors'),
+  fontFamily('font-serif'),
+  fontWeight('font-bold'),
+  fontSize('text-2xl'),
+  textAlign('text-center')
+)
+export function Subtitle({ children }: ChildrenProp) {
+  return <h3 className={subtitle}>{children}</h3>
+}
+
+const linedTitle = classnames(
+  textColor('text-primary'),
+  fontFamily('font-sans'),
+  transitionProperty('transition-colors'),
+  fontWeight('font-bold'),
+  fontSize('text-xl')
+)
+export function LinedTitle({ children }: ChildrenProp) {
+  return <h4 className={linedTitle}>{children}</h4>
+}
+
+const linedText = classnames(
+  fontSize('text-lg'),
+  textColor('text-primary'),
+  fontFamily('font-sans'),
+  transitionProperty('transition-colors'),
+  textAlign('text-justify')
+)
+export function LinedText({ children }: ChildrenProp) {
+  return <p className={linedText}>{children}</p>
+}
+
 const logoText = classnames(
   textColor('text-primary'),
   fontSize('text-xl'),
