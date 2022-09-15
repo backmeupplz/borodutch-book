@@ -31,6 +31,15 @@ export function BoldText({ children }: ChildrenProp) {
   return <p className={boldText}>{children}</p>
 }
 
+const exampleText = classnames(
+  text(),
+  fontStyle('italic'),
+  textAlign('text-right')
+)
+export function ExampleText({ children }: ChildrenProp) {
+  return <p className={exampleText}>{children}</p>
+}
+
 const buttonText = classnames(
   fontFamily('font-sans'),
   transitionProperty('transition-colors'),

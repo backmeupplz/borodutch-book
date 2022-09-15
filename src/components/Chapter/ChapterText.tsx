@@ -1,4 +1,5 @@
 import {
+  ExampleText,
   Heading,
   LinedText,
   LinedTitle,
@@ -99,6 +100,8 @@ function renderChild(child: Content, key: string) {
     return <Heading>{extractChildren(child.children)}</Heading>
   } else if (child.class?.includes('Heading-5')) {
     return <Subheading>{extractChildren(child.children)}</Subheading>
+  } else if (child.class?.includes('Example')) {
+    return <ExampleText>{extractChildren(child.children)}</ExampleText>
   } else if (child.tagName?.includes('UL')) {
     return (
       <ul key={key} className={unorderedList}>
@@ -134,6 +137,7 @@ function extractChildren(contents: readonly Content[] = []) {
     'Separator',
     'Heading-4',
     'Heading-5',
+    'Example',
   ]
   const allowedClassesRegex = new RegExp(allowedClasses.join('|'), 'i')
   const filtered = contents.filter(
@@ -149,13 +153,7 @@ function extractChildren(contents: readonly Content[] = []) {
     const difference = new Set<string>(
       [...contentClasses].filter((x) => !filteredClasses.has(x))
     )
-    console.log(
-      filteredClasses,
-      contentClasses,
-      contents.length,
-      filtered.length,
-      difference
-    )
+    console.log(contents.length, filtered.length, difference)
   }
   const result = [] as Content[]
   let currentLinedBlock:
