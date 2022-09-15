@@ -1,14 +1,26 @@
-import { Text } from 'components/Text'
+import { Title } from 'components/Text'
+import { margin } from 'classnames/tailwind'
 import { useLocation } from 'wouter'
 import { useSnapshot } from 'valtio'
 import ChapterStore from 'stores/ChapterStore'
+import ChapterText from 'components/ChapterText'
+import Divider from 'components/Toc/Divider'
 import Loading from 'components/Loading'
 import SuspenseWithError from 'components/SuspenseWithError'
 
+const dividerContainer = margin('my-4')
 function ChapterSuspended({ location }: { location: string }) {
   const { chapters } = useSnapshot(ChapterStore)
   const chapter = chapters[location]
-  return <Text>{JSON.stringify(chapter, undefined, 2)}</Text>
+  return (
+    <>
+      <Title large>{chapter.title}</Title>
+      <div className={dividerContainer}>
+        <Divider />
+      </div>
+      <ChapterText chapter={chapter} />
+    </>
+  )
 }
 
 export default function () {
