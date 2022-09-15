@@ -6,6 +6,7 @@ import ChapterStore from 'stores/ChapterStore'
 import ChapterText from 'components/Chapter/ChapterText'
 import Divider from 'components/Divider'
 import Footer from 'components/Chapter/Footer'
+import ScrollToTop from 'components/ScrollToTop'
 import SuspenseWithError from 'components/SuspenseWithError'
 
 const dividerContainer = margin('my-4')
@@ -20,6 +21,7 @@ function ChapterSuspended({ location }: { location: string }) {
       </div>
       <ChapterText chapter={chapter} />
       <Footer chapter={chapter} />
+      <ScrollToTop />
     </>
   )
 }

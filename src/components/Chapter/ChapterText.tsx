@@ -1,7 +1,9 @@
 import { LinedText, LinedTitle, Subtitle, Text, text } from 'components/Text'
 import Chapter from 'models/Chapter'
 import Content from 'models/Content'
+import DialogueBlock from 'components/Chapter/DialogueBlock'
 import LinedBlock from 'components/Chapter/LinedBlock'
+import Separator from 'components/Chapter/Separator'
 import classnames, {
   cursor,
   display,
@@ -68,12 +70,17 @@ function renderChild(child: Content, key: string) {
   } else if (child.class === 'Subheading') {
     return <Subtitle>{extractChildren(child.children)}</Subtitle>
   } else if (child.class === 'Lined-block') {
-    console.log(child.children?.[0].class)
     return <LinedBlock>{extractChildren(child.children)}</LinedBlock>
   } else if (child.class === 'Lined-title-parsed') {
     return <LinedTitle>{extractChildren(child.children)}</LinedTitle>
   } else if (child.class === 'Lined-parsed') {
     return <LinedText>{extractChildren(child.children)}</LinedText>
+  } else if (child.class === 'Dialogue-block') {
+    return <DialogueBlock>{extractChildren(child.children)}</DialogueBlock>
+  } else if (child.class === 'Dialogue-parsed') {
+    return <Text>{extractChildren(child.children)}</Text>
+  } else if (child.class === 'Separator') {
+    return <Separator />
   } else if (child.tagName === 'UL') {
     return (
       <ul key={key} className={unorderedList}>
@@ -106,10 +113,32 @@ function extractChildren(contents: readonly Content[] = []) {
         'Lined-title-parsed',
         'Lined',
         'Lined-parsed',
+        'Dialogue',
+        'Dialogue-block',
+        'Dialogue-parsed',
+        'Separator',
       ].includes(content.class)
   )
+  if (contents.length !== filtered.length) {
+    const filteredClasses = new Set<string>(
+      filtered.map((content) => content.class || '')
+    )
+    const contentClasses = new Set<string>(
+      contents.map((content) => content.class || '')
+    )
+    const difference = new Set<string>(
+      [...contentClasses].filter((x) => !filteredClasses.has(x))
+    )
+    console.log(difference)
+  }
   const result = [] as Content[]
   let currentLinedBlock:
+    | {
+        class: string
+        children: Content[]
+      }
+    | undefined
+  let currentDialogueBlock:
     | {
         class: string
         children: Content[]
@@ -131,10 +160,42 @@ function extractChildren(contents: readonly Content[] = []) {
         class: 'Lined-parsed',
         children: content.children,
       })
+      if (
+        currentLinedBlock &&
+        filtered.indexOf(content) === filtered.length - 1
+      ) {
+        result.push(currentLinedBlock)
+        currentLinedBlock = undefined
+      }
+    } else if (content.class === 'Dialogue') {
+      if (currentDialogueBlock) {
+        currentDialogueBlock.children?.push({
+          class: 'Dialogue-parsed',
+          children: content.children,
+        })
+        if (filtered.indexOf(content) === filtered.length - 1) {
+          result.push(currentDialogueBlock)
+          currentDialogueBlock = undefined
+        }
+      } else {
+        currentDialogueBlock = {
+          class: 'Dialogue-block',
+          children: [
+            {
+              class: 'Dialogue-parsed',
+              children: content.children,
+            },
+          ],
+        }
+      }
     } else {
       if (currentLinedBlock) {
         result.push(currentLinedBlock)
         currentLinedBlock = undefined
+      }
+      if (currentDialogueBlock) {
+        result.push(currentDialogueBlock)
+        currentDialogueBlock = undefined
       }
       result.push(content)
     }

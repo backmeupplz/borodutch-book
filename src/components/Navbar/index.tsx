@@ -16,6 +16,7 @@ import classnames, {
   padding,
   position,
   transitionProperty,
+  zIndex,
 } from 'classnames/tailwind'
 import icon from 'classnames/icon'
 
@@ -27,7 +28,8 @@ const container = classnames(
   alignItems('items-stretch'),
   justifyContent('justify-center'),
   backgroundColor('bg-background'),
-  transitionProperty('transition-colors')
+  transitionProperty('transition-colors'),
+  zIndex('z-50')
 )
 const content = classnames(
   display('flex'),
