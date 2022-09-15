@@ -20,10 +20,13 @@ const unorderedList = classnames(
 )
 const orderedList = classnames(unorderedList, listStyleType('list-decimal'))
 const superscript = classnames(
+  margin('ml-0.5'),
+  transitionProperty('transition-colors')
+)
+const superscriptLink = classnames(
   textDecoration('underline'),
   textColor('hover:text-primary-highlighted', 'active:text-primary-active'),
   cursor('cursor-pointer'),
-  margin('ml-0.5'),
   transitionProperty('transition-colors')
 )
 function renderChild(child: Content, key: string) {
@@ -47,7 +50,15 @@ function renderChild(child: Content, key: string) {
   } else if (child.class === 'CharOverride-2') {
     return (
       <sup className={superscript}>
-        {child.children?.[0].children?.[0].children?.[0].children?.[0].text}
+        {child.children?.map((supChild, i) =>
+          supChild.text ? (
+            <span key={`${i}`}>{supChild.text}</span>
+          ) : (
+            <span key={`${i}`} className={superscriptLink}>
+              {supChild.children?.[0].children?.[0].children?.[0].text}
+            </span>
+          )
+        )}
       </sup>
     )
   } else if (child.tagName === 'UL') {
