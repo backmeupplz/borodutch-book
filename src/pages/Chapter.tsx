@@ -31,7 +31,10 @@ export default function () {
   ChapterStore.fetchChapter(trueLocation)
 
   return trueLocation ? (
-    <SuspenseWithError fallback={<Loading />} errorText="Error loading chapter">
+    <SuspenseWithError
+      fallback={<Title large>Загружаю главу...</Title>}
+      errorText="Error loading chapter"
+    >
       <ChapterSuspended location={trueLocation} />
     </SuspenseWithError>
   ) : null

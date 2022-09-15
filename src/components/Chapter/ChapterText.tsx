@@ -3,6 +3,9 @@ import Chapter from 'models/Chapter'
 import Content from 'models/Content'
 import classnames, {
   cursor,
+  display,
+  flexDirection,
+  gap,
   listStylePosition,
   listStyleType,
   margin,
@@ -93,7 +96,12 @@ function extractChildren(contents: readonly Content[] = []) {
   return filtered.map((content, i) => renderChild(content, `${i}`))
 }
 
+const container = classnames(
+  display('flex'),
+  flexDirection('flex-col'),
+  gap('gap-y-4')
+)
 export default function ({ chapter }: { chapter: Chapter }) {
   const children = extractChildren(chapter.beginning)
-  return <>{children}</>
+  return <div className={container}>{children}</div>
 }
