@@ -1,5 +1,5 @@
 import { Text, Title } from 'components/Text'
-import Divider from 'components/Toc/Divider'
+import Divider from 'components/Divider'
 import Toc from 'components/Toc'
 import classnames, {
   alignItems,

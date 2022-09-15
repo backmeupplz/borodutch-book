@@ -24,6 +24,20 @@ export function Text({
   return <p className={text(fullWidth)}>{children}</p>
 }
 
+const boldText = classnames(text(), fontWeight('font-bold'))
+export function BoldText({ children }: ChildrenProp) {
+  return <p className={boldText}>{children}</p>
+}
+
+const buttonText = classnames(
+  fontFamily('font-sans'),
+  transitionProperty('transition-colors'),
+  fontWeight('font-bold')
+)
+export function ButtonText({ children }: ChildrenProp) {
+  return <p className={buttonText}>{children}</p>
+}
+
 const title = (large?: boolean) =>
   classnames(
     text(),

@@ -3,8 +3,9 @@ import { margin } from 'classnames/tailwind'
 import { useLocation } from 'wouter'
 import { useSnapshot } from 'valtio'
 import ChapterStore from 'stores/ChapterStore'
-import ChapterText from 'components/ChapterText'
-import Divider from 'components/Toc/Divider'
+import ChapterText from 'components/Chapter/ChapterText'
+import Divider from 'components/Divider'
+import Footer from 'components/Chapter/Footer'
 import Loading from 'components/Loading'
 import SuspenseWithError from 'components/SuspenseWithError'
 
@@ -19,6 +20,7 @@ function ChapterSuspended({ location }: { location: string }) {
         <Divider />
       </div>
       <ChapterText chapter={chapter} />
+      <Footer chapter={chapter} />
     </>
   )
 }

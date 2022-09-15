@@ -1,7 +1,7 @@
 import { Link } from 'wouter'
 import { Text } from 'components/Text'
 import Chapter from 'models/Chapter'
-import Divider from 'components/Toc/Divider'
+import Divider from 'components/Divider'
 import UpRightIcon from 'components/UpRightIcon'
 import classnames, {
   alignItems,
