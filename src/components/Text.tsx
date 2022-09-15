@@ -8,8 +8,9 @@ import classnames, {
   transitionProperty,
 } from 'classnames/tailwind'
 
-const text = (fullWidth?: boolean) =>
+export const text = (fullWidth?: boolean) =>
   classnames(
+    fontSize('text-lg'),
     textColor('text-primary'),
     fontFamily('font-sans'),
     transitionProperty('transition-colors'),
@@ -40,7 +41,9 @@ export function ButtonText({ children }: ChildrenProp) {
 
 const title = (large?: boolean) =>
   classnames(
-    text(),
+    textColor('text-primary'),
+    fontFamily('font-sans'),
+    transitionProperty('transition-colors'),
     fontFamily('font-serif'),
     fontWeight('font-bold'),
     fontSize(large ? 'text-4xl' : 'text-2xl'),

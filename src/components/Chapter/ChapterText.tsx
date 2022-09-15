@@ -1,15 +1,34 @@
-import { Text } from 'components/Text'
-import { whitespace } from 'classnames/tailwind'
+import { Text, text } from 'components/Text'
 import Chapter from 'models/Chapter'
 import Content from 'models/Content'
+import classnames, {
+  cursor,
+  listStylePosition,
+  listStyleType,
+  margin,
+  textColor,
+  textDecoration,
+  transitionProperty,
+  whitespace,
+} from 'classnames/tailwind'
 
 const noWrap = whitespace('whitespace-nowrap')
+const unorderedList = classnames(
+  listStyleType('list-disc'),
+  listStylePosition('list-inside'),
+  margin('my-1')
+)
+const orderedList = classnames(unorderedList, listStyleType('list-decimal'))
+const superscript = classnames(
+  textDecoration('underline'),
+  textColor('hover:text-primary-highlighted', 'active:text-primary-active'),
+  cursor('cursor-pointer'),
+  margin('ml-0.5'),
+  transitionProperty('transition-colors')
+)
 function renderChild(child: Content, key: string) {
   if (child.text) {
     return <span key={key}>{child.text}</span>
-  }
-  if (!child.class) {
-    return null
   }
   if (child.class === 'Basic-Paragraph') {
     return (
@@ -23,6 +42,26 @@ function renderChild(child: Content, key: string) {
         {extractChildren(child.children)}
       </span>
     )
+  } else if (child.class === 'Bullet-list' || child.class === 'Numbered-list') {
+    return <li className={text()}>{extractChildren(child.children)}</li>
+  } else if (child.class === 'CharOverride-2') {
+    return (
+      <sup className={superscript}>
+        {child.children?.[0].children?.[0].children?.[0].children?.[0].text}
+      </sup>
+    )
+  } else if (child.tagName === 'UL') {
+    return (
+      <ul key={key} className={unorderedList}>
+        {extractChildren(child.children)}
+      </ul>
+    )
+  } else if (child.tagName === 'OL') {
+    return (
+      <ol key={key} className={orderedList}>
+        {extractChildren(child.children)}
+      </ol>
+    )
   } else {
     return null
   }
@@ -31,7 +70,14 @@ function renderChild(child: Content, key: string) {
 function extractChildren(contents: readonly Content[] = []) {
   const filtered = contents.filter(
     (content) =>
-      !content.class || ['Basic-Paragraph', 'No-break'].includes(content.class)
+      !content.class ||
+      [
+        'Basic-Paragraph',
+        'No-break',
+        'Bullet-list',
+        'Numbered-list',
+        'CharOverride-2',
+      ].includes(content.class)
   )
   return filtered.map((content, i) => renderChild(content, `${i}`))
 }

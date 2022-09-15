@@ -8,6 +8,8 @@ module.exports = {
       colors: {
         background: 'var(--background)',
         primary: 'var(--primary)',
+        'primary-highlighted': 'var(--primary-highlighted)',
+        'primary-active': 'var(--primary-active)',
         secondary: 'var(--secondary)',
         'highlighted-background': 'var(--highlighted-background)',
         'active-background': 'var(--active-background)',

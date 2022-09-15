@@ -14,7 +14,11 @@ const useHashLocation = () => {
   useEffect(() => {
     const handler = () => setLoc(currentLoc())
     window.addEventListener('hashchange', handler)
-    return () => window.removeEventListener('hashchange', handler)
+    window.addEventListener('popstate', handler)
+    return () => {
+      window.removeEventListener('hashchange', handler)
+      window.removeEventListener('popstate', handler)
+    }
   }, [])
 
   const navigate = useCallback((to: string) => (window.location.hash = to), [])
@@ -23,16 +27,14 @@ const useHashLocation = () => {
 
 const App = () => {
   return (
-    <>
+    <Router hook={useHashLocation as any}>
+      {/* TODO: fix types ^^^ */}
       <Navbar />
       <Root>
-        {/* TODO: fix types */}
-        <Router hook={useHashLocation as any}>
-          <Route path="/" component={Main} />
-          <Route path="/:chapter" component={Chapter} />
-        </Router>
+        <Route path="/" component={Main} />
+        <Route path="/:chapter" component={Chapter} />
       </Root>
-    </>
+    </Router>
   )
 }
 

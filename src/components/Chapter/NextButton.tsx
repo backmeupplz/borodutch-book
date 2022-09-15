@@ -5,7 +5,6 @@ import classnames, {
   alignItems,
   backgroundColor,
   borderRadius,
-  cursor,
   display,
   flexDirection,
   gap,
