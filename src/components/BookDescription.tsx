@@ -1,6 +1,7 @@
 import { ArrowDownTrayIcon, BookOpenIcon } from '@heroicons/react/24/outline'
 import { useSnapshot } from 'valtio'
 import Button from 'components/Button'
+import Divider from 'components/Divider'
 import FormatsStore from 'stores/FormatsStore'
 import Image from 'components/Image'
 import SuspenseWithError from 'components/SuspenseWithError'
@@ -13,6 +14,7 @@ import classnames, {
   height,
   justifyContent,
   margin,
+  visibility,
   width,
 } from 'classnames/tailwind'
 
@@ -20,7 +22,7 @@ const icon = classnames(width('w-4'), height('h-4'))
 const buttonContainer = classnames(
   display('flex'),
   flexDirection('flex-row', 'lg:flex-col'),
-  gap('gap-4'),
+  gap('gap-2'),
   flexWrap('flex-wrap', 'lg:flex-nowrap'),
   justifyContent('justify-center')
 )
@@ -69,6 +71,7 @@ export default function () {
         height="257.5"
       />
       <DownloadButtons />
+      <Divider />
     </div>
   )
 }

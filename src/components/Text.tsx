@@ -11,7 +11,7 @@ import classnames, {
 
 export const text = (fullWidth?: boolean) =>
   classnames(
-    fontSize('text-lg'),
+    fontSize('sm:text-lg'),
     textColor('text-primary'),
     fontFamily('font-sans'),
     transitionProperty('transition-colors'),
@@ -56,7 +56,10 @@ const title = (large?: boolean) =>
     transitionProperty('transition-colors'),
     fontFamily('font-serif'),
     fontWeight('font-bold'),
-    fontSize(large ? 'text-4xl' : 'text-2xl'),
+    fontSize(
+      large ? 'text-2xl' : 'text-xl',
+      large ? 'sm:text-4xl' : 'sm:text-2xl'
+    ),
     textAlign({
       'text-center': large,
     })
@@ -70,7 +73,7 @@ const subtitle = classnames(
   transitionProperty('transition-colors'),
   fontFamily('font-serif'),
   fontWeight('font-bold'),
-  fontSize('text-2xl'),
+  fontSize('text-lg', 'sm:text-2xl'),
   textAlign('text-center')
 )
 export function Subtitle({ children }: ChildrenProp) {
@@ -78,7 +81,7 @@ export function Subtitle({ children }: ChildrenProp) {
 }
 
 const heading = classnames(
-  fontSize('text-xl'),
+  fontSize('text-lg', 'sm:text-xl'),
   textColor('text-primary'),
   fontFamily('font-serif'),
   fontWeight('font-bold'),
@@ -89,7 +92,7 @@ export function Heading({ children }: ChildrenProp) {
 }
 
 const subheading = classnames(
-  fontSize('text-lg'),
+  fontSize('sm:text-lg'),
   textColor('text-primary'),
   fontFamily('font-sans'),
   fontWeight('font-bold'),
@@ -105,14 +108,14 @@ const linedTitle = classnames(
   fontFamily('font-sans'),
   transitionProperty('transition-colors'),
   fontWeight('font-bold'),
-  fontSize('text-xl')
+  fontSize('text-lg', 'sm:text-xl')
 )
 export function LinedTitle({ children }: ChildrenProp) {
   return <h4 className={linedTitle}>{children}</h4>
 }
 
 const linedText = classnames(
-  fontSize('text-lg'),
+  fontSize('sm:text-lg'),
   textColor('text-primary'),
   fontFamily('font-sans'),
   transitionProperty('transition-colors'),
@@ -124,7 +127,7 @@ export function LinedText({ children }: ChildrenProp) {
 
 const logoText = classnames(
   textColor('text-primary'),
-  fontSize('text-xl'),
+  fontSize('text-lg', 'sm:text-xl'),
   fontWeight('font-bold'),
   fontFamily('font-sans'),
   transitionProperty('transition-colors')

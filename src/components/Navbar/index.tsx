@@ -36,7 +36,7 @@ const content = classnames(
   flexDirection('flex-row'),
   alignItems('items-center'),
   justifyContent('justify-between'),
-  padding('px-8', 'py-4')
+  padding('px-2', 'sm:px-8', 'py-2', 'sm:py-4')
 )
 const logo = classnames(
   display('flex'),
@@ -62,13 +62,13 @@ export default function () {
         </Link>
         <div className={buttons}>
           <ThemeToggle />
-          <IconButton
+          {/* <IconButton
             onClick={() => {
               console.log('Menu clicked')
             }}
           >
             <ListBulletIcon className={icon} />
-          </IconButton>
+          </IconButton> */}
         </div>
       </div>
       <Separator />

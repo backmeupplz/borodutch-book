@@ -8,6 +8,7 @@ import classnames, {
   flexDirection,
   gap,
   justifyContent,
+  margin,
   maxWidth,
   padding,
 } from 'classnames/tailwind'
@@ -16,7 +17,8 @@ const main = classnames(
   display('flex'),
   flexDirection('flex-col', 'lg:flex-row'),
   alignItems('items-center', 'lg:items-start'),
-  gap('gap-8')
+  gap('gap-8'),
+  margin('mx-auto')
 )
 const container = classnames(
   display('flex'),
