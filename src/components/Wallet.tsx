@@ -1,5 +1,5 @@
-import { ConnectButton, useConnectModal } from '@web3modal/react'
 import { WalletIcon } from '@heroicons/react/24/outline'
+import { useConnectModal } from '@web3modal/react'
 import Button from 'components/Button'
 import classnames, {
   alignItems,

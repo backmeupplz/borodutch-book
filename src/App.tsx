@@ -4,7 +4,6 @@ import Chapter from 'pages/Chapter'
 import Main from 'pages/Main'
 import Navbar from 'components/Navbar'
 import Root from 'components/Root'
-import WalletHooks from 'components/WalletHooks'
 import Web3Modal from 'components/Web3Modal'
 
 // TODO: extract to a separate file
@@ -38,7 +37,6 @@ const App = () => {
           <Route path="/:chapter" component={Chapter} />
         </Root>
       </Router>
-      <WalletHooks />
     </Web3Modal>
   )
 }
