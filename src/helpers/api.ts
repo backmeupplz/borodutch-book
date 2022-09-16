@@ -18,3 +18,9 @@ export function fetchFormats() {
     response.json()
   ) as Promise<string[]>
 }
+
+export function fetchVersion() {
+  return fetch(`${env.VITE_BACKEND_URL}/book/version`).then((response) =>
+    response.json()
+  ) as Promise<{ version: string }>
+}

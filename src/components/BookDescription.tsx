@@ -1,10 +1,12 @@
 import { ArrowDownTrayIcon, BookOpenIcon } from '@heroicons/react/24/outline'
+import { Text } from 'components/Text'
 import { useSnapshot } from 'valtio'
 import Button from 'components/Button'
 import Divider from 'components/Divider'
 import FormatsStore from 'stores/FormatsStore'
 import Image from 'components/Image'
 import SuspenseWithError from 'components/SuspenseWithError'
+import VersionStore from 'stores/VersionStore'
 import classnames, {
   alignItems,
   display,
@@ -17,6 +19,24 @@ import classnames, {
   visibility,
   width,
 } from 'classnames/tailwind'
+
+function BookVersionSuspended() {
+  const {
+    version: { version },
+  } = useSnapshot(VersionStore)
+  return <Text>{version}</Text>
+}
+
+function BookVersion() {
+  return (
+    <SuspenseWithError
+      fallback={null}
+      errorText="Не получилось загрузить версию"
+    >
+      <BookVersionSuspended />
+    </SuspenseWithError>
+  )
+}
 
 const icon = classnames(width('w-4'), height('h-4'))
 const buttonContainer = classnames(
@@ -71,6 +91,7 @@ export default function () {
         height="257.5"
       />
       <DownloadButtons />
+      <BookVersion />
       <Divider />
     </div>
   )
