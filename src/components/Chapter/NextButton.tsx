@@ -25,7 +25,6 @@ const container = classnames(
     'hover:bg-secondary',
     'active:bg-active-background'
   ),
-  textColor('text-secondary'),
   borderRadius('rounded-full'),
   padding('py-2', 'px-4'),
   textColor('text-secondary', 'hover:text-primary'),

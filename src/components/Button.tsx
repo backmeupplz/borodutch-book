@@ -1,60 +1,55 @@
-import ChildrenProp from 'models/ChildrenProp'
+import { ButtonText } from 'components/Text'
+import { JSX } from 'preact/jsx-runtime'
 import classnames, {
-  TTranslate,
-  animation,
+  alignItems,
   backgroundColor,
+  borderColor,
   borderRadius,
+  borderWidth,
   cursor,
-  hardwareAcceleration,
-  outlineStyle,
+  display,
+  flexDirection,
+  gap,
+  justifyContent,
   padding,
-  scale,
   textColor,
   transitionProperty,
-  transitionTimingFunction,
-  translate,
+  width,
 } from 'classnames/tailwind'
 
-function button(disabled?: boolean, loading?: boolean) {
-  return classnames(
-    padding('px-6', 'py-4'),
-    backgroundColor(disabled || loading ? 'bg-gray-400' : 'bg-primary'),
-    textColor('text-primary'),
-    borderRadius('rounded'),
-    cursor(
-      loading
-        ? 'cursor-wait'
-        : disabled
-        ? 'cursor-not-allowed'
-        : 'cursor-pointer'
-    ),
-    outlineStyle('focus:outline-none'),
-    transitionProperty('transition-all'),
-    transitionTimingFunction('ease-in-out'),
-    scale(disabled ? undefined : 'hover:scale-110'),
-    translate(disabled ? undefined : ('-hover:translate-x-2' as TTranslate)),
-    hardwareAcceleration('transform-gpu')
-  )
-}
-
+const container = classnames(
+  display('flex'),
+  flexDirection('flex-row'),
+  gap('gap-x-2'),
+  justifyContent('justify-center'),
+  alignItems('items-center'),
+  backgroundColor(
+    'bg-background',
+    'hover:bg-primary',
+    'active:bg-active-background'
+  ),
+  borderRadius('rounded-full'),
+  padding('py-2', 'px-4'),
+  textColor('text-primary', 'hover:text-secondary', 'active:text-primary'),
+  transitionProperty('transition-colors'),
+  borderRadius('rounded-full'),
+  borderWidth('border'),
+  borderColor('border-secondary'),
+  cursor('cursor-pointer'),
+  width('w-64'),
+  padding('py-3')
+)
 export default function ({
-  onClick,
-  children,
-  loading,
-  disabled,
+  title,
+  icon,
 }: {
-  onClick: () => void
-  loading?: boolean
-  disabled?: boolean
-} & ChildrenProp) {
+  title: string
+  icon: JSX.Element
+}) {
   return (
-    <button
-      className={button(disabled, loading)}
-      onClick={onClick}
-      disabled={loading || disabled}
-    >
-      {children}
-      {loading && ' 🤔'}
-    </button>
+    <div className={container}>
+      {icon}
+      <ButtonText>{title}</ButtonText>
+    </div>
   )
 }

@@ -12,3 +12,9 @@ export function fetchChapter(slug: string) {
     (response) => response.json()
   ) as Promise<Chapter>
 }
+
+export function fetchFormats() {
+  return fetch(`${env.VITE_BACKEND_URL}/book/formats`).then((response) =>
+    response.json()
+  ) as Promise<string[]>
+}
