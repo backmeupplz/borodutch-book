@@ -4,6 +4,8 @@ import Chapter from 'pages/Chapter'
 import Main from 'pages/Main'
 import Navbar from 'components/Navbar'
 import Root from 'components/Root'
+import WalletHooks from 'components/WalletHooks'
+import Web3Modal from 'components/Web3Modal'
 
 // TODO: extract to a separate file
 // Wouter hash router
@@ -27,14 +29,17 @@ const useHashLocation = () => {
 
 const App = () => {
   return (
-    <Router hook={useHashLocation as any}>
-      {/* TODO: fix types ^^^ */}
-      <Navbar />
-      <Root>
-        <Route path="/" component={Main} />
-        <Route path="/:chapter" component={Chapter} />
-      </Root>
-    </Router>
+    <Web3Modal>
+      <Router hook={useHashLocation as any}>
+        {/* TODO: fix types ^^^ */}
+        <Navbar />
+        <Root>
+          <Route path="/" component={Main} />
+          <Route path="/:chapter" component={Chapter} />
+        </Root>
+      </Router>
+      <WalletHooks />
+    </Web3Modal>
   )
 }
 

@@ -45,7 +45,7 @@ export default function ({
   onClick,
 }: {
   title: string
-  icon: JSX.Element
+  icon?: JSX.Element
   onClick?: () => void
 }) {
   return (
