@@ -1,4 +1,5 @@
 import { ArrowDownTrayIcon, BookOpenIcon } from '@heroicons/react/24/outline'
+import { Link, useLocation } from 'wouter'
 import { Text } from 'components/Text'
 import { useSnapshot } from 'valtio'
 import Button from 'components/Button'
@@ -48,9 +49,16 @@ const buttonContainer = classnames(
 )
 function DownloadButtonsSuspended() {
   const { formats } = useSnapshot(FormatsStore)
+  const [, setLocation] = useLocation()
   return (
     <div className={buttonContainer}>
-      <Button title="Читать онлайн" icon={<BookOpenIcon className={icon} />} />
+      <Button
+        title="Читать онлайн"
+        icon={<BookOpenIcon className={icon} />}
+        onClick={() => {
+          setLocation('/vvedenie')
+        }}
+      />
       {formats.map((format) => (
         <Button
           key={format}

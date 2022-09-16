@@ -42,12 +42,14 @@ const container = classnames(
 export default function ({
   title,
   icon,
+  onClick,
 }: {
   title: string
   icon: JSX.Element
+  onClick?: () => void
 }) {
   return (
-    <div className={container}>
+    <div className={container} onClick={() => onClick?.()}>
       {icon}
       <ButtonText>{title}</ButtonText>
     </div>
