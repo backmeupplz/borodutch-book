@@ -20,6 +20,12 @@ export function fetchFootnote(index: number) {
   ) as Promise<Footnote>
 }
 
+export function fetchFootnotes() {
+  return fetch(`${env.VITE_BACKEND_URL}/book/footnotes`).then((response) =>
+    response.json()
+  ) as Promise<Footnote[]>
+}
+
 export function fetchFormats() {
   return fetch(`${env.VITE_BACKEND_URL}/book/formats`).then((response) =>
     response.json()

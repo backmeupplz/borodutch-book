@@ -26,7 +26,6 @@ import icon from 'classnames/icon'
 function FootnoteTextSuspended({ index }: { index: number }) {
   const { footnotes } = useSnapshot(FootnoteStore)
   const footnote = footnotes[index]
-  console.log(footnote.url)
   return footnote ? (
     footnote.url ? (
       <a href={footnote.url} rel="noopener noreferrer" target="_blank">

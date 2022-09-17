@@ -37,6 +37,9 @@ const container = classnames(maxWidth('max-w-2xl'), margin('mx-auto'))
 export default function () {
   const [location] = useLocation()
   const trueLocation = location.substring(1)
+  if (trueLocation === 'footnotes') {
+    return null
+  }
   ChapterStore.fetchChapter(trueLocation)
 
   return trueLocation ? (
