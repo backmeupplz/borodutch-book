@@ -3,7 +3,6 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { useSnapshot } from 'valtio'
 import FootnoteStore from 'stores/FootnoteStore'
 import IconButton from 'components/IconButton'
-import Link from 'components/Link'
 import SuspenseWithError from 'components/SuspenseWithError'
 import classnames, {
   alignItems,

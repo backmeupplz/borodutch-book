@@ -2,6 +2,7 @@ import { Route, Router } from 'wouter'
 import { useCallback, useEffect, useState } from 'preact/hooks'
 import Chapter from 'pages/Chapter'
 import Footnote from 'components/Chapter/Footnote'
+import Footnotes from 'pages/Footnotes'
 import Main from 'pages/Main'
 import Navbar from 'components/Navbar'
 import Root from 'components/Root'
@@ -35,6 +36,7 @@ const App = () => {
         <Navbar />
         <Root>
           <Route path="/" component={Main} />
+          <Route path="/footnotes" component={Footnotes} />
           <Route path="/:chapter" component={Chapter} />
         </Root>
         <Footnote />
