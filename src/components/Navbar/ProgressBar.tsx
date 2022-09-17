@@ -4,7 +4,6 @@ import classnames, {
   display,
   height,
   transitionProperty,
-  width,
 } from 'classnames/tailwind'
 
 const separator = classnames(

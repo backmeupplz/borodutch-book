@@ -1,4 +1,5 @@
 import Chapter from 'models/Chapter'
+import Footnote from 'models/Footnote'
 import env from 'helpers/env'
 
 export function fetchToc() {
@@ -11,6 +12,12 @@ export function fetchChapter(slug: string) {
   return fetch(`${env.VITE_BACKEND_URL}/book/chapter/${slug}`).then(
     (response) => response.json()
   ) as Promise<Chapter>
+}
+
+export function fetchFootnote(index: number) {
+  return fetch(`${env.VITE_BACKEND_URL}/book/footnote/${index}`).then(
+    (response) => response.json()
+  ) as Promise<Footnote>
 }
 
 export function fetchFormats() {

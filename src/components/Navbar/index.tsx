@@ -1,7 +1,5 @@
 import { Link, useLocation } from 'wouter'
-import { ListBulletIcon } from '@heroicons/react/24/solid'
 import { LogoText } from 'components/Text'
-import IconButton from 'components/IconButton'
 import Image from 'components/Image'
 import ProgressBar from 'components/Navbar/ProgressBar'
 import Separator from 'components/Navbar/Separator'
@@ -19,7 +17,6 @@ import classnames, {
   transitionProperty,
   zIndex,
 } from 'classnames/tailwind'
-import icon from 'classnames/icon'
 
 const container = classnames(
   position('sticky'),
@@ -65,13 +62,6 @@ export default function () {
         </Link>
         <div className={buttons}>
           <ThemeToggle />
-          {/* <IconButton
-            onClick={() => {
-              console.log('Menu clicked')
-            }}
-          >
-            <ListBulletIcon className={icon} />
-          </IconButton> */}
         </div>
       </div>
       {isChapter && <ProgressBar />}

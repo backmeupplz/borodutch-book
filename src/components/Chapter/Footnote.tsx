@@ -3,6 +3,8 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { useSnapshot } from 'valtio'
 import FootnoteStore from 'stores/FootnoteStore'
 import IconButton from 'components/IconButton'
+import Link from 'components/Link'
+import SuspenseWithError from 'components/SuspenseWithError'
 import classnames, {
   alignItems,
   backgroundColor,
@@ -21,6 +23,21 @@ import classnames, {
   zIndex,
 } from 'classnames/tailwind'
 import icon from 'classnames/icon'
+
+function FootnoteTextSuspended({ index }: { index: number }) {
+  const { footnotes } = useSnapshot(FootnoteStore)
+  const footnote = footnotes[index]
+  console.log(footnote.url)
+  return footnote ? (
+    footnote.url ? (
+      <a href={footnote.url} rel="noopener noreferrer" target="_blank">
+        «{footnote.title}»
+      </a>
+    ) : (
+      <span>«{footnote.title}»</span>
+    )
+  ) : null
+}
 
 const container = (visible: boolean) =>
   classnames(
@@ -45,10 +62,20 @@ const innerContainer = classnames(
 )
 export default function () {
   const { currentFootnote } = useSnapshot(FootnoteStore)
+  if (!currentFootnote) return null
+  FootnoteStore.fetchFootnote(currentFootnote)
   return (
     <div className={container(!!currentFootnote)}>
       <div className={innerContainer}>
-        <Text>{currentFootnote}</Text>
+        <Text>
+          {currentFootnote}.{' '}
+          <SuspenseWithError
+            fallback={<span>Загружаю сноску...</span>}
+            errorText="Не вышло загрузить сноску"
+          >
+            <FootnoteTextSuspended index={currentFootnote} />
+          </SuspenseWithError>
+        </Text>
         <IconButton
           onClick={() => {
             FootnoteStore.currentFootnote = undefined
