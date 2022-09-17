@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@big-whale-labs/stores": "^0.1.16",
+    "@bogachenkov/react-scrolling-progress": "^1.0.1",
     "@heroicons/react": "^2.0.10",
     "@wagmi/core": "^0.5.6",
     "@web3modal/ethereum": "^2.0.0-alpha.1",

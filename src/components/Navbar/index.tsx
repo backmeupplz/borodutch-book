@@ -1,8 +1,9 @@
-import { Link } from 'wouter'
+import { Link, useLocation } from 'wouter'
 import { ListBulletIcon } from '@heroicons/react/24/solid'
 import { LogoText } from 'components/Text'
 import IconButton from 'components/IconButton'
 import Image from 'components/Image'
+import ProgressBar from 'components/Navbar/ProgressBar'
 import Separator from 'components/Navbar/Separator'
 import ThemeToggle from 'components/Navbar/ThemeToggle'
 import classnames, {
@@ -53,6 +54,8 @@ const buttons = classnames(
   gap('gap-x-2')
 )
 export default function () {
+  const [location] = useLocation()
+  const isChapter = location !== '/'
   return (
     <div className={container}>
       <div className={content}>
@@ -71,6 +74,7 @@ export default function () {
           </IconButton> */}
         </div>
       </div>
+      {isChapter && <ProgressBar />}
       <Separator />
     </div>
   )

@@ -1,6 +1,7 @@
 import { Route, Router } from 'wouter'
 import { useCallback, useEffect, useState } from 'preact/hooks'
 import Chapter from 'pages/Chapter'
+import Footnote from 'components/Chapter/Footnote'
 import Main from 'pages/Main'
 import Navbar from 'components/Navbar'
 import Root from 'components/Root'
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/" component={Main} />
           <Route path="/:chapter" component={Chapter} />
         </Root>
+        <Footnote />
       </Router>
     </Web3Modal>
   )

@@ -628,6 +628,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@bogachenkov/react-scrolling-progress@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@bogachenkov/react-scrolling-progress@npm:1.0.1"
+  peerDependencies:
+    react: ">= 16.8.0"
+    react-dom: ">= 16.8.0"
+    styled-jsx: 3.3.2
+  checksum: b363b13fa98a67c8ac9ff74eba46e9144894d3f15d8931b24fc751bf182a006fca93045a187cd71ec38350b0d6b75b5db5c2d1bbf68707066351730bd0bedc08
+  languageName: node
+  linkType: hard
+
 "@coinbase/wallet-sdk@npm:3.5.2":
   version: 3.5.2
   resolution: "@coinbase/wallet-sdk@npm:3.5.2"
@@ -2470,6 +2481,7 @@ __metadata:
   resolution: "borodutch-book@workspace:."
   dependencies:
     "@big-whale-labs/stores": ^0.1.16
+    "@bogachenkov/react-scrolling-progress": ^1.0.1
     "@esbuild-plugins/node-globals-polyfill": ^0.1.1
     "@heroicons/react": ^2.0.10
     "@preact/preset-vite": ^2.3.0

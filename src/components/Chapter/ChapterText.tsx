@@ -11,6 +11,7 @@ import {
 import Chapter from 'models/Chapter'
 import Content from 'models/Content'
 import DialogueBlock from 'components/Chapter/DialogueBlock'
+import FootnoteStore from 'stores/FootnoteStore'
 import LinedBlock from 'components/Chapter/LinedBlock'
 import Separator from 'components/Chapter/Separator'
 import classnames, {
@@ -75,7 +76,16 @@ function renderChild(child: Content, key: string) {
           supChild.text ? (
             <span key={`${i}`}>{supChild.text}</span>
           ) : (
-            <span key={`${i}`} className={superscriptLink}>
+            <span
+              key={`${i}`}
+              className={superscriptLink}
+              onClick={() => {
+                if (supChild.children?.[0].children?.[0].children?.[0].text) {
+                  FootnoteStore.currentFootnote =
+                    +supChild.children?.[0].children?.[0].children?.[0].text
+                }
+              }}
+            >
               {supChild.children?.[0].children?.[0].children?.[0].text}
             </span>
           )

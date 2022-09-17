@@ -1,5 +1,5 @@
 import { WalletIcon } from '@heroicons/react/24/outline'
-import { useConnectModal } from '@web3modal/react'
+import { useAccount, useConnectModal } from '@web3modal/react'
 import Button from 'components/Button'
 import classnames, {
   alignItems,
@@ -21,15 +21,18 @@ const container = classnames(
 const icon = classnames(width('w-4'), height('h-4'))
 export default function () {
   const { open } = useConnectModal()
+  const { connected, address } = useAccount()
   return (
     <div className={container}>
-      <Button
-        title="Подключить кошелек!"
-        icon={<WalletIcon className={icon} />}
-        onClick={() => {
-          open()
-        }}
-      />
+      {(!connected || !address) && (
+        <Button
+          title="Подключить кошелек!"
+          icon={<WalletIcon className={icon} />}
+          onClick={() => {
+            open()
+          }}
+        />
+      )}
     </div>
   )
 }
