@@ -5,7 +5,6 @@ import erc1155abi from 'helpers/erc1155abi'
 export default function (address: string) {
   const { read, refetch } = useContractRead()
   useEffect(() => {
-    console.log('refetching')
     void refetch({
       addressOrName: '0x495f947276749Ce646f68AC8c248420045cb7b5e',
       functionName: 'balanceOf',
