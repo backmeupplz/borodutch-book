@@ -1,35 +1,32 @@
-import { defineConfig, Plugin } from 'vite'
+import { defineConfig } from 'vite'
 import preact from '@preact/preset-vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { visualizer } from 'rollup-plugin-visualizer'
-import nodePolyfills from 'rollup-plugin-polyfill-node'
-
-const production = process.env.NODE_ENV === 'production'
+import GlobalsPolyfills from '@esbuild-plugins/node-globals-polyfill'
 
 export default defineConfig({
-  plugins: [
-    preact(),
-    tsconfigPaths(),
-    !production &&
-      (nodePolyfills({
-        include: [
-          'node_modules/**/*.js',
-          new RegExp('node_modules/.vite/.*js'),
-        ],
-      }) as unknown as Plugin),
-  ],
+  plugins: [preact(), tsconfigPaths()],
   build: {
+    outDir: 'docs',
     rollupOptions: {
       plugins: [
         visualizer({
           gzipSize: true,
           brotliSize: true,
-        }) as unknown as Plugin,
-        nodePolyfills() as unknown as Plugin,
+        }),
       ],
     },
-    commonjsOptions: {
-      transformMixedEsModules: true,
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      define: {
+        global: 'globalThis',
+      },
+      plugins: [
+        GlobalsPolyfills({
+          buffer: true,
+        }),
+      ],
     },
   },
   esbuild: {

@@ -1,9 +1,13 @@
-import Link from 'components/Link'
-
-export default function ({ src, alt }: { src: string; alt: string }) {
-  return (
-    <Link url={src}>
-      <img src={src} alt={alt} />
-    </Link>
-  )
+export default function ({
+  src,
+  alt,
+  width,
+  height,
+}: {
+  src: string
+  alt: string
+  width?: string
+  height?: string
+}) {
+  return <img src={src} alt={alt} width={width} height={height} />
 }

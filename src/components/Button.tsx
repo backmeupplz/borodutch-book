@@ -1,59 +1,70 @@
-import ChildrenProp from 'models/ChildrenProp'
+import { ButtonText } from 'components/Text'
+import { JSX } from 'preact/jsx-runtime'
 import classnames, {
-  TTranslate,
+  alignItems,
   backgroundColor,
+  borderColor,
   borderRadius,
+  borderWidth,
   cursor,
-  hardwareAcceleration,
-  outlineStyle,
+  display,
+  flexDirection,
+  gap,
+  justifyContent,
   padding,
-  scale,
   textColor,
   transitionProperty,
-  transitionTimingFunction,
-  translate,
+  width,
 } from 'classnames/tailwind'
 
-function button(disabled?: boolean, loading?: boolean) {
-  return classnames(
-    padding('px-6', 'py-4'),
-    backgroundColor(disabled || loading ? 'bg-gray-400' : 'bg-primary'),
-    textColor('text-black-background'),
-    borderRadius('rounded'),
-    cursor(
-      loading
-        ? 'cursor-wait'
-        : disabled
-        ? 'cursor-not-allowed'
-        : 'cursor-pointer'
+const container = (disabled?: boolean) =>
+  classnames(
+    display('flex'),
+    flexDirection('flex-row'),
+    gap('gap-x-2'),
+    justifyContent('justify-center'),
+    alignItems('items-center'),
+    backgroundColor(
+      { 'bg-background': !disabled },
+      { 'hover:bg-primary': !disabled },
+      { 'active:bg-active-background': !disabled }
     ),
-    outlineStyle('focus:outline-none'),
-    transitionProperty('transition-all'),
-    transitionTimingFunction('ease-in-out'),
-    scale(disabled ? undefined : 'hover:scale-110'),
-    translate(disabled ? undefined : ('-hover:translate-x-2' as TTranslate)),
-    hardwareAcceleration('transform-gpu')
+    borderRadius('rounded-full'),
+    padding('py-3', 'px-4'),
+    textColor(
+      { 'text-primary': !disabled },
+      { 'hover:text-secondary': !disabled },
+      { 'active:text-primary': !disabled },
+      { 'text-secondary': disabled }
+    ),
+    transitionProperty('transition-colors'),
+    borderRadius('rounded-full'),
+    borderWidth('border'),
+    borderColor('border-secondary'),
+    cursor(disabled ? 'cursor-not-allowed' : 'cursor-pointer'),
+    width('w-64')
   )
-}
-
 export default function ({
+  title,
+  icon,
   onClick,
-  children,
-  loading,
   disabled,
 }: {
-  onClick: () => void
-  loading?: boolean
+  title: string
+  icon?: JSX.Element
+  onClick?: () => void
   disabled?: boolean
-} & ChildrenProp) {
+}) {
   return (
-    <button
-      className={button(disabled, loading)}
-      onClick={onClick}
-      disabled={loading || disabled}
+    <div
+      className={container(disabled)}
+      onClick={() => {
+        if (disabled) return
+        onClick?.()
+      }}
     >
-      {children}
-      {loading && ' 🤔'}
-    </button>
+      {icon}
+      <ButtonText>{title}</ButtonText>
+    </div>
   )
 }

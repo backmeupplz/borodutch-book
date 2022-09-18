@@ -54,7 +54,7 @@ export type TBackgroundColor =
   | 'bg-inherit'
   | 'bg-current'
   | 'bg-transparent'
-  | 'bg-black-background'
+  | 'bg-black'
   | 'bg-white'
   | 'bg-slate-50'
   | 'bg-slate-100'
@@ -276,7 +276,13 @@ export type TBackgroundColor =
   | 'bg-rose-700'
   | 'bg-rose-800'
   | 'bg-rose-900'
+  | 'bg-background'
   | 'bg-primary'
+  | 'bg-primary-highlighted'
+  | 'bg-primary-active'
+  | 'bg-secondary'
+  | 'bg-highlighted-background'
+  | 'bg-active-background'
 
 export type TBackgroundPosition =
   | 'bg-bottom'
@@ -312,9 +318,9 @@ export type TGradientColorStops =
   | 'from-transparent'
   | 'via-transparent'
   | 'to-transparent'
-  | 'from-black-background'
-  | 'via-black-background'
-  | 'to-black-background'
+  | 'from-black'
+  | 'via-black'
+  | 'to-black'
   | 'from-white'
   | 'via-white'
   | 'to-white'
@@ -978,9 +984,27 @@ export type TGradientColorStops =
   | 'from-rose-900'
   | 'via-rose-900'
   | 'to-rose-900'
+  | 'from-background'
+  | 'via-background'
+  | 'to-background'
   | 'from-primary'
   | 'via-primary'
   | 'to-primary'
+  | 'from-primary-highlighted'
+  | 'via-primary-highlighted'
+  | 'to-primary-highlighted'
+  | 'from-primary-active'
+  | 'via-primary-active'
+  | 'to-primary-active'
+  | 'from-secondary'
+  | 'via-secondary'
+  | 'to-secondary'
+  | 'from-highlighted-background'
+  | 'via-highlighted-background'
+  | 'to-highlighted-background'
+  | 'from-active-background'
+  | 'via-active-background'
+  | 'to-active-background'
 
 export type TBackgrounds =
   | TBackgroundAttachment
@@ -1033,13 +1057,11 @@ export type TBorderColor =
   | 'border-r-transparent'
   | 'border-b-transparent'
   | 'border-l-transparent'
-  | 'border-black-background'
-  | 'border-t-black-background'
-  | 'border-r-black-background'
-  | 'border-b-black-background'
-  | 'border-l-black-background'
-  | 'border-x-black-background'
-  | 'border-y-black-background'
+  | 'border-black'
+  | 'border-t-black'
+  | 'border-r-black'
+  | 'border-b-black'
+  | 'border-l-black'
   | 'border-white'
   | 'border-t-white'
   | 'border-r-white'
@@ -2585,11 +2607,41 @@ export type TBorderColor =
   | 'border-l-rose-900'
   | 'border-x-rose-900'
   | 'border-y-rose-900'
+  | 'border-background'
+  | 'border-t-background'
+  | 'border-r-background'
+  | 'border-b-background'
+  | 'border-l-background'
   | 'border-primary'
   | 'border-t-primary'
   | 'border-r-primary'
   | 'border-b-primary'
   | 'border-l-primary'
+  | 'border-primary-highlighted'
+  | 'border-t-primary-highlighted'
+  | 'border-r-primary-highlighted'
+  | 'border-b-primary-highlighted'
+  | 'border-l-primary-highlighted'
+  | 'border-primary-active'
+  | 'border-t-primary-active'
+  | 'border-r-primary-active'
+  | 'border-b-primary-active'
+  | 'border-l-primary-active'
+  | 'border-secondary'
+  | 'border-t-secondary'
+  | 'border-r-secondary'
+  | 'border-b-secondary'
+  | 'border-l-secondary'
+  | 'border-highlighted-background'
+  | 'border-t-highlighted-background'
+  | 'border-r-highlighted-background'
+  | 'border-b-highlighted-background'
+  | 'border-l-highlighted-background'
+  | 'border-active-background'
+  | 'border-t-active-background'
+  | 'border-r-active-background'
+  | 'border-b-active-background'
+  | 'border-l-active-background'
 
 export type TBorderOpacity =
   | 'border-opacity-0'
@@ -2609,6 +2661,24 @@ export type TBorderOpacity =
   | 'border-opacity-100'
 
 export type TBorderRadius =
+  | 'rounded-t-none'
+  | 'rounded-r-none'
+  | 'rounded-b-none'
+  | 'rounded-l-none'
+  | 'rounded-tr-none'
+  | 'rounded-tl-none'
+  | 'rounded-br-none'
+  | 'rounded-bl-none'
+  | 'rounded-none'
+  | 'rounded-t-sm'
+  | 'rounded-r-sm'
+  | 'rounded-b-sm'
+  | 'rounded-l-sm'
+  | 'rounded-tr-sm'
+  | 'rounded-tl-sm'
+  | 'rounded-br-sm'
+  | 'rounded-bl-sm'
+  | 'rounded-sm'
   | 'rounded-t'
   | 'rounded-r'
   | 'rounded-b'
@@ -2618,6 +2688,60 @@ export type TBorderRadius =
   | 'rounded-br'
   | 'rounded-bl'
   | 'rounded'
+  | 'rounded-t-md'
+  | 'rounded-r-md'
+  | 'rounded-b-md'
+  | 'rounded-l-md'
+  | 'rounded-tr-md'
+  | 'rounded-tl-md'
+  | 'rounded-br-md'
+  | 'rounded-bl-md'
+  | 'rounded-md'
+  | 'rounded-t-lg'
+  | 'rounded-r-lg'
+  | 'rounded-b-lg'
+  | 'rounded-l-lg'
+  | 'rounded-tr-lg'
+  | 'rounded-tl-lg'
+  | 'rounded-br-lg'
+  | 'rounded-bl-lg'
+  | 'rounded-lg'
+  | 'rounded-t-xl'
+  | 'rounded-r-xl'
+  | 'rounded-b-xl'
+  | 'rounded-l-xl'
+  | 'rounded-tr-xl'
+  | 'rounded-tl-xl'
+  | 'rounded-br-xl'
+  | 'rounded-bl-xl'
+  | 'rounded-xl'
+  | 'rounded-t-2xl'
+  | 'rounded-r-2xl'
+  | 'rounded-b-2xl'
+  | 'rounded-l-2xl'
+  | 'rounded-tr-2xl'
+  | 'rounded-tl-2xl'
+  | 'rounded-br-2xl'
+  | 'rounded-bl-2xl'
+  | 'rounded-2xl'
+  | 'rounded-t-3xl'
+  | 'rounded-r-3xl'
+  | 'rounded-b-3xl'
+  | 'rounded-l-3xl'
+  | 'rounded-tr-3xl'
+  | 'rounded-tl-3xl'
+  | 'rounded-br-3xl'
+  | 'rounded-bl-3xl'
+  | 'rounded-3xl'
+  | 'rounded-t-full'
+  | 'rounded-r-full'
+  | 'rounded-b-full'
+  | 'rounded-l-full'
+  | 'rounded-tr-full'
+  | 'rounded-tl-full'
+  | 'rounded-br-full'
+  | 'rounded-bl-full'
+  | 'rounded-full'
 
 export type TBorderWidth =
   | 'border-t-0'
@@ -2918,7 +3042,7 @@ export type TRingColor =
   | 'ring-inherit'
   | 'ring-current'
   | 'ring-transparent'
-  | 'ring-black-background'
+  | 'ring-black'
   | 'ring-white'
   | 'ring-slate-50'
   | 'ring-slate-100'
@@ -3140,7 +3264,13 @@ export type TRingColor =
   | 'ring-rose-700'
   | 'ring-rose-800'
   | 'ring-rose-900'
+  | 'ring-background'
   | 'ring-primary'
+  | 'ring-primary-highlighted'
+  | 'ring-primary-active'
+  | 'ring-secondary'
+  | 'ring-highlighted-background'
+  | 'ring-active-background'
 
 export type TRingWidth =
   | 'ring-0'
@@ -3173,7 +3303,7 @@ export type TRingOffsetColor =
   | 'ring-offset-inherit'
   | 'ring-offset-current'
   | 'ring-offset-transparent'
-  | 'ring-offset-black-background'
+  | 'ring-offset-black'
   | 'ring-offset-white'
   | 'ring-offset-slate-50'
   | 'ring-offset-slate-100'
@@ -3395,7 +3525,13 @@ export type TRingOffsetColor =
   | 'ring-offset-rose-700'
   | 'ring-offset-rose-800'
   | 'ring-offset-rose-900'
+  | 'ring-offset-background'
   | 'ring-offset-primary'
+  | 'ring-offset-primary-highlighted'
+  | 'ring-offset-primary-active'
+  | 'ring-offset-secondary'
+  | 'ring-offset-highlighted-background'
+  | 'ring-offset-active-background'
 
 export type TRingOffsetWidth =
   | 'ring-offset-0'
@@ -3422,7 +3558,7 @@ export type TOutlineColor =
   | 'outline-inherit'
   | 'outline-current'
   | 'outline-transparent'
-  | 'outline-black-background'
+  | 'outline-black'
   | 'outline-white'
   | 'outline-slate-50'
   | 'outline-slate-100'
@@ -3644,7 +3780,13 @@ export type TOutlineColor =
   | 'outline-rose-700'
   | 'outline-rose-800'
   | 'outline-rose-900'
+  | 'outline-background'
   | 'outline-primary'
+  | 'outline-primary-highlighted'
+  | 'outline-primary-active'
+  | 'outline-secondary'
+  | 'outline-highlighted-background'
+  | 'outline-active-background'
 
 export type TBorders =
   | TBorderStyle
@@ -3722,7 +3864,7 @@ export type TBoxShadowColor =
   | 'shadow-inherit'
   | 'shadow-current'
   | 'shadow-transparent'
-  | 'shadow-black-background'
+  | 'shadow-black'
   | 'shadow-white'
   | 'shadow-slate-50'
   | 'shadow-slate-100'
@@ -3944,7 +4086,13 @@ export type TBoxShadowColor =
   | 'shadow-rose-700'
   | 'shadow-rose-800'
   | 'shadow-rose-900'
+  | 'shadow-background'
   | 'shadow-primary'
+  | 'shadow-primary-highlighted'
+  | 'shadow-primary-active'
+  | 'shadow-secondary'
+  | 'shadow-highlighted-background'
+  | 'shadow-active-background'
 
 export type TOpacity =
   | 'opacity-0'
@@ -5261,7 +5409,7 @@ export type TCaretColor =
   | 'caret-inherit'
   | 'caret-current'
   | 'caret-transparent'
-  | 'caret-black-background'
+  | 'caret-black'
   | 'caret-white'
   | 'caret-slate-50'
   | 'caret-slate-100'
@@ -5483,7 +5631,13 @@ export type TCaretColor =
   | 'caret-rose-700'
   | 'caret-rose-800'
   | 'caret-rose-900'
+  | 'caret-background'
   | 'caret-primary'
+  | 'caret-primary-highlighted'
+  | 'caret-primary-active'
+  | 'caret-secondary'
+  | 'caret-highlighted-background'
+  | 'caret-active-background'
 
 export type TWillChange =
   | 'will-change-auto'
@@ -5495,7 +5649,7 @@ export type TAccentColor =
   | 'accent-inherit'
   | 'accent-current'
   | 'accent-transparent'
-  | 'accent-black-background'
+  | 'accent-black'
   | 'accent-white'
   | 'accent-slate-50'
   | 'accent-slate-100'
@@ -5718,7 +5872,13 @@ export type TAccentColor =
   | 'accent-rose-800'
   | 'accent-rose-900'
   | 'accent-auto'
+  | 'accent-background'
   | 'accent-primary'
+  | 'accent-primary-highlighted'
+  | 'accent-primary-active'
+  | 'accent-secondary'
+  | 'accent-highlighted-background'
+  | 'accent-active-background'
 
 export type TScrollPadding =
   | 'scroll-p-0'
@@ -6944,7 +7104,13 @@ export type TFill =
   | 'fill-fuchsia'
   | 'fill-pink'
   | 'fill-rose'
+  | 'fill-background'
   | 'fill-primary'
+  | 'fill-primary-highlighted'
+  | 'fill-primary-active'
+  | 'fill-secondary'
+  | 'fill-highlighted-background'
+  | 'fill-active-background'
 
 export type TStroke =
   | 'stroke-inherit'
@@ -6974,7 +7140,13 @@ export type TStroke =
   | 'stroke-fuchsia'
   | 'stroke-pink'
   | 'stroke-rose'
+  | 'stroke-background'
   | 'stroke-primary'
+  | 'stroke-primary-highlighted'
+  | 'stroke-primary-active'
+  | 'stroke-secondary'
+  | 'stroke-highlighted-background'
+  | 'stroke-active-background'
 
 export type TStrokeWidth = 'stroke-0' | 'stroke-1' | 'stroke-2'
 
@@ -7203,7 +7375,11 @@ export type TTextDecorationStyle =
   | 'decoration-dashed'
   | 'decoration-wavy'
 
-export type TFontFamily = 'font-sans' | 'font-serif' | 'font-mono'
+export type TFontFamily =
+  | 'font-sans'
+  | 'font-serif'
+  | 'font-mono'
+  | 'font-title'
 
 export type TFontSize =
   | 'text-xs'
@@ -7261,7 +7437,7 @@ export type TPlaceholderColor =
   | 'placeholder-inherit'
   | 'placeholder-current'
   | 'placeholder-transparent'
-  | 'placeholder-black-background'
+  | 'placeholder-black'
   | 'placeholder-white'
   | 'placeholder-slate-50'
   | 'placeholder-slate-100'
@@ -7483,7 +7659,13 @@ export type TPlaceholderColor =
   | 'placeholder-rose-700'
   | 'placeholder-rose-800'
   | 'placeholder-rose-900'
+  | 'placeholder-background'
   | 'placeholder-primary'
+  | 'placeholder-primary-highlighted'
+  | 'placeholder-primary-active'
+  | 'placeholder-secondary'
+  | 'placeholder-highlighted-background'
+  | 'placeholder-active-background'
 
 export type TPlaceholderOpacity =
   | 'placeholder-opacity-0'
@@ -7506,7 +7688,7 @@ export type TTextColor =
   | 'text-inherit'
   | 'text-current'
   | 'text-transparent'
-  | 'text-black-background'
+  | 'text-black'
   | 'text-white'
   | 'text-slate-50'
   | 'text-slate-100'
@@ -7728,7 +7910,13 @@ export type TTextColor =
   | 'text-rose-700'
   | 'text-rose-800'
   | 'text-rose-900'
+  | 'text-background'
   | 'text-primary'
+  | 'text-primary-highlighted'
+  | 'text-primary-active'
+  | 'text-secondary'
+  | 'text-highlighted-background'
+  | 'text-active-background'
 
 export type TTextOpacity =
   | 'text-opacity-0'
@@ -7790,7 +7978,7 @@ export type TTextDecorationColor =
   | 'decoration-inherit'
   | 'decoration-current'
   | 'decoration-transparent'
-  | 'decoration-black-background'
+  | 'decoration-black'
   | 'decoration-white'
   | 'decoration-slate-50'
   | 'decoration-slate-100'
@@ -8012,7 +8200,13 @@ export type TTextDecorationColor =
   | 'decoration-rose-700'
   | 'decoration-rose-800'
   | 'decoration-rose-900'
+  | 'decoration-background'
   | 'decoration-primary'
+  | 'decoration-primary-highlighted'
+  | 'decoration-primary-active'
+  | 'decoration-secondary'
+  | 'decoration-highlighted-background'
+  | 'decoration-active-background'
 
 export type TTextDecorationThickness =
   | 'decoration-0'
@@ -8426,6 +8620,73 @@ export const textDecorationThickness: TUtilityFunction<TTextDecorationThickness>
 export const textUnderlineOffset: TUtilityFunction<TTextUnderlineOffset> =
   classnamesLib as any
 
+//////////// Accessibility Utility functions
+
+export const accessibility: TUtilityFunction<TAccessibility> =
+  classnamesLib as any
+
+//////////// Backgrounds Utility functions
+
+export const backgrounds: TUtilityFunction<TBackgrounds> = classnamesLib as any
+
+//////////// Borders Utility functions
+
+export const borders: TUtilityFunction<TBorders> = classnamesLib as any
+
+//////////// Tables Utility functions
+
+export const tables: TUtilityFunction<TTables> = classnamesLib as any
+
+//////////// Effects Utility functions
+
+export const effects: TUtilityFunction<TEffects> = classnamesLib as any
+
+//////////// TransitionsAndAnimations Utility functions
+
+export const transitionsAndAnimations: TUtilityFunction<TTransitionsAndAnimations> =
+  classnamesLib as any
+
+//////////// Filters Utility functions
+
+export const filters: TUtilityFunction<TFilters> = classnamesLib as any
+
+//////////// FlexBox Utility functions
+
+export const flexBox: TUtilityFunction<TFlexBox> = classnamesLib as any
+
+//////////// Grid Utility functions
+
+export const grid: TUtilityFunction<TGrid> = classnamesLib as any
+
+//////////// Spacing Utility functions
+
+export const spacing: TUtilityFunction<TSpacing> = classnamesLib as any
+
+//////////// Interactivity Utility functions
+
+export const interactivity: TUtilityFunction<TInteractivity> =
+  classnamesLib as any
+
+//////////// Layout Utility functions
+
+export const layout: TUtilityFunction<TLayout> = classnamesLib as any
+
+//////////// Sizing Utility functions
+
+export const sizing: TUtilityFunction<TSizing> = classnamesLib as any
+
+//////////// SVG Utility functions
+
+export const svg: TUtilityFunction<TSVG> = classnamesLib as any
+
+//////////// Transforms Utility functions
+
+export const transforms: TUtilityFunction<TTransforms> = classnamesLib as any
+
+//////////// Typography Utility functions
+
+export const typography: TUtilityFunction<TTypography> = classnamesLib as any
+
 export const TW = {
   screenReaders,
   backgroundAttachment,
@@ -8595,6 +8856,29 @@ export const TW = {
   textDecorationThickness,
   textUnderlineOffset,
 }
+
+export const CN = {
+  accessibility,
+  backgrounds,
+  borders,
+  tables,
+  effects,
+  transitionsAndAnimations,
+  filters,
+  flexBox,
+  grid,
+  spacing,
+  interactivity,
+  layout,
+  sizing,
+  svg,
+  transforms,
+  typography,
+}
+
+export const mainCategoriesUtilityFunctions = CN
+
+export const subCategoriesUtilityFunctions = TW
 
 export type TTailwindString = 'TAILWIND_STRING'
 
