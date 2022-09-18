@@ -11,7 +11,8 @@ import Web3Modal from 'components/Web3Modal'
 
 // TODO: extract to a separate file
 // Wouter hash router
-const currentLoc = () => window.location.hash.replace('#', '') || '/'
+const currentLoc = () => window.location.hash.split('#')[1] || '/'
+
 const useHashLocation = () => {
   const [loc, setLoc] = useState(currentLoc())
 

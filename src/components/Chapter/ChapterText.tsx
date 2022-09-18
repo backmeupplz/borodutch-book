@@ -107,9 +107,17 @@ function renderChild(child: Content, key: string) {
   } else if (child.class?.includes('Separator')) {
     return <Separator />
   } else if (child.class?.includes('Heading-4')) {
-    return <Heading>{extractChildren(child.children)}</Heading>
+    return (
+      <Heading>
+        <a id={child.slug}>{extractChildren(child.children)}</a>
+      </Heading>
+    )
   } else if (child.class?.includes('Heading-5')) {
-    return <Subheading>{extractChildren(child.children)}</Subheading>
+    return (
+      <Subheading>
+        <a id={child.slug}>{extractChildren(child.children)}</a>
+      </Subheading>
+    )
   } else if (child.class?.includes('Example')) {
     return <ExampleText>{extractChildren(child.children)}</ExampleText>
   } else if (child.tagName?.includes('UL')) {

@@ -54,7 +54,7 @@ export default function () {
   const [location] = useLocation()
   const isChapter = location !== '/'
   return (
-    <div className={container}>
+    <div className={container} id="navbar">
       <div className={content}>
         <Link href="/" className={logo}>
           <Image src="/icons/logo.svg" alt="Logo" />

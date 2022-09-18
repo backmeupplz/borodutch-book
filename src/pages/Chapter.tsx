@@ -1,4 +1,5 @@
 import { Title } from 'components/Text'
+import { useEffect, useState } from 'preact/hooks'
 import { useLocation } from 'wouter'
 import { useSnapshot } from 'valtio'
 import ChapterStore from 'stores/ChapterStore'
@@ -26,6 +27,28 @@ function ChapterSuspended({ location }: { location: string }) {
   const { chapters } = useSnapshot(ChapterStore)
   const chapter = chapters[location]
   const subchapter = chapter.subchapters?.[0]
+  const [anchor, setAnchor] = useState(window.location.hash.split('#')[2])
+  useEffect(() => {
+    const handler = () => setAnchor(window.location.hash.split('#')[2])
+    window.addEventListener('hashchange', handler)
+    window.addEventListener('popstate', handler)
+    return () => {
+      window.removeEventListener('hashchange', handler)
+      window.removeEventListener('popstate', handler)
+    }
+  }, [])
+  function _scrollTo(id: string, yOffset = 0) {
+    const el = document.getElementById(id)
+    const y =
+      (el?.getBoundingClientRect().top || 0) - 10 + window.pageYOffset - yOffset
+    window.scrollTo({ top: y, behavior: 'smooth' })
+  }
+  useEffect(() => {
+    const offset = document
+      .getElementById('navbar')
+      ?.getBoundingClientRect().height
+    _scrollTo(anchor, offset)
+  }, [anchor])
   return (
     <>
       <Title large>{chapter.title}</Title>
