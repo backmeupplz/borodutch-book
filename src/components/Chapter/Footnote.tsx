@@ -3,6 +3,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { useSnapshot } from 'valtio'
 import FootnoteStore from 'stores/FootnoteStore'
 import IconButton from 'components/IconButton'
+import Loading from 'components/Loading'
 import SuspenseWithError from 'components/SuspenseWithError'
 import classnames, {
   alignItems,
@@ -68,7 +69,7 @@ export default function () {
         <Text>
           {currentFootnote}.{' '}
           <SuspenseWithError
-            fallback={<span>Загружаю сноску...</span>}
+            fallback={<Loading text="Загружаю сноску..." />}
             errorText="Не вышло загрузить сноску"
           >
             <FootnoteTextSuspended index={currentFootnote} />

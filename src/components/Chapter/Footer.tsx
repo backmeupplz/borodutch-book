@@ -3,6 +3,7 @@ import { useSnapshot } from 'valtio'
 import Chapter from 'models/Chapter'
 import ChapterStore from 'stores/ChapterStore'
 import Divider from 'components/Divider'
+import Loading from 'components/Loading'
 import NextButton from 'components/Chapter/NextButton'
 import SuspenseWithError from 'components/SuspenseWithError'
 import classnames, {
@@ -58,7 +59,10 @@ function FooterSuspended({ chapter }: { chapter: Chapter }) {
 
 export default function ({ chapter }: { chapter: Chapter }) {
   return (
-    <SuspenseWithError fallback={null} errorText="Error loading chapters">
+    <SuspenseWithError
+      fallback={<Loading text="Загружаю оглавление..." />}
+      errorText="Не получилось загрузить оглавление"
+    >
       <FooterSuspended chapter={chapter} />
     </SuspenseWithError>
   )

@@ -53,8 +53,8 @@ function ChaptersSuspended() {
 export default function () {
   return (
     <SuspenseWithError
-      fallback={<Loading />}
-      errorText="Error loading chapters"
+      fallback={<Loading text="Загружаю оглавление..." />}
+      errorText="Не получилось загрузить оглавление"
     >
       <ChaptersSuspended />
     </SuspenseWithError>

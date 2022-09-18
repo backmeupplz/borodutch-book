@@ -7,6 +7,7 @@ import Button from 'components/Button'
 import Divider from 'components/Divider'
 import FormatsStore from 'stores/FormatsStore'
 import Image from 'components/Image'
+import Loading from 'components/Loading'
 import SignatureStore from 'stores/SignatureStore'
 import SuspenseWithError from 'components/SuspenseWithError'
 import VersionStore from 'stores/VersionStore'
@@ -36,7 +37,7 @@ function BookVersionSuspended() {
 function BookVersion() {
   return (
     <SuspenseWithError
-      fallback={null}
+      fallback={<Loading text="Загружаю версию..." />}
       errorText="Не получилось загрузить версию"
     >
       <BookVersionSuspended />
@@ -113,7 +114,7 @@ function DownloadButtonsSuspended() {
 function DownloadButtons() {
   return (
     <SuspenseWithError
-      fallback={null}
+      fallback={<Loading text="Загружаю форматы..." />}
       errorText="Не получилось загрузить форматы"
     >
       <DownloadButtonsSuspended />
