@@ -1,6 +1,7 @@
 import { Text, Title } from 'components/Text'
 import BookDescription from 'components/BookDescription'
 import Divider from 'components/Divider'
+import Link from 'components/Link'
 import Toc from 'components/Toc'
 import WalletBlock from 'components/WalletBlock'
 import classnames, {
@@ -57,6 +58,18 @@ export default function () {
         <WalletBlock />
         <Divider />
         <Toc />
+        <Divider />
+        <Text>
+          Код{' '}
+          <Link url="https://github.com/backmeupplz/borodutch-book-backend">
+            сервера
+          </Link>{' '}
+          и{' '}
+          <Link url="https://github.com/backmeupplz/borodutch-book">
+            самого сайта
+          </Link>{' '}
+          открыт, пользуйтесь на здоровье!
+        </Text>
       </div>
     </div>
   )
