@@ -1,7 +1,11 @@
 import { Link } from 'wouter'
 import { Text } from 'components/Text'
+import { useSnapshot } from 'valtio'
 import Chapter from 'models/Chapter'
 import Divider from 'components/Divider'
+import FreeSlugsStore from 'stores/FreeSlugsStore'
+import LockedIcon from 'components/LockedIcon'
+import SignatureStore from 'stores/SignatureStore'
 import UpRightIcon from 'components/UpRightIcon'
 import classnames, {
   alignItems,
@@ -44,6 +48,8 @@ function Subchapter({
   chapter: Chapter
   divider: boolean
 }) {
+  const { freeSlugs } = useSnapshot(FreeSlugsStore)
+  const { signature } = useSnapshot(SignatureStore)
   return (
     <>
       <Link
@@ -52,6 +58,7 @@ function Subchapter({
       >
         <Text>{chapter.title}</Text>
         <UpRightIcon />
+        {!signature && !freeSlugs.includes(chapter.slug) && <LockedIcon />}
       </Link>
       {!!chapter.subchapters?.length && <Divider />}
       {!!chapter.subchapters?.length && (

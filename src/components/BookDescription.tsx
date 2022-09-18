@@ -24,6 +24,7 @@ import classnames, {
 } from 'classnames/tailwind'
 import download from 'downloadjs'
 import env from 'helpers/env'
+import message from 'helpers/message'
 
 function BookVersionSuspended() {
   const {
@@ -77,8 +78,7 @@ function DownloadButtonsSuspended() {
                   method: 'POST',
                   body: JSON.stringify({
                     signature,
-                    message:
-                      'Подверждение владения книгой "Не Тысячу Лет Живем"',
+                    message,
                   }),
                   headers: {
                     'Content-Type': 'application/json',

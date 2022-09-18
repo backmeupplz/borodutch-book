@@ -5,9 +5,20 @@ import ChapterStore from 'stores/ChapterStore'
 import ChapterText from 'components/Chapter/ChapterText'
 import Divider from 'components/Divider'
 import Footer from 'components/Chapter/Footer'
+import FreeSlugsStore from 'stores/FreeSlugsStore'
 import ScrollToTop from 'components/ScrollToTop'
+import SignatureStore from 'stores/SignatureStore'
 import SuspenseWithError from 'components/SuspenseWithError'
-import classnames, { margin, maxWidth, textAlign } from 'classnames/tailwind'
+import WalletBlock from 'components/WalletBlock'
+import classnames, {
+  display,
+  flexDirection,
+  gap,
+  margin,
+  maxWidth,
+  textAlign,
+} from 'classnames/tailwind'
+import flattenToc from 'helpers/flattenToc'
 
 const dividerContainer = margin('my-4')
 const subtitle = textAlign('text-center')
@@ -33,14 +44,48 @@ function ChapterSuspended({ location }: { location: string }) {
   )
 }
 
+const walletContainer = classnames(
+  display('flex'),
+  flexDirection('flex-col'),
+  gap('gap-4')
+)
+function ChapterWrapper({ location }: { location: string }) {
+  const { freeSlugs } = useSnapshot(FreeSlugsStore)
+  const { signature } = useSnapshot(SignatureStore)
+
+  if (!signature && !freeSlugs.includes(location)) {
+    const { toc } = useSnapshot(ChapterStore)
+    const title = flattenToc(toc).find(
+      (chapter) => chapter.slug === location
+    )?.title
+    return (
+      <>
+        <Title large>{title}</Title>
+        <span className={subtitle}>
+          <Title>(Нужно разблокировать книгу)</Title>
+        </span>
+        <div className={dividerContainer}>
+          <Divider />
+        </div>
+        <div className={walletContainer}>
+          <WalletBlock />
+        </div>
+      </>
+    )
+  }
+
+  ChapterStore.fetchChapter(location)
+  return <ChapterSuspended location={location} />
+}
+
 const container = classnames(maxWidth('max-w-2xl'), margin('mx-auto'))
 export default function () {
   const [location] = useLocation()
   const trueLocation = location.substring(1)
+
   if (trueLocation === 'footnotes') {
     return null
   }
-  ChapterStore.fetchChapter(trueLocation)
 
   return trueLocation ? (
     <div className={container}>
@@ -48,7 +93,7 @@ export default function () {
         fallback={<Title large>Загружаю главу...</Title>}
         errorText="Error loading chapter"
       >
-        <ChapterSuspended location={trueLocation} />
+        <ChapterWrapper location={trueLocation} />
       </SuspenseWithError>
     </div>
   ) : null

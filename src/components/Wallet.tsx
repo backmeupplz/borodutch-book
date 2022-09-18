@@ -27,6 +27,7 @@ import classnames, {
   transitionProperty,
   width,
 } from 'classnames/tailwind'
+import message from 'helpers/message'
 
 const container = classnames(
   display('flex'),
@@ -112,9 +113,7 @@ export default function () {
                   title="Создать подпись!"
                   icon={<KeyIcon className={icon} />}
                   onClick={() => {
-                    void sign(
-                      'Подверждение владения книгой "Не Тысячу Лет Живем"'
-                    )
+                    void sign(message)
                   }}
                 />
               )}

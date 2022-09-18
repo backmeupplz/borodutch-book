@@ -1,7 +1,9 @@
 import { fetchChapter, fetchToc } from 'helpers/api'
 import { proxy } from 'valtio'
 import Chapter from 'models/Chapter'
+import SignatureStore from 'stores/SignatureStore'
 import flattenToc from 'helpers/flattenToc'
+import message from 'helpers/message'
 
 class ChapterStore {
   toc: Promise<Chapter[]>
@@ -15,7 +17,11 @@ class ChapterStore {
 
   fetchChapter(slug: string) {
     if (!this.chapters[slug]) {
-      this.chapters[slug] = fetchChapter(slug).then(async (chapter) => {
+      this.chapters[slug] = fetchChapter(
+        slug,
+        message,
+        SignatureStore.signature
+      ).then(async (chapter) => {
         if (!chapter.beginning.length && chapter.level === 1) {
           const flatToc = flattenToc(await this.toc)
           const chapterIndex = flatToc.findIndex((item) => item.slug === slug)

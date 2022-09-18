@@ -8,10 +8,16 @@ export function fetchToc() {
   ) as Promise<Chapter[]>
 }
 
-export function fetchChapter(slug: string) {
-  return fetch(`${env.VITE_BACKEND_URL}/book/chapter/${slug}`).then(
-    (response) => response.json()
-  ) as Promise<Chapter>
+export function fetchChapter(
+  slug: string,
+  message?: string,
+  signature?: string
+) {
+  return fetch(
+    `${env.VITE_BACKEND_URL}/book/chapter/${slug}${
+      message && signature ? `?message=${message}&signature=${signature}` : ''
+    }`
+  ).then((response) => response.json()) as Promise<Chapter>
 }
 
 export function fetchFootnote(index: number) {
@@ -36,4 +42,10 @@ export function fetchVersion() {
   return fetch(`${env.VITE_BACKEND_URL}/book/version`).then((response) =>
     response.json()
   ) as Promise<{ version: string }>
+}
+
+export function fetchFreeSlugs() {
+  return fetch(`${env.VITE_BACKEND_URL}/book/free-slugs`).then((response) =>
+    response.json()
+  ) as Promise<string[]>
 }

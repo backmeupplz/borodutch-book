@@ -43,7 +43,6 @@ function Content({ children }: ChildrenProp) {
     : { isLoading: true, name: null }
   // Balance
   const { ownsToken } = connected ? useBalance(address) : { ownsToken: false }
-  console.log('change')
   return (
     <WalletContext.Provider
       value={{
