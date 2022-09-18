@@ -32,3 +32,14 @@ body {
 sup {
   text-justify: none;
 }
+
+/* For some reason tailwind css pulse was using too much CPU */
+@keyframes fadeIn {
+  from {
+    opacity: 0.2;
+  }
+}
+
+.pulse {
+  animation: fadeIn 1s infinite alternate;
+}

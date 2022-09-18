@@ -1,9 +1,8 @@
 import { Text, Title } from 'components/Text'
 import BookDescription from 'components/BookDescription'
 import Divider from 'components/Divider'
-import Link from 'components/Link'
 import Toc from 'components/Toc'
-import Wallet from 'components/Wallet'
+import WalletBlock from 'components/WalletBlock'
 import classnames, {
   alignItems,
   display,
@@ -55,15 +54,7 @@ export default function () {
           ссылку — не стесняйтесь делиться ими с друзьями, семьей и знакомыми!
         </Text>
         <Divider />
-        <Text>
-          Часть книги доступна бесплатно, но для того, чтобы получить доступ к
-          большинству глав и загрузке файлов,{' '}
-          <Link url="https://opensea.io/assets/ethereum/0x495f947276749ce646f68ac8c248420045cb7b5e/86597206928702930307486193712987064466367043993614253349341663474748447785515">
-            необходимо купить токен книги на OpenSea
-          </Link>{' '}
-          и подключить свой кошелек к этому сайту.
-        </Text>
-        <Wallet />
+        <WalletBlock />
         <Divider />
         <Toc />
       </div>

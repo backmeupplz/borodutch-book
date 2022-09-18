@@ -1,4 +1,5 @@
 import { Route, Router } from 'wouter'
+import { ToastContainer } from 'react-toastify'
 import { useCallback, useEffect, useState } from 'preact/hooks'
 import Chapter from 'pages/Chapter'
 import Footnote from 'components/Chapter/Footnote'
@@ -41,6 +42,7 @@ const App = () => {
         </Root>
         <Footnote />
       </Router>
+      <ToastContainer theme="dark" position="bottom-right" />
     </Web3Modal>
   )
 }

@@ -153,18 +153,6 @@ function extractChildren(contents: readonly Content[] = []) {
   const filtered = contents.filter(
     (content) => !content.class || allowedClassesRegex.test(content.class)
   )
-  if (contents.length !== filtered.length) {
-    const filteredClasses = new Set<string>(
-      filtered.map((content) => content.class || '')
-    )
-    const contentClasses = new Set<string>(
-      contents.map((content) => content.class || '')
-    )
-    const difference = new Set<string>(
-      [...contentClasses].filter((x) => !filteredClasses.has(x))
-    )
-    console.log(contents.length, filtered.length, difference)
-  }
   const result = [] as Content[]
   let currentLinedBlock:
     | {
