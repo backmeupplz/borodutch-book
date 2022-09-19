@@ -11,7 +11,6 @@ import Loading from 'components/Loading'
 import SignatureStore from 'stores/SignatureStore'
 import SuspenseWithError from 'components/SuspenseWithError'
 import VersionStore from 'stores/VersionStore'
-import WalletContext from 'context/WalletContext'
 import classnames, {
   alignItems,
   display,
@@ -58,56 +57,50 @@ function DownloadButtonsSuspended() {
   const [, setLocation] = useLocation()
   const { signature } = useSnapshot(SignatureStore)
   return (
-    <WalletContext.Consumer>
-      {({ ownsToken }) => (
-        <div className={buttonContainer}>
-          <Button
-            title="Читать онлайн"
-            icon={<BookOpenIcon className={icon} />}
-            onClick={() => {
-              setLocation('/vvedenie')
-            }}
-          />
-          {formats.map((format) => (
-            <Button
-              disabled={!ownsToken}
-              key={format}
-              title={`Скачать ${format}`}
-              icon={<ArrowDownTrayIcon className={icon} />}
-              onClick={() => {
-                return fetch(`${env.VITE_BACKEND_URL}/book/${format}`, {
-                  method: 'POST',
-                  body: JSON.stringify({
-                    signature,
-                    message,
-                  }),
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                })
-                  .then(async function (resp) {
-                    // If error status throw
-                    if (!resp.ok) {
-                      throw new Error((await resp.json()).message)
-                    }
-                    return resp.blob()
-                  })
-                  .then(function (blob) {
-                    return download(blob, `wdlaty.${format}`)
-                  })
-                  .catch((error) => {
-                    toast(
-                      error instanceof Error
-                        ? error.message
-                        : 'Failed to download'
-                    )
-                  })
-              }}
-            />
-          ))}
-        </div>
-      )}
-    </WalletContext.Consumer>
+    <div className={buttonContainer}>
+      <Button
+        title="Читать онлайн"
+        icon={<BookOpenIcon className={icon} />}
+        onClick={() => {
+          setLocation('/vvedenie')
+        }}
+      />
+      {formats.map((format) => (
+        <Button
+          disabled={!signature}
+          key={format}
+          title={`Скачать ${format}`}
+          icon={<ArrowDownTrayIcon className={icon} />}
+          onClick={() => {
+            return fetch(`${env.VITE_BACKEND_URL}/book/${format}`, {
+              method: 'POST',
+              body: JSON.stringify({
+                signature,
+                message,
+              }),
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            })
+              .then(async function (resp) {
+                // If error status throw
+                if (!resp.ok) {
+                  throw new Error((await resp.json()).message)
+                }
+                return resp.blob()
+              })
+              .then(function (blob) {
+                return download(blob, `wdlaty.${format}`)
+              })
+              .catch((error) => {
+                toast(
+                  error instanceof Error ? error.message : 'Failed to download'
+                )
+              })
+          }}
+        />
+      ))}
+    </div>
   )
 }
 
