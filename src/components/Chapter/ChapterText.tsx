@@ -12,6 +12,7 @@ import Chapter from 'models/Chapter'
 import Content from 'models/Content'
 import DialogueBlock from 'components/Chapter/DialogueBlock'
 import FootnoteStore from 'stores/FootnoteStore'
+import HashLink from 'components/Chapter/HashLink'
 import LinedBlock from 'components/Chapter/LinedBlock'
 import Separator from 'components/Chapter/Separator'
 import classnames, {
@@ -109,13 +110,15 @@ function renderChild(child: Content, key: string) {
   } else if (child.class?.includes('Heading-4')) {
     return (
       <Heading>
-        <a id={child.slug}>{extractChildren(child.children)}</a>
+        <a id={child.slug}>{extractChildren(child.children)}</a>{' '}
+        {child.slug && <HashLink slug={child.slug} />}
       </Heading>
     )
   } else if (child.class?.includes('Heading-5')) {
     return (
       <Subheading>
-        <a id={child.slug}>{extractChildren(child.children)}</a>
+        <a id={child.slug}>{extractChildren(child.children)}</a>{' '}
+        {child.slug && <HashLink slug={child.slug} />}
       </Subheading>
     )
   } else if (child.class?.includes('Example')) {
