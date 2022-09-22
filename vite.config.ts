@@ -3,6 +3,7 @@ import preact from '@preact/preset-vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { visualizer } from 'rollup-plugin-visualizer'
 import GlobalsPolyfills from '@esbuild-plugins/node-globals-polyfill'
+import nodePolyfills from 'rollup-plugin-polyfill-node'
 
 export default defineConfig({
   plugins: [preact(), tsconfigPaths()],
@@ -14,6 +15,7 @@ export default defineConfig({
           gzipSize: true,
           brotliSize: true,
         }),
+        nodePolyfills(),
       ],
     },
   },

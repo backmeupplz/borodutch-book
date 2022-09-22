@@ -63,6 +63,7 @@
     "eslint-plugin-valtio": "^0.6.0",
     "postcss": "^8.4.16",
     "prettier": "^2.7.1",
+    "rollup-plugin-polyfill-node": "^0.10.2",
     "rollup-plugin-visualizer": "^5.8.1",
     "tailwindcss": "^3.1.8",
     "tailwindcss-classnames": "^3.0.6",
