@@ -1,6 +1,14 @@
-import classnames, { textAlign, textColor } from 'classnames/tailwind'
+import classnames, {
+  backgroundColor,
+  textAlign,
+  textColor,
+} from 'classnames/tailwind'
 
-const image = classnames(textAlign('text-center'), textColor('text-primary'))
+const image = classnames(
+  textAlign('text-center'),
+  textColor('text-primary'),
+  backgroundColor('bg-highlighted-background')
+)
 export default function ({
   src,
   alt,
