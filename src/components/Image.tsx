@@ -1,3 +1,6 @@
+import classnames, { textAlign, textColor } from 'classnames/tailwind'
+
+const image = classnames(textAlign('text-center'), textColor('text-primary'))
 export default function ({
   src,
   alt,
@@ -9,5 +12,7 @@ export default function ({
   width?: string
   height?: string
 }) {
-  return <img src={src} alt={alt} width={width} height={height} />
+  return (
+    <img src={src} alt={alt} width={width} height={height} className={image} />
+  )
 }

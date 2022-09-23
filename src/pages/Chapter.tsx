@@ -4,6 +4,7 @@ import { useLocation } from 'wouter'
 import { useSnapshot } from 'valtio'
 import ChapterStore from 'stores/ChapterStore'
 import ChapterText from 'components/Chapter/ChapterText'
+import CoverIfExists from 'components/Chapter/CoverIfExists'
 import Divider from 'components/Divider'
 import Footer from 'components/Chapter/Footer'
 import FreeSlugsStore from 'stores/FreeSlugsStore'
@@ -112,6 +113,7 @@ export default function () {
 
   return trueLocation ? (
     <div className={container}>
+      <CoverIfExists />
       <SuspenseWithError
         fallback={<Title large>Загружаю главу...</Title>}
         errorText="Error loading chapter"
