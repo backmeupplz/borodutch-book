@@ -1,6 +1,6 @@
 import { useLocation } from 'wouter'
 
 export default function () {
-  const [location] = useLocation()
-  return location.split('?signature=')[1]
+  useLocation()
+  return window.location.hash.split('?signature=')[1]
 }

@@ -1,5 +1,6 @@
 import { useLocation } from 'wouter'
 import classnames, { cursor, textColor } from 'classnames/tailwind'
+import useExternalSignature from 'hooks/useExternalSignature'
 
 const hashLink = classnames(
   textColor(
@@ -11,11 +12,16 @@ const hashLink = classnames(
 )
 export default function ({ slug }: { slug: string }) {
   const [location, setLocation] = useLocation()
+  const externalSignature = useExternalSignature()
   return (
     <span
       className={hashLink}
       onClick={() => {
-        setLocation(`${location}#${slug}`)
+        setLocation(
+          `${location.split('?')[0]}#${slug}${
+            externalSignature ? `?signature=${externalSignature}` : ''
+          }`
+        )
       }}
     >
       #
