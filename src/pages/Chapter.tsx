@@ -49,7 +49,7 @@ function ChapterSuspended({ location }: { location: string }) {
       .getElementById('navbar')
       ?.getBoundingClientRect().height
     _scrollTo(anchor, offset)
-  }, [anchor])
+  }, [anchor, chapter])
   return (
     <>
       <Title large>{chapter.title}</Title>
@@ -63,7 +63,7 @@ function ChapterSuspended({ location }: { location: string }) {
       </div>
       <ChapterText chapter={subchapter || chapter} />
       <Footer chapter={subchapter || chapter} />
-      <ScrollToTop />
+      {!anchor && <ScrollToTop />}
     </>
   )
 }
