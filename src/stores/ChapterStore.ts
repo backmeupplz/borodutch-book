@@ -20,6 +20,7 @@ class ChapterStore {
     message = defaultMessage,
     signature = SignatureStore.signature
   ) {
+    console.log('Fetching chapter', slug, message, signature)
     if (!this.chapters[slug]) {
       this.chapters[slug] = fetchChapter(slug, message, signature).then(
         async (chapter) => {

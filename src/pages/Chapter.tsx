@@ -99,8 +99,11 @@ function ChapterWrapper({ slug }: { slug: string }) {
       </>
     )
   }
-
-  ChapterStore.fetchChapter(slug, slug, externalSignature)
+  ChapterStore.fetchChapter(
+    slug,
+    externalSignature ? slug : undefined,
+    externalSignature
+  )
   return <ChapterSuspended slug={slug} />
 }
 
