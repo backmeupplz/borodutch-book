@@ -7,7 +7,7 @@ import classnames, {
 const image = classnames(
   textAlign('text-center'),
   textColor('text-primary'),
-  backgroundColor('bg-highlighted-background')
+  backgroundColor('bg-background')
 )
 export default function ({
   src,
