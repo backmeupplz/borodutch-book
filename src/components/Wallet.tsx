@@ -26,6 +26,7 @@ import classnames, {
   textColor,
   transitionProperty,
   width,
+  wordBreak,
 } from 'classnames/tailwind'
 import message from 'helpers/message'
 
@@ -57,7 +58,8 @@ const addressContainer = classnames(
   transitionProperty('transition-colors'),
   borderRadius('rounded-full'),
   borderWidth('border'),
-  borderColor('border-secondary')
+  borderColor('border-secondary'),
+  wordBreak('break-all')
 )
 export default function () {
   const { open } = useConnectModal()
