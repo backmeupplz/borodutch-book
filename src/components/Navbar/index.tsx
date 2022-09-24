@@ -3,6 +3,7 @@ import { LogoText } from 'components/Text'
 import Image from 'components/Image'
 import ProgressBar from 'components/Navbar/ProgressBar'
 import Separator from 'components/Navbar/Separator'
+import ShareButton from 'components/Navbar/ShareButton'
 import ThemeToggle from 'components/Navbar/ThemeToggle'
 import classnames, {
   alignItems,
@@ -61,6 +62,7 @@ export default function () {
           <LogoText>Не Тысячу Лет Живем</LogoText>
         </Link>
         <div className={buttons}>
+          {isChapter && <ShareButton />}
           <ThemeToggle />
         </div>
       </div>

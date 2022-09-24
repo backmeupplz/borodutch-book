@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useLocation } from 'wouter'
 import Image from 'components/Image'
 import classnames, {
   borderRadius,
@@ -7,6 +6,7 @@ import classnames, {
   margin,
   overflow,
 } from 'classnames/tailwind'
+import useSlug from 'hooks/useSlug'
 
 const container = (visible: boolean) =>
   classnames(
@@ -17,8 +17,7 @@ const container = (visible: boolean) =>
     margin('mx-auto')
   )
 export default () => {
-  const [location] = useLocation()
-  const slug = location.substring(1)
+  const slug = useSlug()
   const [isValid, setIsValid] = useState(false)
   const src = `/covers/${slug}.webp`
   useEffect(() => {

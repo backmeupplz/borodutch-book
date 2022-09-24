@@ -1,6 +1,5 @@
 import { Title } from 'components/Text'
 import { useEffect, useState } from 'preact/hooks'
-import { useLocation } from 'wouter'
 import { useSnapshot } from 'valtio'
 import ChapterStore from 'stores/ChapterStore'
 import ChapterText from 'components/Chapter/ChapterText'
@@ -21,12 +20,14 @@ import classnames, {
   textAlign,
 } from 'classnames/tailwind'
 import flattenToc from 'helpers/flattenToc'
+import useExternalSignature from 'hooks/useExternalSignature'
+import useSlug from 'hooks/useSlug'
 
 const dividerContainer = margin('my-4')
 const subtitle = textAlign('text-center')
-function ChapterSuspended({ location }: { location: string }) {
+function ChapterSuspended({ slug }: { slug: string }) {
   const { chapters } = useSnapshot(ChapterStore)
-  const chapter = chapters[location]
+  const chapter = chapters[slug]
   const subchapter = chapter.subchapters?.[0]
   const [anchor, setAnchor] = useState(window.location.hash.split('#')[2])
   useEffect(() => {
@@ -73,14 +74,15 @@ const walletContainer = classnames(
   flexDirection('flex-col'),
   gap('gap-4')
 )
-function ChapterWrapper({ location }: { location: string }) {
+function ChapterWrapper({ slug }: { slug: string }) {
   const { freeSlugs } = useSnapshot(FreeSlugsStore)
   const { signature } = useSnapshot(SignatureStore)
+  const externalSignature = useExternalSignature()
 
-  if (!signature && !freeSlugs.includes(location)) {
+  if (!signature && !externalSignature && !freeSlugs.includes(slug)) {
     const { toc } = useSnapshot(ChapterStore)
     const title = flattenToc(toc).find(
-      (chapter) => chapter.slug === location
+      (chapter) => chapter.slug === slug
     )?.title
     return (
       <>
@@ -98,27 +100,26 @@ function ChapterWrapper({ location }: { location: string }) {
     )
   }
 
-  ChapterStore.fetchChapter(location)
-  return <ChapterSuspended location={location} />
+  ChapterStore.fetchChapter(slug, slug, externalSignature)
+  return <ChapterSuspended slug={slug} />
 }
 
 const container = classnames(maxWidth('max-w-2xl'), margin('mx-auto'))
 export default function () {
-  const [location] = useLocation()
-  const trueLocation = location.substring(1)
+  const slug = useSlug()
 
-  if (trueLocation === 'footnotes') {
+  if (slug === 'footnotes') {
     return null
   }
 
-  return trueLocation ? (
+  return slug ? (
     <div className={container}>
       <CoverIfExists />
       <SuspenseWithError
         fallback={<Title large>Загружаю главу...</Title>}
         errorText="Error loading chapter"
       >
-        <ChapterWrapper location={trueLocation} />
+        <ChapterWrapper slug={slug} />
       </SuspenseWithError>
     </div>
   ) : null
