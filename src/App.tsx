@@ -8,16 +8,19 @@ import Main from 'pages/Main'
 import Navbar from 'components/Navbar'
 import Root from 'components/Root'
 import Web3Modal from 'components/Web3Modal'
+import getHashComponents from 'helpers/getHashComponents'
 
 // TODO: extract to a separate file
 // Wouter hash router
-const currentLoc = () => window.location.hash.split('#')[1] || '/'
+const currentLoc = () =>
+  getHashComponents().slug ? `/${getHashComponents().slug}` : '/'
 
 const useHashLocation = () => {
   const [loc, setLoc] = useState(currentLoc())
 
   useEffect(() => {
     const handler = () => setLoc(currentLoc())
+
     window.addEventListener('hashchange', handler)
     window.addEventListener('popstate', handler)
     return () => {

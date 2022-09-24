@@ -20,6 +20,7 @@ import classnames, {
   textAlign,
 } from 'classnames/tailwind'
 import flattenToc from 'helpers/flattenToc'
+import getHashComponents from 'helpers/getHashComponents'
 import useExternalSignature from 'hooks/useExternalSignature'
 import useSlug from 'hooks/useSlug'
 
@@ -29,12 +30,9 @@ function ChapterSuspended({ slug }: { slug: string }) {
   const { chapters } = useSnapshot(ChapterStore)
   const chapter = chapters[slug]
   const subchapter = chapter.subchapters?.[0]
-  const [anchor, setAnchor] = useState(
-    window.location.hash.split('#')[2]?.split('?')[0]
-  )
+  const [anchor, setAnchor] = useState(getHashComponents().anchor)
   useEffect(() => {
-    const handler = () =>
-      setAnchor(window.location.hash.split('#')[2]?.split('?')[0])
+    const handler = () => setAnchor(getHashComponents().anchor)
     window.addEventListener('hashchange', handler)
     window.addEventListener('popstate', handler)
     return () => {
