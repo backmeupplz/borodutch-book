@@ -13,6 +13,7 @@ import SuspenseWithError from 'components/SuspenseWithError'
 import VersionStore from 'stores/VersionStore'
 import classnames, {
   alignItems,
+  borderRadius,
   display,
   flexDirection,
   flexWrap,
@@ -20,6 +21,7 @@ import classnames, {
   height,
   justifyContent,
   margin,
+  overflow,
   width,
 } from 'classnames/tailwind'
 import download from 'downloadjs'
@@ -123,15 +125,21 @@ const container = classnames(
   margin('mt-6'),
   gap('gap-4')
 )
+const imageContainer = classnames(
+  overflow('overflow-hidden'),
+  borderRadius('rounded-lg')
+)
 export default function () {
   return (
     <div className={container}>
-      <Image
-        src="/images/cover.webp"
-        alt="Обложка книги"
-        width="175"
-        height="257.5"
-      />
+      <div className={imageContainer}>
+        <Image
+          src="/images/cover.webp"
+          alt="Обложка книги"
+          width="175"
+          height="257.5"
+        />
+      </div>
       <DownloadButtons />
       <BookVersion />
       <Divider />
