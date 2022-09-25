@@ -1,11 +1,11 @@
 import { LockClosedIcon } from '@heroicons/react/24/outline'
-import baseIcon from 'classnames/icon'
 import classnames, {
   borderColor,
   borderRadius,
   borderWidth,
   height,
   padding,
+  textColor,
   transitionProperty,
   width,
 } from 'classnames/tailwind'
@@ -17,7 +17,7 @@ const iconContainer = classnames(
   borderColor('border-secondary'),
   transitionProperty('transition-colors')
 )
-const icon = classnames(baseIcon, width('w-3'), height('h-3'))
+const icon = classnames(textColor('text-primary'), width('w-3'), height('h-3'))
 export default function () {
   return (
     <div className={iconContainer}>

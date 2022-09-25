@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'wouter'
 import { LogoText } from 'components/Text'
 import Image from 'components/Image'
+import LanguageButton from 'components/Navbar/LanguageButton'
 import ProgressBar from 'components/Navbar/ProgressBar'
 import Separator from 'components/Navbar/Separator'
 import ShareButton from 'components/Navbar/ShareButton'
@@ -49,8 +50,9 @@ const buttons = classnames(
   flexDirection('flex-row'),
   alignItems('items-center'),
   justifyContent('justify-center'),
-  gap('gap-x-2')
+  gap('gap-x-1', 'sm:gap-x-2')
 )
+const hiddenOnMobile = classnames(display('hidden', 'sm:block'))
 export default function () {
   const [location] = useLocation()
   const isChapter = location !== '/'
@@ -58,12 +60,15 @@ export default function () {
     <div className={container} id="navbar">
       <div className={content}>
         <Link href="/" className={logo}>
-          <Image src="/icons/logo.svg" alt="Logo" />
+          <div className={hiddenOnMobile}>
+            <Image src="/icons/logo.svg" alt="Logo" />
+          </div>
           <LogoText>Не Тысячу Лет Живем</LogoText>
         </Link>
         <div className={buttons}>
           {isChapter && <ShareButton />}
           <ThemeToggle />
+          <LanguageButton />
         </div>
       </div>
       {isChapter && <ProgressBar />}
