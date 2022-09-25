@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'preact/hooks'
 import Chapter from 'pages/Chapter'
 import Footnote from 'components/Chapter/Footnote'
 import Footnotes from 'pages/Footnotes'
+import Head from 'components/Head'
 import Main from 'pages/Main'
 import Navbar from 'components/Navbar'
 import Root from 'components/Root'
@@ -36,6 +37,7 @@ const useHashLocation = () => {
 const App = () => {
   return (
     <Web3Modal>
+      <Head />
       <Router hook={useHashLocation as any}>
         {/* TODO: fix types ^^^ */}
         <Navbar />

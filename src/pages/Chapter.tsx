@@ -7,10 +7,12 @@ import CoverIfExists from 'components/Chapter/CoverIfExists'
 import Divider from 'components/Divider'
 import Footer from 'components/Chapter/Footer'
 import FreeSlugsStore from 'stores/FreeSlugsStore'
+import MetadataStore from 'stores/MetadataStore'
 import ScrollToTop from 'components/ScrollToTop'
 import SignatureStore from 'stores/SignatureStore'
 import SuspenseWithError from 'components/SuspenseWithError'
 import WalletBlock from 'components/WalletBlock'
+import bookTitle from 'helpers/bookTitle'
 import classnames, {
   display,
   flexDirection,
@@ -52,6 +54,11 @@ function ChapterSuspended({ slug }: { slug: string }) {
       ?.getBoundingClientRect().height
     _scrollTo(anchor, offset)
   }, [anchor, chapter])
+  useEffect(() => {
+    MetadataStore.title = chapter.title
+      ? `${chapter.title} | ${bookTitle.short}`
+      : bookTitle.long
+  }, [chapter])
   return (
     <>
       <Title large>{chapter.title}</Title>
@@ -85,6 +92,11 @@ function ChapterWrapper({ slug }: { slug: string }) {
     const title = flattenToc(toc).find(
       (chapter) => chapter.slug === slug
     )?.title
+    useEffect(() => {
+      MetadataStore.title = title
+        ? `${title} | ${bookTitle.short}`
+        : bookTitle.long
+    }, [title])
     return (
       <>
         <Title large>{title}</Title>

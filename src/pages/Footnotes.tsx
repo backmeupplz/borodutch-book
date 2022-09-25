@@ -1,9 +1,12 @@
 import { Text, Title } from 'components/Text'
+import { useEffect } from 'preact/hooks'
 import { useSnapshot } from 'valtio'
 import Divider from 'components/Divider'
 import FootnoteStore from 'stores/FootnoteStore'
 import Link from 'components/Link'
+import MetadataStore from 'stores/MetadataStore'
 import SuspenseWithError from 'components/SuspenseWithError'
+import bookTitle from 'helpers/bookTitle'
 import classnames, {
   alignItems,
   display,
@@ -49,6 +52,9 @@ const container = classnames(
   margin('mx-auto')
 )
 export default function () {
+  useEffect(() => {
+    MetadataStore.title = `Приложение | ${bookTitle.short}`
+  }, [])
   FootnoteStore.fetchFootnotes()
   return (
     <div className={container}>
