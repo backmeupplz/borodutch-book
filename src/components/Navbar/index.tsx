@@ -68,7 +68,7 @@ export default function () {
         <div className={buttons}>
           {isChapter && <ShareButton />}
           <ThemeToggle />
-          <LanguageButton />
+          {/* <LanguageButton /> */}
         </div>
       </div>
       {isChapter && <ProgressBar />}
