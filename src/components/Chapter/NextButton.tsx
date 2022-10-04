@@ -33,7 +33,7 @@ const container = classnames(
 const icon = classnames(width('w-4'), height('h-4'))
 export default function ({ slug }: { slug: string }) {
   return (
-    <Link className={container} href={`/${slug}`}>
+    <Link className={container} href={`#/${slug}`}>
       <ButtonText>Вперед</ButtonText>
       <ChevronRightIcon className={icon} />
     </Link>

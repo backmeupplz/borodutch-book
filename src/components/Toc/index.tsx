@@ -30,7 +30,7 @@ const titleContainer = classnames(
 function FootnotesLink() {
   return (
     <div className={container}>
-      <Link className={titleContainer} href="/footnotes">
+      <Link className={titleContainer} href="#/footnotes">
         <Title>Приложение</Title>
         <UpRightIcon />
       </Link>

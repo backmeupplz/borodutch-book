@@ -28,7 +28,7 @@ const titleContainer = classnames(
 export default function ({ chapter }: { chapter: Chapter }) {
   return (
     <div className={container}>
-      <Link className={titleContainer} href={`/${chapter.slug}`}>
+      <Link className={titleContainer} href={`#/${chapter.slug}`}>
         <Title>{chapter.title}</Title>
         <UpRightIcon />
       </Link>

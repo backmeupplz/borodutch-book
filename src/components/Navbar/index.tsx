@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'wouter'
 import { LogoText } from 'components/Text'
 import Image from 'components/Image'
-import LanguageButton from 'components/Navbar/LanguageButton'
+// import LanguageButton from 'components/Navbar/LanguageButton'
 import ProgressBar from 'components/Navbar/ProgressBar'
 import Separator from 'components/Navbar/Separator'
 import ShareButton from 'components/Navbar/ShareButton'
@@ -59,7 +59,7 @@ export default function () {
   return (
     <div className={container} id="navbar">
       <div className={content}>
-        <Link href="/" className={logo}>
+        <Link href="#/" className={logo}>
           <div className={hiddenOnMobile}>
             <Image src="/icons/logo.svg" alt="Logo" />
           </div>

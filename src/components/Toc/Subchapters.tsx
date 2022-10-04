@@ -54,7 +54,7 @@ function Subchapter({
     <>
       <Link
         className={subchapterContainer(chapter.level > 1)}
-        href={`/${chapter.slug}`}
+        href={`#/${chapter.slug}`}
       >
         <Text>{chapter.title}</Text>
         <UpRightIcon />
