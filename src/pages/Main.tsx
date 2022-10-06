@@ -1,13 +1,10 @@
 import { Text as IntlText, useText } from 'preact-i18n'
 import { Text, Title } from 'components/Text'
-import { useEffect } from 'preact/hooks'
 import BookDescription from 'components/BookDescription'
 import Divider from 'components/Divider'
 import Link from 'components/Link'
-import MetadataStore from 'stores/MetadataStore'
 import Toc from 'components/Toc'
 import WalletBlock from 'components/WalletBlock'
-import bookTitle from 'helpers/bookTitle'
 import classnames, {
   alignItems,
   display,
@@ -36,9 +33,6 @@ const container = classnames(
   maxWidth('max-w-2xl')
 )
 export default function () {
-  useEffect(() => {
-    MetadataStore.title = bookTitle.long
-  }, [])
   const { text1 } = useText('description.text1')
   const { text2 } = useText('description.text2')
   const { text3 } = useText('description.text3')

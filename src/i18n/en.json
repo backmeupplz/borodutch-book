@@ -1,5 +1,5 @@
 {
-  "title": "We Don't Live a Thousand Years",
+  "title": { "full": "We Don't Live a Thousand Years", "separator": " | " },
   "coverAlt": "Book cover",
   "chapterCoverAlt": "Chapter cover",
   "logoAlt": "Logo",

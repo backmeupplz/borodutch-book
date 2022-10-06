@@ -66,7 +66,7 @@ export default function () {
             <Image src="/icons/logo.svg" alt={logoAlt} />
           </div>
           <LogoText>
-            <Text id="title" />
+            <Text id="title.full" />
           </LogoText>
         </Link>
         <div className={buttons}>

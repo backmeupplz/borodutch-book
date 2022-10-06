@@ -1,5 +1,5 @@
 {
-  "title": "Не Тысячу Лет Живем",
+  "title": { "full": "Не Тысячу Лет Живем", "separator": " | " },
   "coverAlt": "Обложка книги",
   "chapterCoverAlt": "Обложка главы",
   "logoAlt": "Лого",

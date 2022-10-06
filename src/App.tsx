@@ -15,8 +15,8 @@ const App = () => {
   return (
     <Intl>
       <Web3Modal>
-        <Head />
         <Router hook={useHashLocation}>
+          <Head />
           <Navbar />
           <Root>
             <Route path="/" component={Main} />
