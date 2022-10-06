@@ -3,6 +3,7 @@ import { useSnapshot } from 'valtio'
 import MetadataStore from 'stores/MetadataStore'
 
 export default function () {
+  // TODO: localize title
   const { title } = useSnapshot(MetadataStore)
   return (
     <Helmet>

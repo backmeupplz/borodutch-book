@@ -70,7 +70,7 @@ function DownloadButtonsSuspended() {
         title={readOnline}
         icon={<BookOpenIcon className={icon} />}
         onClick={() => {
-          setLocation('/vvedenie')
+          setLocation('/vvedenie') // TODO: localize first chapter
         }}
       />
       {formats.map((format) => (
