@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'wouter'
 import { LogoText } from 'components/Text'
+import { Text, useText } from 'preact-i18n'
 import Image from 'components/Image'
 import LanguageButton from 'components/Navbar/LanguageButton'
 import ProgressBar from 'components/Navbar/ProgressBar'
@@ -56,14 +57,17 @@ const hiddenOnMobile = classnames(display('hidden', 'sm:block'))
 export default function () {
   const [location] = useLocation()
   const isChapter = location !== '/'
+  const text = useText('coverAlt').coverAlt
   return (
     <div className={container} id="navbar">
       <div className={content}>
         <Link href="#/" className={logo}>
           <div className={hiddenOnMobile}>
-            <Image src="/icons/logo.svg" alt="Logo" />
+            <Image src="/icons/logo.svg" alt={text} />
           </div>
-          <LogoText>Не Тысячу Лет Живем</LogoText>
+          <LogoText>
+            <Text id="title" />
+          </LogoText>
         </Link>
         <div className={buttons}>
           {isChapter && <ShareButton />}

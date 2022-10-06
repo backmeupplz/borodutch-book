@@ -1,3 +1,4 @@
+import { Text as IntlText } from 'preact-i18n'
 import { Text, Title } from 'components/Text'
 import { useEffect } from 'preact/hooks'
 import BookDescription from 'components/BookDescription'
@@ -67,15 +68,14 @@ export default function () {
         <Toc />
         <Divider />
         <Text>
-          Код{' '}
           <Link url="https://github.com/backmeupplz/borodutch-book-backend">
-            сервера
+            <IntlText id="footer.server" />
           </Link>{' '}
-          и{' '}
+          <IntlText id="footer.and" />{' '}
           <Link url="https://github.com/backmeupplz/borodutch-book">
-            самого сайта
+            <IntlText id="footer.website" />
           </Link>{' '}
-          открыт, пользуйтесь на здоровье!
+          <IntlText id="footer.open" />
         </Text>
       </div>
     </div>

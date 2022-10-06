@@ -5,6 +5,7 @@ import Chapter from 'pages/Chapter'
 import Footnote from 'components/Chapter/Footnote'
 import Footnotes from 'pages/Footnotes'
 import Head from 'components/Head'
+import Intl from 'components/Intl'
 import Main from 'pages/Main'
 import Navbar from 'components/Navbar'
 import Root from 'components/Root'
@@ -36,20 +37,23 @@ const useHashLocation = () => {
 
 const App = () => {
   return (
-    <Web3Modal>
-      <Head />
-      <Router hook={useHashLocation as any}>
-        {/* TODO: fix types ^^^ */}
-        <Navbar />
-        <Root>
-          <Route path="/" component={Main} />
-          <Route path="/footnotes" component={Footnotes} />
-          <Route path="/:chapter" component={Chapter} />
-        </Root>
-        <Footnote />
-      </Router>
-      <ToastContainer theme="dark" position="bottom-right" />
-    </Web3Modal>
+    <Intl>
+      <Web3Modal>
+        <Head />
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+        <Router hook={useHashLocation as any}>
+          {/* TODO: fix types ^^^ */}
+          <Navbar />
+          <Root>
+            <Route path="/" component={Main} />
+            <Route path="/footnotes" component={Footnotes} />
+            <Route path="/:chapter" component={Chapter} />
+          </Root>
+          <Footnote />
+        </Router>
+        <ToastContainer theme="dark" position="bottom-right" />
+      </Web3Modal>
+    </Intl>
   )
 }
 
