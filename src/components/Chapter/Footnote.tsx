@@ -1,4 +1,5 @@
 import { Text } from 'components/Text'
+import { Text as TextIntl, useText } from 'preact-i18n'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { useSnapshot } from 'valtio'
 import FootnoteStore from 'stores/FootnoteStore'
@@ -30,10 +31,16 @@ function FootnoteTextSuspended({ index }: { index: number }) {
   return footnote ? (
     footnote.url ? (
       <a href={footnote.url} rel="noopener noreferrer" target="_blank">
-        «{footnote.title}»
+        <TextIntl id="openQuotes" />
+        {footnote.title}
+        <TextIntl id="closeQuotes" />
       </a>
     ) : (
-      <span>«{footnote.title}»</span>
+      <span>
+        <TextIntl id="openQuotes" />
+        {footnote.title}
+        <TextIntl id="closeQuotes" />
+      </span>
     )
   ) : null
 }
@@ -63,14 +70,16 @@ export default function () {
   const { currentFootnote } = useSnapshot(FootnoteStore)
   if (!currentFootnote) return null
   FootnoteStore.fetchFootnote(currentFootnote)
+  const { loading } = useText('endnote.loading')
+  const { errorLoading } = useText('endnote.errorLoading')
   return (
     <div className={container(!!currentFootnote)}>
       <div className={innerContainer}>
         <Text>
           {currentFootnote}.{' '}
           <SuspenseWithError
-            fallback={<Loading text="Загружаю сноску..." />}
-            errorText="Не вышло загрузить сноску"
+            fallback={<Loading text={loading} />}
+            errorText={errorLoading}
           >
             <FootnoteTextSuspended index={currentFootnote} />
           </SuspenseWithError>

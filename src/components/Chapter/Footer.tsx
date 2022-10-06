@@ -1,4 +1,5 @@
 import { BoldText, Text } from 'components/Text'
+import { Text as IntlText, useText } from 'preact-i18n'
 import { useSnapshot } from 'valtio'
 import Chapter from 'models/Chapter'
 import ChapterStore from 'stores/ChapterStore'
@@ -48,7 +49,9 @@ function FooterSuspended({ chapter }: { chapter: Chapter }) {
       <Divider />
       <div className={row}>
         <div className={col}>
-          <BoldText>Далее:</BoldText>
+          <BoldText>
+            <IntlText id="nextChapter" />
+          </BoldText>
           <Text>{next.title}</Text>
         </div>
         <NextButton slug={next.slug} />
@@ -58,10 +61,12 @@ function FooterSuspended({ chapter }: { chapter: Chapter }) {
 }
 
 export default function ({ chapter }: { chapter: Chapter }) {
+  const { loading } = useText('toc.loading')
+  const { errorLoading } = useText('toc.errorLoading')
   return (
     <SuspenseWithError
-      fallback={<Loading text="Загружаю оглавление..." />}
-      errorText="Не получилось загрузить оглавление"
+      fallback={<Loading text={loading} />}
+      errorText={errorLoading}
     >
       <FooterSuspended chapter={chapter} />
     </SuspenseWithError>

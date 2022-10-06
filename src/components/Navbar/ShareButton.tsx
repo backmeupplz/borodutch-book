@@ -3,6 +3,7 @@ import { Suspense, useEffect, useState } from 'preact/compat'
 import { toast } from 'react-toastify'
 import { useAccount, useSigner } from '@web3modal/react'
 import { useSnapshot } from 'valtio'
+import { useText } from 'preact-i18n'
 import FreeSlugsStore from 'stores/FreeSlugsStore'
 import IconButton from 'components/IconButton'
 import WalletContext from 'context/WalletContext'
@@ -24,12 +25,15 @@ function ShareButtonSuspended({ ownsToken }: { ownsToken: boolean }) {
   useEffect(() => {
     setSignature('')
   }, [slug])
+  const { success } = useText('share.success')
+  const { signatureSuccess } = useText('share.signatureSuccess')
+  const { error: signatureError } = useText('share.error')
   return isFree || (ownsToken && signer) ? (
     <IconButton
       onClick={async () => {
         if (freeSlugs.includes(slug)) {
           void navigator.clipboard.writeText(window.location.href)
-          toast('Ссылка скопирована!', {
+          toast(success, {
             type: 'success',
           })
         } else {
@@ -37,20 +41,17 @@ function ShareButtonSuspended({ ownsToken }: { ownsToken: boolean }) {
             void navigator.clipboard.writeText(
               `${window.location.href}?signature=${signature}`
             )
-            toast('Ссылка скопирована!', {
+            toast(success, {
               type: 'success',
             })
           } else {
             try {
               setSignature(await signer?.signMessage(slug))
-              toast(
-                'Подпись создана! Нажмите кнопку еще раз, чтобы скопировать ссылку!',
-                {
-                  type: 'success',
-                }
-              )
+              toast(signatureSuccess, {
+                type: 'success',
+              })
             } catch (error) {
-              toast('Ошибка подписи!', {
+              toast(signatureError, {
                 type: 'error',
               })
             }

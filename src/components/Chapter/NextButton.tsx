@@ -1,6 +1,7 @@
 import { ButtonText } from 'components/Text'
 import { ChevronRightIcon } from '@heroicons/react/24/solid'
 import { Link } from 'wouter'
+import { Text } from 'preact-i18n'
 import classnames, {
   alignItems,
   backgroundColor,
@@ -34,7 +35,9 @@ const icon = classnames(width('w-4'), height('h-4'))
 export default function ({ slug }: { slug: string }) {
   return (
     <Link className={container} href={`#/${slug}`}>
-      <ButtonText>Вперед</ButtonText>
+      <ButtonText>
+        <Text id="nextButton" />
+      </ButtonText>
       <ChevronRightIcon className={icon} />
     </Link>
   )

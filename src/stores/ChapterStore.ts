@@ -17,7 +17,7 @@ class ChapterStore {
 
   fetchChapter(
     slug: string,
-    message = defaultMessage,
+    message = defaultMessage(),
     signature = SignatureStore.signature
   ) {
     if (!this.chapters[slug]) {

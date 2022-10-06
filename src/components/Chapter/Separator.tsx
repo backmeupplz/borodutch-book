@@ -1,3 +1,4 @@
+import { Text } from 'preact-i18n'
 import { Title } from 'components/Text'
 import Divider from 'components/Divider'
 import classnames, {
@@ -20,7 +21,9 @@ export default function () {
     <div className={container}>
       <Divider />
       <div className={stars}>
-        <Title>***</Title>
+        <Title>
+          <Text id="separator" />
+        </Title>
       </div>
       <Divider />
     </div>

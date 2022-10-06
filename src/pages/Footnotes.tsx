@@ -1,3 +1,4 @@
+import { Text as IntlText, useText } from 'preact-i18n'
 import { Text, Title } from 'components/Text'
 import { useEffect } from 'preact/hooks'
 import { useSnapshot } from 'valtio'
@@ -29,7 +30,12 @@ function FootnotesSuspended() {
       {allFootnotes?.map((f, i) =>
         f.url ? (
           <Text key={`${i}`}>
-            {i + 1}. <Link url={f.url}>«{f.title}»</Link>
+            {i + 1}.{' '}
+            <Link url={f.url}>
+              <IntlText id="openQuotes" />
+              {f.title}
+              <IntlText id="closeQuotes" />
+            </Link>
           </Text>
         ) : (
           <Text key={`${i}`}>
@@ -52,17 +58,25 @@ const container = classnames(
   margin('mx-auto')
 )
 export default function () {
+  const { title } = useText('endnotes.title')
+  const { errorLoading } = useText('endnotes.errorLoading')
   useEffect(() => {
-    MetadataStore.title = `Приложение | ${bookTitle.short}`
-  }, [])
+    MetadataStore.title = `${title} | ${bookTitle.short}`
+  }, [title])
   FootnoteStore.fetchFootnotes()
   return (
     <div className={container}>
-      <Title large>Приложение</Title>
+      <Title large>
+        <IntlText id="endnotes.title" />
+      </Title>
       <Divider />
       <SuspenseWithError
-        fallback={<Text>Загружаю приложение...</Text>}
-        errorText="Не получилось загрузить приложение"
+        fallback={
+          <Text>
+            <IntlText id="endnotes.loading" />
+          </Text>
+        }
+        errorText={errorLoading}
       >
         <FootnotesSuspended />
       </SuspenseWithError>

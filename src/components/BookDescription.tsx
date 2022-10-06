@@ -3,6 +3,7 @@ import { Text } from 'components/Text'
 import { toast } from 'react-toastify'
 import { useLocation } from 'wouter'
 import { useSnapshot } from 'valtio'
+import { useText } from 'preact-i18n'
 import Button from 'components/Button'
 import Divider from 'components/Divider'
 import FormatsStore from 'stores/FormatsStore'
@@ -36,10 +37,12 @@ function BookVersionSuspended() {
 }
 
 function BookVersion() {
+  const { loading } = useText('version.loading')
+  const { errorLoading } = useText('version.errorLoading')
   return (
     <SuspenseWithError
-      fallback={<Loading text="Загружаю версию..." />}
-      errorText="Не получилось загрузить версию"
+      fallback={<Loading text={loading} />}
+      errorText={errorLoading}
     >
       <BookVersionSuspended />
     </SuspenseWithError>
@@ -58,10 +61,13 @@ function DownloadButtonsSuspended() {
   const { formats } = useSnapshot(FormatsStore)
   const [, setLocation] = useLocation()
   const { signature } = useSnapshot(SignatureStore)
+  const { readOnline } = useText('readOnline')
+  const { download: downloadText } = useText('download')
+  const { downloadFailure } = useText('downloadFailure')
   return (
     <div className={buttonContainer}>
       <Button
-        title="Читать онлайн"
+        title={readOnline}
         icon={<BookOpenIcon className={icon} />}
         onClick={() => {
           setLocation('/vvedenie')
@@ -71,14 +77,14 @@ function DownloadButtonsSuspended() {
         <Button
           disabled={!signature}
           key={format}
-          title={`Скачать ${format}`}
+          title={`${downloadText} ${format}`}
           icon={<ArrowDownTrayIcon className={icon} />}
           onClick={() => {
             return fetch(`${env.VITE_BACKEND_URL}/book/${format}`, {
               method: 'POST',
               body: JSON.stringify({
                 signature,
-                message,
+                message: message(),
               }),
               headers: {
                 'Content-Type': 'application/json',
@@ -95,9 +101,7 @@ function DownloadButtonsSuspended() {
                 return download(blob, `wdlaty.${format}`)
               })
               .catch((error) => {
-                toast(
-                  error instanceof Error ? error.message : 'Failed to download'
-                )
+                toast(error instanceof Error ? error.message : downloadFailure)
               })
           }}
         />
@@ -107,10 +111,12 @@ function DownloadButtonsSuspended() {
 }
 
 function DownloadButtons() {
+  const { loading } = useText('formats.loading')
+  const { errorLoading } = useText('formats.errorLoading')
   return (
     <SuspenseWithError
-      fallback={<Loading text="Загружаю форматы..." />}
-      errorText="Не получилось загрузить форматы"
+      fallback={<Loading text={loading} />}
+      errorText={errorLoading}
     >
       <DownloadButtonsSuspended />
     </SuspenseWithError>
@@ -130,12 +136,13 @@ const imageContainer = classnames(
   borderRadius('rounded-lg')
 )
 export default function () {
+  const { coverAlt } = useText('coverAlt')
   return (
     <div className={container}>
       <div className={imageContainer}>
         <Image
           src="/images/cover.webp"
-          alt="Обложка книги"
+          alt={coverAlt}
           width="175"
           height="257.5"
         />

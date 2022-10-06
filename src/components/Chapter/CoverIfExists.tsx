@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useText } from 'preact-i18n'
 import Image from 'components/Image'
 import classnames, {
   borderRadius,
@@ -34,9 +35,10 @@ export default () => {
         setIsValid(false)
       })
   }, [src, slug])
+  const { chapterCoverAlt } = useText('chapterCoverAlt')
   return (
     <div className={container(isValid)}>
-      <Image src={src} alt="Обложка" />
+      <Image src={src} alt={chapterCoverAlt} />
     </div>
   )
 }

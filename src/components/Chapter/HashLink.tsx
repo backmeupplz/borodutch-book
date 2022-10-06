@@ -1,3 +1,4 @@
+import { Text } from 'preact-i18n'
 import { useLocation } from 'wouter'
 import classnames, { cursor, textColor } from 'classnames/tailwind'
 import useExternalSignature from 'hooks/useExternalSignature'
@@ -24,7 +25,7 @@ export default function ({ slug }: { slug: string }) {
         )
       }}
     >
-      #
+      <Text id="hash" />
     </span>
   )
 }

@@ -5,6 +5,7 @@ import {
   WalletIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
+import { Text, useText } from 'preact-i18n'
 import { useConnectModal, useSignMessage } from '@web3modal/react'
 import { useSnapshot } from 'valtio'
 import Button from 'components/Button'
@@ -68,13 +69,16 @@ export default function () {
   if (newSignature && signature !== newSignature) {
     SignatureStore.signature = newSignature
   }
+  const { connectWallet } = useText('wallet.buttons.connectWallet')
+  const { buyToken } = useText('wallet.buttons.buyToken')
+  const { createSignature } = useText('wallet.buttons.createSignature')
   return (
     <WalletContext.Consumer>
       {({ address, connected, name, ownsToken }) => (
         <div className={container}>
           {!connected && (
             <Button
-              title="Подключить кошелек!"
+              title={connectWallet}
               icon={<WalletIcon className={icon} />}
               onClick={() => {
                 open()
@@ -90,38 +94,38 @@ export default function () {
               {ownsToken ? (
                 <div className={addressContainer}>
                   <CheckIcon className={icon} />
-                  Есть токен!
+                  <Text id="wallet.buttons.gotToken" />
                 </div>
               ) : (
                 <div className={addressContainer}>
                   <XMarkIcon className={icon} />
-                  Нет токена
+                  <Text id="wallet.buttons.noToken" />
                 </div>
               )}
               {ownsToken &&
                 (signature ? (
                   <div className={addressContainer}>
                     <CheckIcon className={icon} />
-                    Есть подпись!
+                    <Text id="wallet.buttons.gotSignature" />
                   </div>
                 ) : (
                   <div className={addressContainer}>
                     <XMarkIcon className={icon} />
-                    Нет подписи
+                    <Text id="wallet.buttons.noSignature" />
                   </div>
                 ))}
               {ownsToken && !signature && (
                 <Button
-                  title="Создать подпись!"
+                  title={createSignature}
                   icon={<KeyIcon className={icon} />}
                   onClick={() => {
-                    void sign(message)
+                    void sign(message())
                   }}
                 />
               )}
               {!ownsToken && (
                 <Button
-                  title="Купить токен!"
+                  title={buyToken}
                   icon={<RocketLaunchIcon className={icon} />}
                   onClick={() => {
                     window.open(

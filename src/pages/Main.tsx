@@ -1,4 +1,4 @@
-import { Text as IntlText } from 'preact-i18n'
+import { Text as IntlText, useText } from 'preact-i18n'
 import { Text, Title } from 'components/Text'
 import { useEffect } from 'preact/hooks'
 import BookDescription from 'components/BookDescription'
@@ -39,29 +39,22 @@ export default function () {
   useEffect(() => {
     MetadataStore.title = bookTitle.long
   }, [])
+  const { text1 } = useText('description.text1')
+  const { text2 } = useText('description.text2')
+  const { text3 } = useText('description.text3')
+  const { text4 } = useText('description.text4')
+  const texts = [text1, text2, text3, text4].filter((v) => !!v)
 
   return (
     <div class={main}>
       <BookDescription />
       <div className={container}>
-        <Title>Описание</Title>
-        <Text>
-          Последние 10 лет я провел в поисках и разборах научных исследований о
-          том, как улучшить свою жизнь. Я выделил четыре сферы жизни, в которых
-          необходимо достичь дзена для того, чтобы стать максимально
-          счастливыми: отношения с другими, отношения с собой, рациональное
-          мышление и развитие собственного дела.
-        </Text>
-        <Text>
-          В этой книге я собрал все практические советы, которые почерпнул из
-          тех прочитанных исследований, чтобы вам не пришлось снова проходить
-          мой путь проб и ошибок. Будьте готовы к качественному скачку,
-          пристегните ремни, мы входим в гиперпространство!
-        </Text>
-        <Text>
-          P.S., каждая из глав и подглав книги на этом сайте имеет уникальную
-          ссылку — не стесняйтесь делиться ими с друзьями, семьей и знакомыми!
-        </Text>
+        <Title>
+          <IntlText id="description.title" />
+        </Title>
+        {texts.map((paragraph, index) => (
+          <Text key={index}>{paragraph}</Text>
+        ))}
         <Divider />
         <WalletBlock />
         <Divider />

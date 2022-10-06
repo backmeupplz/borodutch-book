@@ -1,3 +1,4 @@
+import { Text as IntlText } from 'preact-i18n'
 import { Text } from 'components/Text'
 import { useSnapshot } from 'valtio'
 import SignatureStore from 'stores/SignatureStore'
@@ -16,22 +17,23 @@ export default function () {
       {({ connected, ownsToken }) => (
         <div className={container}>
           {!connected && (
-            <Text>Вам нужно подключить свой адрес к этому сайту.</Text>
+            <Text>
+              <IntlText id="wallet.connect" />
+            </Text>
           )}
           {connected && !ownsToken && (
             <Text>
-              Вам нужно купить токен на OpenSea, чтобы получить доступ к книге.
+              <IntlText id="wallet.buyToken" />
             </Text>
           )}
           {connected && ownsToken && !signature && (
             <Text>
-              Вам нужно подписать сообщение, чтобы получить доступ к книге.
+              <IntlText id="wallet.signMessage" />
             </Text>
           )}
           {connected && ownsToken && signature && (
             <Text>
-              Поздравляю, вы успешно подписали сообщение — наслаждайтесь
-              неограниченным доступом к книге!
+              <IntlText id="wallet.success" />
             </Text>
           )}
         </div>

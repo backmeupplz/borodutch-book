@@ -57,13 +57,13 @@ const hiddenOnMobile = classnames(display('hidden', 'sm:block'))
 export default function () {
   const [location] = useLocation()
   const isChapter = location !== '/'
-  const text = useText('coverAlt').coverAlt
+  const { logoAlt } = useText('logoAlt')
   return (
     <div className={container} id="navbar">
       <div className={content}>
         <Link href="#/" className={logo}>
           <div className={hiddenOnMobile}>
-            <Image src="/icons/logo.svg" alt={text} />
+            <Image src="/icons/logo.svg" alt={logoAlt} />
           </div>
           <LogoText>
             <Text id="title" />

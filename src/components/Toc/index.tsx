@@ -1,4 +1,5 @@
 import { Link } from 'wouter'
+import { Text, useText } from 'preact-i18n'
 import { Title } from 'components/Text'
 import { useSnapshot } from 'valtio'
 import Chapter from 'components/Toc/Chapter'
@@ -31,7 +32,9 @@ function FootnotesLink() {
   return (
     <div className={container}>
       <Link className={titleContainer} href="#/footnotes">
-        <Title>Приложение</Title>
+        <Title>
+          <Text id="endnotes.title" />
+        </Title>
         <UpRightIcon />
       </Link>
     </div>
@@ -51,10 +54,12 @@ function ChaptersSuspended() {
 }
 
 export default function () {
+  const { loading } = useText('toc.loading')
+  const { errorLoading } = useText('toc.errorLoading')
   return (
     <SuspenseWithError
-      fallback={<Loading text="Загружаю оглавление..." />}
-      errorText="Не получилось загрузить оглавление"
+      fallback={<Loading text={loading} />}
+      errorText={errorLoading}
     >
       <ChaptersSuspended />
     </SuspenseWithError>

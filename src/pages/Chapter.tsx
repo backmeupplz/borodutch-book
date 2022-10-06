@@ -1,3 +1,4 @@
+import { Text, useText } from 'preact-i18n'
 import { Title } from 'components/Text'
 import { useEffect, useState } from 'preact/hooks'
 import { useSnapshot } from 'valtio'
@@ -101,7 +102,9 @@ function ChapterWrapper({ slug }: { slug: string }) {
       <>
         <Title large>{title}</Title>
         <span className={subtitle}>
-          <Title>(Нужно разблокировать книгу)</Title>
+          <Title>
+            <Text id="chapter.needUnlocking" />
+          </Title>
         </span>
         <div className={dividerContainer}>
           <Divider />
@@ -124,6 +127,8 @@ const container = classnames(maxWidth('max-w-2xl'), margin('mx-auto'))
 export default function () {
   const slug = useSlug()
 
+  const { errorLoading } = useText('chapter.errorLoading')
+
   if (slug === 'footnotes') {
     return null
   }
@@ -132,8 +137,12 @@ export default function () {
     <div className={container}>
       <CoverIfExists />
       <SuspenseWithError
-        fallback={<Title large>Загружаю главу...</Title>}
-        errorText="Error loading chapter"
+        fallback={
+          <Title large>
+            <Text id="chapter.loading" />
+          </Title>
+        }
+        errorText={errorLoading}
       >
         <ChapterWrapper slug={slug} />
       </SuspenseWithError>
