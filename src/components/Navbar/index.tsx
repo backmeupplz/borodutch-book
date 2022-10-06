@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'wouter'
 import { LogoText } from 'components/Text'
 import Image from 'components/Image'
-// import LanguageButton from 'components/Navbar/LanguageButton'
+import LanguageButton from 'components/Navbar/LanguageButton'
 import ProgressBar from 'components/Navbar/ProgressBar'
 import Separator from 'components/Navbar/Separator'
 import ShareButton from 'components/Navbar/ShareButton'
@@ -68,7 +68,7 @@ export default function () {
         <div className={buttons}>
           {isChapter && <ShareButton />}
           <ThemeToggle />
-          {/* <LanguageButton /> */}
+          <LanguageButton />
         </div>
       </div>
       {isChapter && <ProgressBar />}
