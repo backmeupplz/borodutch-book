@@ -114,7 +114,7 @@ export function LinedTitle({ children }: ChildrenProp) {
   return <h4 className={linedTitle}>{children}</h4>
 }
 
-const linedText = classnames(
+export const linedText = classnames(
   fontSize('sm:text-lg'),
   textColor('text-primary'),
   fontFamily('font-sans'),

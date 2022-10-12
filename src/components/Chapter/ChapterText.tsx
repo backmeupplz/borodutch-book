@@ -6,6 +6,7 @@ import {
   Subheading,
   Subtitle,
   Text,
+  linedText,
   text,
 } from 'components/Text'
 import Chapter from 'models/Chapter'
@@ -101,6 +102,10 @@ function renderChild(child: Content, key: string) {
     return <LinedTitle>{extractChildren(child.children)}</LinedTitle>
   } else if (child.class?.includes('Lined-parsed')) {
     return <LinedText>{extractChildren(child.children)}</LinedText>
+  } else if (child.class?.includes('Lined-bullet-wrapper')) {
+    return <ul className={unorderedList}>{extractChildren(child.children)}</ul>
+  } else if (child.class?.includes('Lined-bullet')) {
+    return <li className={linedText}>{extractChildren(child.children)}</li>
   } else if (child.class?.includes('Dialogue-block')) {
     return <DialogueBlock>{extractChildren(child.children)}</DialogueBlock>
   } else if (child.class?.includes('Dialogue-parsed')) {
@@ -152,6 +157,8 @@ function extractChildren(contents: readonly Content[] = []) {
     'Lined-title-parsed',
     'Lined',
     'Lined-parsed',
+    'Lined-bullet',
+    'Lined-bullet-wrapper',
     'Dialogue',
     'Dialogue-block',
     'Dialogue-parsed',
@@ -191,6 +198,23 @@ function extractChildren(contents: readonly Content[] = []) {
     } else if (content.class === 'Lined') {
       currentLinedBlock?.children?.push({
         class: 'Lined-parsed',
+        children: content.children,
+      })
+      if (
+        currentLinedBlock &&
+        filtered.indexOf(content) === filtered.length - 1
+      ) {
+        result.push(currentLinedBlock)
+        currentLinedBlock = undefined
+      }
+    } else if (
+      content.tagName === 'UL' &&
+      content.children
+        ?.map((c) => c.class?.toLowerCase())
+        .some((c) => c?.includes('lined'))
+    ) {
+      currentLinedBlock?.children?.push({
+        class: 'Lined-bullet-wrapper',
         children: content.children,
       })
       if (
