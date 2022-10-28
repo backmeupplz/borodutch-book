@@ -4,8 +4,8 @@ import {
   useAccount,
   useFetchEnsName,
 } from '@web3modal/react'
+import { alchemyProvider } from '@wagmi/core/providers/alchemy'
 import { chain, configureChains, createClient } from '@wagmi/core'
-import { publicProvider } from '@wagmi/core/providers/public'
 import ChildrenProp from 'models/ChildrenProp'
 import WalletContext from 'context/WalletContext'
 import env from 'helpers/env'
@@ -15,7 +15,11 @@ import type { ConfigOptions } from '@web3modal/react'
 const WC_PROJECT_ID = env.VITE_WC_PROJECT_ID
 const { chains, provider } = configureChains(
   [chain.mainnet],
-  [publicProvider()]
+  [
+    alchemyProvider({
+      apiKey: 'eDO9sGCLsLrKzRF3-02N66UWQVS42A7K',
+    }),
+  ]
 )
 const wagmiClient = createClient({
   autoConnect: true,
