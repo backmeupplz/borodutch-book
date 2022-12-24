@@ -8,13 +8,13 @@ import Intl from 'components/Intl'
 import Main from 'pages/Main'
 import Navbar from 'components/Navbar'
 import Root from 'components/Root'
-import Web3Modal from 'components/Web3Modal'
+import WalletProvider from 'components/WalletProvider'
 import useHashLocation from 'components/Router'
 
 const App = () => {
   return (
     <Intl>
-      <Web3Modal>
+      <WalletProvider>
         <Router hook={useHashLocation}>
           <Head />
           <Navbar />
@@ -26,7 +26,7 @@ const App = () => {
           <Footnote />
         </Router>
         <ToastContainer theme="dark" position="bottom-right" />
-      </Web3Modal>
+      </WalletProvider>
     </Intl>
   )
 }

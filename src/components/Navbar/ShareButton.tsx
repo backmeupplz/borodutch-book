@@ -1,7 +1,7 @@
 import { ArrowUpOnSquareIcon } from '@heroicons/react/24/outline'
 import { Suspense, useEffect, useState } from 'preact/compat'
 import { toast } from 'react-toastify'
-import { useAccount, useSigner } from '@web3modal/react'
+import { useAccount, useSigner } from 'wagmi'
 import { useSnapshot } from 'valtio'
 import { useText } from 'preact-i18n'
 import FreeSlugsStore from 'stores/FreeSlugsStore'
@@ -15,7 +15,7 @@ function ShareButtonSuspended({ ownsToken }: { ownsToken: boolean }) {
   const slug = useSlug()
   if (!slug) return null
   const isFree = freeSlugs.includes(slug)
-  const { signer, refetch } = useSigner()
+  const { data: signer, refetch } = useSigner()
   const { address } = useAccount()
   useEffect(() => {
     void refetch({})

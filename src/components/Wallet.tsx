@@ -5,8 +5,9 @@ import {
   WalletIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
+import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { Text, useText } from 'preact-i18n'
-import { useConnectModal, useSignMessage } from '@web3modal/react'
+import { useSignMessage } from 'wagmi'
 import { useSnapshot } from 'valtio'
 import Button from 'components/Button'
 import SignatureStore from 'stores/SignatureStore'
@@ -63,9 +64,9 @@ const addressContainer = classnames(
   wordBreak('break-all')
 )
 export default function () {
-  const { open } = useConnectModal()
+  // const { open } = useConnectModal()
   const { signature } = useSnapshot(SignatureStore)
-  const { signature: newSignature, sign } = useSignMessage()
+  const { data: newSignature, signMessage: sign } = useSignMessage()
   if (newSignature && signature !== newSignature) {
     SignatureStore.signature = newSignature
   }
@@ -77,12 +78,11 @@ export default function () {
       {({ address, connected, name, ownsToken }) => (
         <div className={container}>
           {!connected && (
-            <Button
-              title={connectWallet}
-              icon={<WalletIcon className={icon} />}
-              onClick={() => {
-                open()
-              }}
+            <ConnectButton
+              label={connectWallet}
+              accountStatus="address"
+              chainStatus="none"
+              showBalance={false}
             />
           )}
           {connected && (
@@ -119,7 +119,7 @@ export default function () {
                   title={createSignature}
                   icon={<KeyIcon className={icon} />}
                   onClick={() => {
-                    void sign(message())
+                    void sign({ message: message() })
                   }}
                 />
               )}
