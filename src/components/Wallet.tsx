@@ -64,7 +64,6 @@ const addressContainer = classnames(
   wordBreak('break-all')
 )
 export default function () {
-  // const { open } = useConnectModal()
   const { signature } = useSnapshot(SignatureStore)
   const { data: newSignature, signMessage: sign } = useSignMessage()
   if (newSignature && signature !== newSignature) {
