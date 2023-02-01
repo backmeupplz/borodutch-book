@@ -1,5 +1,6 @@
 import { fetchFootnote, fetchFootnotes } from 'helpers/api'
 import { proxy } from 'valtio'
+import Edition from 'models/Edition'
 import Footnote from 'models/Footnote'
 
 class FootnoteStore {
@@ -9,15 +10,15 @@ class FootnoteStore {
   } = {}
   allFootnotes: Promise<Footnote[]> | undefined
 
-  fetchFootnote(index: number) {
+  fetchFootnote(index: number, edition: Edition) {
     if (!this.footnotes[index]) {
-      this.footnotes[index] = fetchFootnote(index - 1)
+      this.footnotes[index] = fetchFootnote(index - 1, edition)
     }
   }
 
-  fetchFootnotes() {
+  fetchFootnotes(edition: Edition) {
     if (!this.allFootnotes) {
-      this.allFootnotes = fetchFootnotes()
+      this.allFootnotes = fetchFootnotes(edition)
     }
   }
 }

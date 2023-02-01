@@ -8,6 +8,7 @@ import Button from 'components/Button'
 import Divider from 'components/Divider'
 import FormatsStore from 'stores/FormatsStore'
 import Image from 'components/Image'
+import LanguageStore from 'stores/LanguageStore'
 import Loading from 'components/Loading'
 import SignatureStore from 'stores/SignatureStore'
 import SuspenseWithError from 'components/SuspenseWithError'
@@ -30,10 +31,9 @@ import env from 'helpers/env'
 import message from 'helpers/message'
 
 function BookVersionSuspended() {
-  const {
-    version: { version },
-  } = useSnapshot(VersionStore)
-  return <Text>{version}</Text>
+  const { versions } = useSnapshot(VersionStore)
+  const { language } = useSnapshot(LanguageStore)
+  return <Text>{versions[language]}</Text>
 }
 
 function BookVersion() {

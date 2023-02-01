@@ -1,8 +1,9 @@
 import { fetchFreeSlugs } from 'helpers/api'
 import { proxy } from 'valtio'
+import Edition from 'models/Edition'
 
 class FreeSlugsStore {
-  freeSlugs: Promise<string[]>
+  freeSlugs: Promise<Record<Edition, string[]>>
   constructor() {
     this.freeSlugs = fetchFreeSlugs()
   }

@@ -1,10 +1,11 @@
-import { fetchVersion } from 'helpers/api'
+import { fetchVersions } from 'helpers/api'
 import { proxy } from 'valtio'
+import Edition from 'models/Edition'
 
 class VersionStore {
-  version: Promise<{ version: string }>
+  versions: Promise<Record<Edition, string>>
   constructor() {
-    this.version = fetchVersion()
+    this.versions = fetchVersions()
   }
 }
 

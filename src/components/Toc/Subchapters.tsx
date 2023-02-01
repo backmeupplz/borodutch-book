@@ -4,6 +4,7 @@ import { useSnapshot } from 'valtio'
 import Chapter from 'models/Chapter'
 import Divider from 'components/Divider'
 import FreeSlugsStore from 'stores/FreeSlugsStore'
+import LanguageStore from 'stores/LanguageStore'
 import LockedIcon from 'components/LockedIcon'
 import SignatureStore from 'stores/SignatureStore'
 import UpRightIcon from 'components/UpRightIcon'
@@ -50,6 +51,7 @@ function Subchapter({
 }) {
   const { freeSlugs } = useSnapshot(FreeSlugsStore)
   const { signature } = useSnapshot(SignatureStore)
+  const { language } = useSnapshot(LanguageStore)
   return (
     <>
       <Link
@@ -58,7 +60,9 @@ function Subchapter({
       >
         <Text>{chapter.title}</Text>
         <UpRightIcon />
-        {!signature && !freeSlugs.includes(chapter.slug) && <LockedIcon />}
+        {!signature && !freeSlugs[language].includes(chapter.slug) && (
+          <LockedIcon />
+        )}
       </Link>
       {!!chapter.subchapters?.length && <Divider />}
       {!!chapter.subchapters?.length && (

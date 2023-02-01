@@ -8,6 +8,7 @@ import CoverIfExists from 'components/Chapter/CoverIfExists'
 import Divider from 'components/Divider'
 import Footer from 'components/Chapter/Footer'
 import FreeSlugsStore from 'stores/FreeSlugsStore'
+import LanguageStore from 'stores/LanguageStore'
 import ScrollToTop from 'components/ScrollToTop'
 import SignatureStore from 'stores/SignatureStore'
 import SuspenseWithError from 'components/SuspenseWithError'
@@ -80,8 +81,9 @@ function ChapterWrapper({ slug }: { slug: string }) {
   const { freeSlugs } = useSnapshot(FreeSlugsStore)
   const { signature } = useSnapshot(SignatureStore)
   const externalSignature = useExternalSignature()
+  const { language } = useSnapshot(LanguageStore)
 
-  if (!signature && !externalSignature && !freeSlugs.includes(slug)) {
+  if (!signature && !externalSignature && !freeSlugs[language].includes(slug)) {
     const { toc } = useSnapshot(ChapterStore)
     const title = flattenToc(toc).find(
       (chapter) => chapter.slug === slug
@@ -105,6 +107,7 @@ function ChapterWrapper({ slug }: { slug: string }) {
   }
   ChapterStore.fetchChapter(
     slug,
+    language,
     externalSignature ? slug : undefined,
     externalSignature
   )

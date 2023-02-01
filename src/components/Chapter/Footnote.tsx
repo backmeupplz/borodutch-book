@@ -4,6 +4,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { useSnapshot } from 'valtio'
 import FootnoteStore from 'stores/FootnoteStore'
 import IconButton from 'components/IconButton'
+import LanguageStore from 'stores/LanguageStore'
 import Loading from 'components/Loading'
 import SuspenseWithError from 'components/SuspenseWithError'
 import classnames, {
@@ -69,7 +70,8 @@ const innerContainer = classnames(
 export default function () {
   const { currentFootnote } = useSnapshot(FootnoteStore)
   if (!currentFootnote) return null
-  FootnoteStore.fetchFootnote(currentFootnote)
+  const { language } = useSnapshot(LanguageStore)
+  FootnoteStore.fetchFootnote(currentFootnote, language)
   const { loading } = useText('endnote.loading')
   const { errorLoading } = useText('endnote.errorLoading')
   return (

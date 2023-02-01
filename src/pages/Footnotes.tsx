@@ -3,6 +3,7 @@ import { Text, Title } from 'components/Text'
 import { useSnapshot } from 'valtio'
 import Divider from 'components/Divider'
 import FootnoteStore from 'stores/FootnoteStore'
+import LanguageStore from 'stores/LanguageStore'
 import Link from 'components/Link'
 import SuspenseWithError from 'components/SuspenseWithError'
 import classnames, {
@@ -56,7 +57,8 @@ const container = classnames(
 )
 export default function () {
   const { errorLoading } = useText('endnotes.errorLoading')
-  FootnoteStore.fetchFootnotes()
+  const { language } = useSnapshot(LanguageStore)
+  FootnoteStore.fetchFootnotes(language)
   return (
     <div className={container}>
       <Title large>

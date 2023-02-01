@@ -6,15 +6,17 @@ import { useSnapshot } from 'valtio'
 import { useText } from 'preact-i18n'
 import FreeSlugsStore from 'stores/FreeSlugsStore'
 import IconButton from 'components/IconButton'
+import LanguageStore from 'stores/LanguageStore'
 import WalletContext from 'context/WalletContext'
 import icon from 'classnames/icon'
 import useSlug from 'hooks/useSlug'
 
 function ShareButtonSuspended({ ownsToken }: { ownsToken: boolean }) {
   const { freeSlugs } = useSnapshot(FreeSlugsStore)
+  const { language } = useSnapshot(LanguageStore)
   const slug = useSlug()
   if (!slug) return null
-  const isFree = freeSlugs.includes(slug)
+  const isFree = freeSlugs[language].includes(slug)
   const { data: signer, refetch } = useSigner()
   const { address } = useAccount()
   useEffect(() => {
@@ -31,7 +33,7 @@ function ShareButtonSuspended({ ownsToken }: { ownsToken: boolean }) {
   return isFree || (ownsToken && signer) ? (
     <IconButton
       onClick={async () => {
-        if (freeSlugs.includes(slug)) {
+        if (freeSlugs[language].includes(slug)) {
           void navigator.clipboard.writeText(window.location.href)
           toast(success, {
             type: 'success',

@@ -4,6 +4,7 @@ import { Title } from 'components/Text'
 import { useSnapshot } from 'valtio'
 import Chapter from 'components/Toc/Chapter'
 import ChapterStore from 'stores/ChapterStore'
+import LanguageStore from 'stores/LanguageStore'
 import Loading from 'components/Loading'
 import SuspenseWithError from 'components/SuspenseWithError'
 import UpRightIcon from 'components/UpRightIcon'
@@ -56,6 +57,8 @@ function ChaptersSuspended() {
 export default function () {
   const { loading } = useText('toc.loading')
   const { errorLoading } = useText('toc.errorLoading')
+  const { language } = useSnapshot(LanguageStore)
+  ChapterStore.fetchToc(language)
   return (
     <SuspenseWithError
       fallback={<Loading text={loading} />}
