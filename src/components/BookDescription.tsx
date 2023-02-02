@@ -60,12 +60,13 @@ const buttonContainer = classnames(
 function DownloadButtonsSuspended() {
   const { formats } = useSnapshot(FormatsStore)
   const [, setLocation] = useLocation()
-  const { signature } = useSnapshot(SignatureStore)
+  const { language } = useSnapshot(LanguageStore)
+  const { signatures } = useSnapshot(SignatureStore)
+  const signature = signatures[language]
   const { readOnline } = useText('readOnline')
   const { readOnlineSlug } = useText('readOnlineSlug')
   const { download: downloadText } = useText('download')
   const { downloadFailure } = useText('downloadFailure')
-  const { language } = useSnapshot(LanguageStore)
   return (
     <div className={buttonContainer}>
       <Button
@@ -104,7 +105,16 @@ function DownloadButtonsSuspended() {
                 return download(blob, `wdlaty.${format}`)
               })
               .catch((error) => {
-                toast(error instanceof Error ? error.message : downloadFailure)
+                if (error instanceof Error) {
+                  try {
+                    const json = JSON.parse(error.message)
+                    toast(json[language])
+                  } catch (e) {
+                    toast(error.message)
+                  }
+                } else {
+                  toast(downloadFailure)
+                }
               })
           }}
         />

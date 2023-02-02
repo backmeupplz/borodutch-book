@@ -10,6 +10,7 @@ import { Text, useText } from 'preact-i18n'
 import { useSignMessage } from 'wagmi'
 import { useSnapshot } from 'valtio'
 import Button from 'components/Button'
+import LanguageStore from 'stores/LanguageStore'
 import SignatureStore from 'stores/SignatureStore'
 import WalletContext from 'context/WalletContext'
 import classnames, {
@@ -64,11 +65,10 @@ const addressContainer = classnames(
   wordBreak('break-all')
 )
 export default function () {
-  const { signature } = useSnapshot(SignatureStore)
-  const { data: newSignature, signMessage: sign } = useSignMessage()
-  if (newSignature && signature !== newSignature) {
-    SignatureStore.signature = newSignature
-  }
+  const { language } = useSnapshot(LanguageStore)
+  const { signatures } = useSnapshot(SignatureStore)
+  const signature = signatures[language]
+  const { signMessageAsync: sign } = useSignMessage()
   const { connectWallet } = useText('wallet.buttons.connectWallet')
   const { buyToken } = useText('wallet.buttons.buyToken')
   const { createSignature } = useText('wallet.buttons.createSignature')
@@ -117,8 +117,14 @@ export default function () {
                 <Button
                   title={createSignature}
                   icon={<KeyIcon className={icon} />}
-                  onClick={() => {
-                    void sign({ message: message() })
+                  onClick={async () => {
+                    try {
+                      SignatureStore.signatures[language] = await sign({
+                        message: message(),
+                      })
+                    } catch (error) {
+                      console.error(error)
+                    }
                   }}
                 />
               )}

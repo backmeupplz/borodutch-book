@@ -1,6 +1,7 @@
 import { Text as IntlText } from 'preact-i18n'
 import { Text } from 'components/Text'
 import { useSnapshot } from 'valtio'
+import LanguageStore from 'stores/LanguageStore'
 import SignatureStore from 'stores/SignatureStore'
 import WalletContext from 'context/WalletContext'
 import classnames, { display, flexDirection, gap } from 'classnames/tailwind'
@@ -11,7 +12,9 @@ const container = classnames(
   gap('gap-y-4')
 )
 export default function () {
-  const { signature } = useSnapshot(SignatureStore)
+  const { language } = useSnapshot(LanguageStore)
+  const { signatures } = useSnapshot(SignatureStore)
+  const signature = signatures[language]
   return (
     <WalletContext.Consumer>
       {({ connected, ownsToken }) => (

@@ -80,9 +80,10 @@ const walletContainer = classnames(
 )
 function ChapterWrapper({ slug }: { slug: string }) {
   const { freeSlugs } = useSnapshot(FreeSlugsStore)
-  const { signature } = useSnapshot(SignatureStore)
-  const externalSignature = useExternalSignature()
   const { language } = useSnapshot(LanguageStore)
+  const { signatures } = useSnapshot(SignatureStore)
+  const signature = signatures[language]
+  const externalSignature = useExternalSignature()
 
   if (!signature && !externalSignature && !freeSlugs.includes(slug)) {
     const { toc } = useSnapshot(ChapterStore)

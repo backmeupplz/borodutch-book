@@ -3,7 +3,9 @@ import { Text as IntlText, useText } from 'preact-i18n'
 import { useSnapshot } from 'valtio'
 import Chapter from 'models/Chapter'
 import ChapterStore from 'stores/ChapterStore'
+import CompatibilityStore from 'stores/CompatibilityStore'
 import Divider from 'components/Divider'
+import LanguageStore from 'stores/LanguageStore'
 import Loading from 'components/Loading'
 import NextButton from 'components/Chapter/NextButton'
 import SuspenseWithError from 'components/SuspenseWithError'
@@ -42,8 +44,14 @@ function FooterSuspended({ chapter }: { chapter: Chapter }) {
   const slug = chapter.slug
   // flatten toc
   const tocFlat = flattenToc(toc)
+  const { lastReadySlugs } = useSnapshot(CompatibilityStore)
+  const { language } = useSnapshot(LanguageStore)
+  const lastReadySlug = lastReadySlugs[language]
+  const lastReadySlugIndex = lastReadySlug
+    ? tocFlat.findIndex((item) => item.slug === lastReadySlug)
+    : tocFlat.length - 1
   const index = tocFlat.findIndex((item) => item.slug === slug)
-  const next = tocFlat[index + 1]
+  const next = index + 1 <= lastReadySlugIndex ? tocFlat[index + 1] : undefined
   return next ? (
     <div className={container}>
       <Divider />
