@@ -8,9 +8,12 @@ import flattenToc from 'helpers/flattenToc'
 
 class ChapterStore {
   toc: Promise<Chapter[]> = Promise.resolve([])
-  chapters: {
-    [slug: string]: Promise<Chapter>
-  } = {}
+  chapters = {} as Record<
+    Edition,
+    {
+      [slug: string]: Promise<Chapter>
+    }
+  >
 
   fetchToc(edition: Edition) {
     this.toc = fetchToc(edition)
@@ -22,8 +25,11 @@ class ChapterStore {
     message = defaultMessage(),
     signature = SignatureStore.signature
   ) {
-    if (!this.chapters[slug]) {
-      this.chapters[slug] = fetchChapter(
+    if (!this.chapters[edition]) {
+      this.chapters[edition] = {}
+    }
+    if (!this.chapters[edition][slug]) {
+      this.chapters[edition][slug] = fetchChapter(
         slug,
         edition,
         message,

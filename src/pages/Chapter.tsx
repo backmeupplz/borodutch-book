@@ -30,7 +30,8 @@ const dividerContainer = margin('my-4')
 const subtitle = textAlign('text-center')
 function ChapterSuspended({ slug }: { slug: string }) {
   const { chapters } = useSnapshot(ChapterStore)
-  const chapter = chapters[slug]
+  const { language } = useSnapshot(LanguageStore)
+  const chapter = chapters[language][slug]
   const subchapter = chapter.subchapters?.[0]
   const [anchor, setAnchor] = useState(getHashComponents().anchor)
   useEffect(() => {
@@ -83,7 +84,7 @@ function ChapterWrapper({ slug }: { slug: string }) {
   const externalSignature = useExternalSignature()
   const { language } = useSnapshot(LanguageStore)
 
-  if (!signature && !externalSignature && !freeSlugs[language].includes(slug)) {
+  if (!signature && !externalSignature && !freeSlugs.includes(slug)) {
     const { toc } = useSnapshot(ChapterStore)
     const title = flattenToc(toc).find(
       (chapter) => chapter.slug === slug

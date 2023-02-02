@@ -9,6 +9,18 @@ export function fetchToc(edition: Edition) {
   ) as Promise<Chapter[]>
 }
 
+export function fetchLastReadySlugs() {
+  return fetch(`${env.VITE_BACKEND_URL}/book/lastReadySlugs`).then((response) =>
+    response.json()
+  ) as Promise<Record<Edition, string>>
+}
+
+export function fetchAllEditionsSlugs(slug: string) {
+  return fetch(
+    `${env.VITE_BACKEND_URL}/book/allEditionsSlugs?slug=${slug}`
+  ).then((response) => response.json()) as Promise<Record<Edition, string>>
+}
+
 export function fetchChapter(
   slug: string,
   edition: Edition,
@@ -47,7 +59,10 @@ export function fetchVersions() {
 }
 
 export function fetchFreeSlugs() {
-  return fetch(`${env.VITE_BACKEND_URL}/book/free-slugs`).then((response) =>
-    response.json()
-  ) as Promise<Record<Edition, string[]>>
+  return fetch(`${env.VITE_BACKEND_URL}/book/free-slugs`).then(
+    async (response) =>
+      Object.values(
+        (await response.json()) as Promise<Record<Edition, string[]>>
+      ).reduce((p, c) => p.concat(c), [])
+  ) as Promise<string[]>
 }

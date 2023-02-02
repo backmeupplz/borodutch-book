@@ -62,6 +62,7 @@ function DownloadButtonsSuspended() {
   const [, setLocation] = useLocation()
   const { signature } = useSnapshot(SignatureStore)
   const { readOnline } = useText('readOnline')
+  const { readOnlineSlug } = useText('readOnlineSlug')
   const { download: downloadText } = useText('download')
   const { downloadFailure } = useText('downloadFailure')
   return (
@@ -70,7 +71,7 @@ function DownloadButtonsSuspended() {
         title={readOnline}
         icon={<BookOpenIcon className={icon} />}
         onClick={() => {
-          setLocation('/vvedenie') // TODO: localize first chapter
+          setLocation(`/${readOnlineSlug}`)
         }}
       />
       {formats.map((format) => (
