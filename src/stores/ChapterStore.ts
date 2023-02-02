@@ -23,7 +23,7 @@ class ChapterStore {
     slug: string,
     edition: Edition,
     message = defaultMessage(),
-    signature: string
+    signature?: string
   ) {
     if (!this.chapters[edition]) {
       this.chapters[edition] = {}

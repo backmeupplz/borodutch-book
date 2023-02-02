@@ -111,7 +111,7 @@ function ChapterWrapper({ slug }: { slug: string }) {
     slug,
     language,
     externalSignature ? slug : undefined,
-    externalSignature
+    externalSignature || signature
   )
   return <ChapterSuspended slug={slug} />
 }
