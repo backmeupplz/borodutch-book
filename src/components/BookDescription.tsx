@@ -65,6 +65,7 @@ function DownloadButtonsSuspended() {
   const { readOnlineSlug } = useText('readOnlineSlug')
   const { download: downloadText } = useText('download')
   const { downloadFailure } = useText('downloadFailure')
+  const { language } = useSnapshot(LanguageStore)
   return (
     <div className={buttonContainer}>
       <Button
@@ -86,6 +87,7 @@ function DownloadButtonsSuspended() {
               body: JSON.stringify({
                 signature,
                 message: message(),
+                edition: language,
               }),
               headers: {
                 'Content-Type': 'application/json',
