@@ -107,12 +107,6 @@ function ChapterWrapper({ slug }: { slug: string }) {
       </>
     )
   }
-  ChapterStore.fetchChapter(
-    slug,
-    language,
-    externalSignature ? slug : undefined,
-    externalSignature || signature
-  )
   return <ChapterSuspended slug={slug} />
 }
 
@@ -125,6 +119,18 @@ export default function () {
   if (slug === 'footnotes') {
     return null
   }
+
+  const { language } = useSnapshot(LanguageStore)
+  const { signatures } = useSnapshot(SignatureStore)
+  const signature = signatures[language]
+  const externalSignature = useExternalSignature()
+
+  ChapterStore.fetchChapter(
+    slug,
+    language,
+    externalSignature ? slug : undefined,
+    externalSignature || signature
+  )
 
   return slug ? (
     <div className={container}>
