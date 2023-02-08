@@ -5,20 +5,27 @@ import Footnote from 'models/Footnote'
 
 class FootnoteStore {
   currentFootnote: number | undefined
-  footnotes: {
-    [index: number]: Promise<Footnote>
-  } = {}
-  allFootnotes: Promise<Footnote[]> | undefined
+  footnotes: Record<
+    Edition,
+    {
+      [index: number]: Promise<Footnote>
+    }
+  > = { ru: {}, en: {}, 'ru-f': {} }
+  allFootnotes: Record<Edition, Promise<Footnote[]> | undefined> = {
+    ru: undefined,
+    en: undefined,
+    'ru-f': undefined,
+  }
 
   fetchFootnote(index: number, edition: Edition) {
-    if (!this.footnotes[index]) {
-      this.footnotes[index] = fetchFootnote(index - 1, edition)
+    if (!this.footnotes[edition][index]) {
+      this.footnotes[edition][index] = fetchFootnote(index - 1, edition)
     }
   }
 
   fetchFootnotes(edition: Edition) {
-    if (!this.allFootnotes) {
-      this.allFootnotes = fetchFootnotes(edition)
+    if (!this.allFootnotes[edition]) {
+      this.allFootnotes[edition] = fetchFootnotes(edition)
     }
   }
 }

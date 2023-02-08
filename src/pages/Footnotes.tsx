@@ -23,9 +23,10 @@ const footnotesContainer = classnames(
 )
 function FootnotesSuspended() {
   const { allFootnotes } = useSnapshot(FootnoteStore)
+  const { language } = useSnapshot(LanguageStore)
   return (
     <div className={footnotesContainer}>
-      {allFootnotes?.map((f, i) =>
+      {allFootnotes[language]?.map((f, i) =>
         f.url ? (
           <Text key={`${i}`}>
             {i + 1}.{' '}

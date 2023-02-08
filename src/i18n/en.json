@@ -24,8 +24,8 @@
     "loading": "Loading endnotes...",
     "errorLoading": "Error loading endnotes"
   },
-  "openQuotes": "«",
-  "closeQuotes": "»",
+  "openQuotes": "\"",
+  "closeQuotes": "\"",
   "toc": {
     "loading": "Loading table of contents...",
     "errorLoading": "Error loading table of contents"
