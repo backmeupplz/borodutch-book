@@ -2,12 +2,15 @@ import { fetchChapter, fetchToc } from 'helpers/api'
 import { proxy } from 'valtio'
 import Chapter from 'models/Chapter'
 import Edition from 'models/Edition'
-import SignatureStore from 'stores/SignatureStore'
 import defaultMessage from 'helpers/message'
 import flattenToc from 'helpers/flattenToc'
 
 class ChapterStore {
-  toc: Promise<Chapter[]> = Promise.resolve([])
+  toc: Record<Edition, Promise<Chapter[]> | undefined> = {
+    ru: undefined,
+    en: undefined,
+    'ru-f': undefined,
+  }
   chapters = {} as Record<
     Edition,
     {
@@ -16,7 +19,9 @@ class ChapterStore {
   >
 
   fetchToc(edition: Edition) {
-    this.toc = fetchToc(edition)
+    if (!this.toc[edition]) {
+      this.toc[edition] = this.toc[edition] = fetchToc(edition)
+    }
   }
 
   fetchChapter(
@@ -36,7 +41,7 @@ class ChapterStore {
         signature
       ).then(async (chapter) => {
         if (!chapter.beginning.length && chapter.level === 1) {
-          const flatToc = flattenToc(await this.toc)
+          const flatToc = flattenToc(await this.toc[edition])
           const chapterIndex = flatToc.findIndex((item) => item.slug === slug)
           return {
             ...chapter,

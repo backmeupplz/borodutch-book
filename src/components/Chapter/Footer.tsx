@@ -43,9 +43,9 @@ function FooterSuspended({ chapter }: { chapter: Chapter }) {
   const { toc } = useSnapshot(ChapterStore)
   const slug = chapter.slug
   // flatten toc
-  const tocFlat = flattenToc(toc)
-  const { lastReadySlugs } = useSnapshot(CompatibilityStore)
   const { language } = useSnapshot(LanguageStore)
+  const tocFlat = flattenToc(toc[language])
+  const { lastReadySlugs } = useSnapshot(CompatibilityStore)
   const lastReadySlug = lastReadySlugs[language]
   const lastReadySlugIndex = lastReadySlug
     ? tocFlat.findIndex((item) => item.slug === lastReadySlug)
@@ -71,6 +71,10 @@ function FooterSuspended({ chapter }: { chapter: Chapter }) {
 export default function ({ chapter }: { chapter: Chapter }) {
   const { loading } = useText('toc.loading')
   const { errorLoading } = useText('toc.errorLoading')
+  const { language } = useSnapshot(LanguageStore)
+
+  ChapterStore.fetchToc(language)
+
   return (
     <SuspenseWithError
       fallback={<Loading text={loading} />}

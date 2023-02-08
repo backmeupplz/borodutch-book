@@ -4,6 +4,7 @@ import { useLocation } from 'wouter'
 import { useSnapshot } from 'valtio'
 import { useText } from 'preact-i18n'
 import ChapterStore from 'stores/ChapterStore'
+import LanguageStore from 'stores/LanguageStore'
 import flattenToc from 'helpers/flattenToc'
 import useSlug from 'hooks/useSlug'
 
@@ -23,7 +24,10 @@ function HeadSuspended() {
   const { full } = useText('title.full')
 
   const { toc } = useSnapshot(ChapterStore)
-  const title = flattenToc(toc).find((chapter) => chapter.slug === slug)?.title
+  const { language } = useSnapshot(LanguageStore)
+  const title = flattenToc(toc[language]).find(
+    (chapter) => chapter.slug === slug
+  )?.title
 
   return <Head title={`${title}${separator}${full}`} />
 }

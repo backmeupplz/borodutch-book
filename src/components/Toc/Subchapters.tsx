@@ -85,7 +85,7 @@ function Subchapter({
   const signature = signatures[language]
 
   const { toc } = useSnapshot(ChapterStore)
-  const tocFlat = flattenToc(toc)
+  const tocFlat = flattenToc(toc[language])
   const { lastReadySlugs } = useSnapshot(CompatibilityStore)
   const lastReadySlug = lastReadySlugs[language]
   const lastReadySlugIndex = lastReadySlug

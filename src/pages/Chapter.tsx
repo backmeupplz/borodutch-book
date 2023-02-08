@@ -87,7 +87,7 @@ function ChapterWrapper({ slug }: { slug: string }) {
 
   if (!signature && !externalSignature && !freeSlugs.includes(slug)) {
     const { toc } = useSnapshot(ChapterStore)
-    const title = flattenToc(toc).find(
+    const title = flattenToc(toc[language]).find(
       (chapter) => chapter.slug === slug
     )?.title
     return (

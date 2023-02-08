@@ -46,16 +46,16 @@ function FootnotesLink() {
 
 function ChaptersSuspended() {
   const { toc } = useSnapshot(ChapterStore)
-  const tocFlat = flattenToc(toc)
-  const { lastReadySlugs } = useSnapshot(CompatibilityStore)
   const { language } = useSnapshot(LanguageStore)
+  const tocFlat = flattenToc(toc[language])
+  const { lastReadySlugs } = useSnapshot(CompatibilityStore)
   const lastReadySlug = lastReadySlugs[language]
   const lastReadySlugIndex = lastReadySlug
     ? tocFlat.findIndex((item) => item.slug === lastReadySlug)
     : tocFlat.length - 1
   return (
     <>
-      {toc.map((chapter) => (
+      {(toc[language] || []).map((chapter) => (
         <Chapter
           key={chapter.slug}
           chapter={chapter}
