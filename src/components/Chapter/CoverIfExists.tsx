@@ -1,3 +1,4 @@
+import { fetchAllEditionsSlugs } from 'helpers/api'
 import { useEffect, useState } from 'react'
 import { useText } from 'preact-i18n'
 import Image from 'components/Image'
@@ -18,26 +19,44 @@ const container = (visible: boolean) =>
     margin('mx-auto')
   )
 export default () => {
-  const slug = useSlug()
-  const [isValid, setIsValid] = useState(false)
-  const src = `/covers/${slug}.webp`
+  const pageSlug = useSlug()
+  const [realSlug, setRealSlug] = useState('')
+  const [src, setSrc] = useState('')
+
+  // If slug changes, update src
   useEffect(() => {
-    if (!slug) {
-      setIsValid(false)
-      return
+    // If there is no slug, reset src and return
+    if (!realSlug) return setSrc('')
+    // Reset src
+    setSrc('')
+    // Remember slug when fetched
+    const realSlugWhenFetched = realSlug
+    async function fetchSrc(slug: string) {
+      const { status } = await fetch(`/covers/${slug}.webp`)
+      if (realSlugWhenFetched !== slug) return
+      if (status === 200) {
+        setSrc(`/covers/${slug}.webp`)
+      } else {
+        setSrc('')
+      }
     }
-    setIsValid(false)
-    void fetch(src)
-      .then(({ status }) => {
-        setIsValid(status === 200)
-      })
-      .catch(() => {
-        setIsValid(false)
-      })
-  }, [src, slug])
+    void fetchSrc(realSlug)
+  }, [realSlug])
+
+  // When page is changed, update the slug
+  useEffect(() => {
+    setRealSlug('')
+    const pageSlugWhenFetched = pageSlug
+    async function fetchRealSlug(pageSlug: string) {
+      const { ru } = await fetchAllEditionsSlugs(pageSlug)
+      if (pageSlugWhenFetched !== pageSlug) return
+      setRealSlug(ru)
+    }
+    void fetchRealSlug(pageSlug)
+  }, [pageSlug])
   const { chapterCoverAlt } = useText('chapterCoverAlt')
   return (
-    <div className={container(isValid)}>
+    <div className={container(!!src)}>
       <Image src={src} alt={chapterCoverAlt} />
     </div>
   )

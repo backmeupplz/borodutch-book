@@ -28,6 +28,7 @@ function HeadSuspended() {
   const title = flattenToc(toc[language]).find(
     (chapter) => chapter.slug === slug
   )?.title
+  if (!title) return ususalTitle()
 
   return <Head title={`${title}${separator}${full}`} />
 }
