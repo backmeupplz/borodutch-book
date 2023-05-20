@@ -157,7 +157,7 @@ export default function () {
           src="/images/cover.webp"
           alt={coverAlt}
           width="175"
-          height="257.5"
+          height="257"
         />
       </div>
       <DownloadButtons />

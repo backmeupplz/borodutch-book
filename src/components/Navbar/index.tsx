@@ -63,7 +63,12 @@ export default function () {
       <div className={content}>
         <Link href="#/" className={logo}>
           <div className={hiddenOnMobile}>
-            <Image src="/icons/logo.svg" alt={logoAlt} />
+            <Image
+              src="/icons/logo.webp"
+              width="40"
+              height="40"
+              alt={logoAlt}
+            />
           </div>
           <LogoText>
             <Text id="title.full" />
