@@ -36,8 +36,7 @@ export default function () {
   const { text1 } = useText('description.text1')
   const { text2 } = useText('description.text2')
   const { text3 } = useText('description.text3')
-  const { text4 } = useText('description.text4')
-  const texts = [text1, text2, text3, text4].filter((v) => !!v)
+  const texts = [text1, text2, text3].filter((v) => !!v)
 
   return (
     <div class={main}>
