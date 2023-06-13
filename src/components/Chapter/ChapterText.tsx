@@ -71,7 +71,7 @@ function renderChild(child: Content, key: string) {
     child.class?.includes('Numbered-list')
   ) {
     return <li className={text(true)}>{extractChildren(child.children)}</li>
-  } else if (child.class?.includes('CharOverride-2')) {
+  } else if (child.class?.includes('CharOverride-4')) {
     return (
       <sup className={superscript}>
         {child.children?.map((supChild, i) =>
