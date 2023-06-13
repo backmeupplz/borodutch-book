@@ -151,7 +151,7 @@ function extractChildren(contents: readonly Content[] = []) {
     'No-break',
     'Bullet-list',
     'Numbered-list',
-    'CharOverride-2',
+    'CharOverride-4',
     'Subheading',
     'Lined-title',
     'Lined-title-parsed',
