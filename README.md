@@ -14,7 +14,7 @@ This is the website for the Borodutch Book.
 | ------------------------------- | ----------------------------- |
 | `VITE_ALCHEMY_KEY`              | Alchemy API key               |
 | `VITE_BACKEND_URL`              | URL of the backend            |
-| `VITE_WALLETCONNECT_PROJECT_ID` | WalletConnect project ID      |
+| `VITE_WALLETCONNECT_PROJECT_ID` | Wallet Connect project ID     |
 | `NODE_ENV`                      | `development` or `production` |
 
 Also, please, consider looking at `.env.sample`.
