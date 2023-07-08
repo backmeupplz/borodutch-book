@@ -8,7 +8,7 @@ import {
 import {
   WagmiConfig,
   configureChains,
-  createClient,
+  createConfig,
   useAccount,
   useEnsName,
 } from 'wagmi'
@@ -21,20 +21,21 @@ import WalletContext from 'context/WalletContext'
 import env from 'helpers/env'
 import useBalance from 'hooks/useBalance'
 
-const { chains, provider } = configureChains(
+const { chains, publicClient } = configureChains(
   [mainnet],
   [alchemyProvider({ apiKey: env.VITE_ALCHEMY_KEY }), publicProvider()]
 )
 
 const { connectors } = getDefaultWallets({
   appName: 'WDLaTY',
+  projectId: env.VITE_WALLETCONNECT_PROJECT_ID,
   chains,
 })
 
-const wagmiClient = createClient({
+const wagmiConfig = createConfig({
   autoConnect: true,
   connectors,
-  provider,
+  publicClient,
 })
 
 function Content({ children }: ChildrenProp) {
@@ -68,7 +69,7 @@ function Content({ children }: ChildrenProp) {
 
 export default function ({ children }: ChildrenProp) {
   return (
-    <WagmiConfig client={wagmiClient}>
+    <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider
         coolMode
         chains={chains}

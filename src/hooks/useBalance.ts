@@ -11,5 +11,5 @@ export default function (address: string) {
       '86597206928702930307486193712987064466367043993614253349341663474748447785515',
     ],
   })
-  return { ownsToken: +(data || 0) > 0, isLoading }
+  return { ownsToken: Number(data || 0) > 0, isLoading }
 }

@@ -1,7 +1,7 @@
 import { ArrowUpOnSquareIcon } from '@heroicons/react/24/outline'
 import { Suspense, useEffect, useState } from 'preact/compat'
 import { toast } from 'react-toastify'
-import { useAccount, useSigner } from 'wagmi'
+import { useAccount, useSignMessage } from 'wagmi'
 import { useSnapshot } from 'valtio'
 import { useText } from 'preact-i18n'
 import FreeSlugsStore from 'stores/FreeSlugsStore'
@@ -15,23 +15,33 @@ function ShareButtonSuspended({ ownsToken }: { ownsToken: boolean }) {
   const slug = useSlug()
   if (!slug) return null
   const isFree = freeSlugs.includes(slug)
-  const { data: signer, refetch } = useSigner()
+  const { data, isError, isSuccess, signMessage } = useSignMessage({
+    message: slug,
+  })
   const { address } = useAccount()
-  useEffect(() => {
-    void refetch({})
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ownsToken, address])
   const [signature, setSignature] = useState<string | undefined>('')
-  useEffect(() => {
-    setSignature('')
-  }, [slug])
   const { success } = useText('share.success')
   const { signatureSuccess } = useText('share.signatureSuccess')
   const { error: signatureError } = useText('share.error')
-  return isFree || (ownsToken && signer) ? (
+  useEffect(() => {
+    setSignature('')
+  }, [slug])
+  useEffect(() => {
+    if (isSuccess) {
+      setSignature(data)
+      toast(signatureSuccess, {
+        type: 'success',
+      })
+    } else if (isError) {
+      toast(signatureError, {
+        type: 'error',
+      })
+    }
+  }, [data, isSuccess, isError, slug, signatureError, signatureSuccess])
+  return isFree || (ownsToken && address) ? (
     <IconButton
-      onClick={async () => {
-        if (freeSlugs.includes(slug)) {
+      onClick={() => {
+        if (isFree) {
           void navigator.clipboard.writeText(window.location.href)
           toast(success, {
             type: 'success',
@@ -45,16 +55,7 @@ function ShareButtonSuspended({ ownsToken }: { ownsToken: boolean }) {
               type: 'success',
             })
           } else {
-            try {
-              setSignature(await signer?.signMessage(slug))
-              toast(signatureSuccess, {
-                type: 'success',
-              })
-            } catch (error) {
-              toast(signatureError, {
-                type: 'error',
-              })
-            }
+            signMessage()
           }
         }
       }}

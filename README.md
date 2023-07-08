@@ -10,11 +10,12 @@ This is the website for the Borodutch Book.
 
 ## Environment variables
 
-| Name               | Description                   |
-| ------------------ | ----------------------------- |
-| `VITE_ALCHEMY_KEY` | Alchemy API key               |
-| `VITE_BACKEND_URL` | URL of the backend            |
-| `NODE_ENV`         | `development` or `production` |
+| Name                            | Description                   |
+| ------------------------------- | ----------------------------- |
+| `VITE_ALCHEMY_KEY`              | Alchemy API key               |
+| `VITE_BACKEND_URL`              | URL of the backend            |
+| `VITE_WALLETCONNECT_PROJECT_ID` | WalletConnect project ID      |
+| `NODE_ENV`                      | `development` or `production` |
 
 Also, please, consider looking at `.env.sample`.
 
