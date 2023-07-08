@@ -27,6 +27,7 @@ jobs:
         env:
           VITE_ALCHEMY_KEY: ${{ secrets.VITE_ALCHEMY_KEY }}
           VITE_BACKEND_URL: ${{ secrets.VITE_BACKEND_URL }}
+          VITE_WALLETCONNECT_PROJECT_ID: ${{ secrets.VITE_WALLETCONNECT_PROJECT_ID }}
           NODE_ENV: ${{ secrets.NODE_ENV }}
         run: yarn build
         shell: bash
