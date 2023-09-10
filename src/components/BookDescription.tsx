@@ -1,4 +1,8 @@
-import { ArrowDownTrayIcon, BookOpenIcon } from '@heroicons/react/24/outline'
+import {
+  ArrowDownTrayIcon,
+  BookOpenIcon,
+  ArrowUpRightIcon,
+} from '@heroicons/react/24/outline'
 import { Text } from 'components/Text'
 import { toast } from 'react-toastify'
 import { useLocation } from 'wouter'
@@ -64,6 +68,7 @@ function DownloadButtonsSuspended() {
   const { signatures } = useSnapshot(SignatureStore)
   const signature = signatures[language]
   const { readOnline } = useText('readOnline')
+  const { buyOnAmazon } = useText('buyOnAmazon')
   const { readOnlineSlug } = useText('readOnlineSlug')
   const { download: downloadText } = useText('download')
   const { downloadFailure } = useText('downloadFailure')
@@ -74,6 +79,13 @@ function DownloadButtonsSuspended() {
         icon={<BookOpenIcon className={icon} />}
         onClick={() => {
           setLocation(`/${readOnlineSlug}`)
+        }}
+      />
+      <Button
+        title={buyOnAmazon}
+        icon={<ArrowUpRightIcon className={icon} />}
+        onClick={() => {
+          window.open('https://a.co/d/bVn7JPU', '_blank')
         }}
       />
       {formats.map((format) => (

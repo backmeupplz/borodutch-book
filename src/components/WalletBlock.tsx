@@ -13,6 +13,10 @@ export default function () {
           <IntlText id="wallet.buyDescription.link" />
         </Link>
         <IntlText id="wallet.buyDescription.connectWallet" />
+        <Link url="https://a.co/d/f0pulXR">
+          <IntlText id="wallet.buyDescription.buyOnAmazon" />
+        </Link>
+        !
       </Text>
       <Wallet />
       <WalletNote />

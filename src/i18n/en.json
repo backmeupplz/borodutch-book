@@ -10,6 +10,7 @@
     "open": "are open source, enjoy!"
   },
   "readOnline": "Read online",
+  "buyOnAmazon": "Buy on Amazon",
   "readOnlineSlug": "introduction",
   "download": "Download",
   "description": {
@@ -38,7 +39,8 @@
     "buyDescription": {
       "free": "Part of the book is available for free, but to get access to most chapters and download files, ",
       "link": "you need to buy a book token on OpenSea",
-      "connectWallet": " and connect your wallet to this website."
+      "connectWallet": " and connect your wallet to this website. Or you can ",
+      "buyOnAmazon": "buy the book on Amazon"
     },
     "buttons": {
       "connectWallet": "Connect wallet!",
