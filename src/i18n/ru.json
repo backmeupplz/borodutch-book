@@ -27,7 +27,7 @@
   "openQuotes": "«",
   "closeQuotes": "»",
   "toc": {
-    "loading": "Загружаю оглавлениеs...",
+    "loading": "Загружаю оглавление...",
     "errorLoading": "Не получилось загрузить оглавление"
   },
   "chapter": {
@@ -65,7 +65,7 @@
     "loading": "Загружаю форматы...",
     "errorLoading": "Не получилось загрузить форматы"
   },
-  "downloadFailure": "Failed to download",
+  "downloadFailure": "Не получилось скачать",
   "version": {
     "loading": "Загружаю версию...",
     "errorLoading": "Не получилось загрузить версию"

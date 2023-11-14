@@ -65,7 +65,7 @@
     "loading": "Loading formats...",
     "errorLoading": "Error loading formats"
   },
-  "downloadFailure": "Не получилось скачать",
+  "downloadFailure": "Failed to download",
   "version": {
     "loading": "Loading version...",
     "errorLoading": "Error loading version"
