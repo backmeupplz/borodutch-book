@@ -41,7 +41,11 @@ class ChapterStore {
         signature
       ).then(async (chapter) => {
         if (!chapter.beginning.length && chapter.level === 1) {
-          const flatToc = flattenToc(await this.toc[edition])
+          let flatToc = flattenToc(await this.toc[edition])
+          if (!flatToc.length) {
+            this.fetchToc(edition)
+            flatToc = flattenToc(await this.toc[edition])
+          }
           const chapterIndex = flatToc.findIndex((item) => item.slug === slug)
           return {
             ...chapter,
