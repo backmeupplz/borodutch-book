@@ -22,16 +22,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - uses: oven-sh/setup-bun@v2
       - name: Install modules
-        run: yarn
+        run: bun install --frozen-lockfile
         shell: bash
       - name: Build code
         env:
           VITE_ALCHEMY_KEY: ${{ secrets.VITE_ALCHEMY_KEY }}
           VITE_BACKEND_URL: ${{ secrets.VITE_BACKEND_URL }}
-          VITE_WALLETCONNECT_PROJECT_ID: ${{ secrets.VITE_WALLETCONNECT_PROJECT_ID }}
           NODE_ENV: ${{ secrets.NODE_ENV }}
-        run: yarn build
+        run: bun run build
         shell: bash
       - name: Setup Pages
         uses: actions/configure-pages@v5

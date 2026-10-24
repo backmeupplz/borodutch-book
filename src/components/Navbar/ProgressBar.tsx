@@ -1,4 +1,4 @@
-import { useScrollProgress } from '@bogachenkov/react-scrolling-progress'
+import { useEffect, useState } from 'preact/hooks'
 import classnames, {
   backgroundColor,
   display,
@@ -13,13 +13,20 @@ const separator = classnames(
   transitionProperty('transition-colors')
 )
 export default function () {
-  const { progressString } = useScrollProgress()
-  return (
-    <div
-      className={separator}
-      style={{
-        width: progressString,
-      }}
-    />
-  )
+  const [progress, setProgress] = useState(0)
+  useEffect(() => {
+    const update = () => {
+      const { scrollTop, scrollHeight, clientHeight } = document.documentElement
+      const scrollable = scrollHeight - clientHeight
+      setProgress(scrollable > 0 ? (scrollTop / scrollable) * 100 : 0)
+    }
+    update()
+    window.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
+    return () => {
+      window.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+    }
+  }, [])
+  return <div className={separator} style={{ width: `${progress}%` }} />
 }

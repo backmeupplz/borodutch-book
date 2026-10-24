@@ -1,6 +1,6 @@
-import { PersistableStore } from '@big-whale-labs/stores'
 import { proxy } from 'valtio'
 import Language from 'models/Language'
+import PersistableStore from 'helpers/PersistableStore'
 
 function getLanguage() {
   const language: string =

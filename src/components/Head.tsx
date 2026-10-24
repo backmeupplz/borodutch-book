@@ -1,5 +1,4 @@
-import { Helmet } from 'react-helmet'
-import { Suspense } from 'preact/compat'
+import { Suspense, useEffect } from 'preact/compat'
 import { useLocation } from 'wouter'
 import { useSnapshot } from 'valtio'
 import { useText } from 'preact-i18n'
@@ -9,13 +8,15 @@ import flattenToc from 'helpers/flattenToc'
 import useSlug from 'hooks/useSlug'
 
 function Head({ title }: { title: string }) {
-  return (
-    <Helmet>
-      <title>{title}</title>
-      <meta property="og:title" content={title} />
-      <meta name="twitter:title" content={title} />
-    </Helmet>
-  )
+  useEffect(() => {
+    document.title = title
+    for (const selector of [
+      'meta[property="og:title"]',
+      'meta[name="twitter:title"]',
+    ])
+      document.querySelector(selector)?.setAttribute('content', title)
+  }, [title])
+  return null
 }
 
 function HeadSuspended() {

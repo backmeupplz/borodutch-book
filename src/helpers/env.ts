@@ -1,7 +1,8 @@
-import { cleanEnv, str } from 'envalid'
+const { VITE_BACKEND_URL, VITE_ALCHEMY_KEY } = import.meta.env as Record<
+  string,
+  string | undefined
+>
+if (!VITE_BACKEND_URL)
+  throw new Error('VITE_BACKEND_URL is not set, see .env.sample')
 
-export default cleanEnv(import.meta.env, {
-  VITE_BACKEND_URL: str(),
-  VITE_ALCHEMY_KEY: str(),
-  VITE_WALLETCONNECT_PROJECT_ID: str(),
-})
+export default { VITE_BACKEND_URL, VITE_ALCHEMY_KEY }

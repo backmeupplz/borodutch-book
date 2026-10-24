@@ -52,6 +52,7 @@
       "buyToken": "Buy token!"
     },
     "connect": "You need to connect your address to this website.",
+    "noWallet": "No browser wallet found. Install a wallet extension like MetaMask or Rabby, or open this page in your wallet app's browser.",
     "buyToken": "You need to buy a token on OpenSea to get access to the book.",
     "signMessage": "You need to sign a message to get access to the book.",
     "success": "Congratulations, you successfully signed the message — enjoy unlimited access to the book!"

@@ -5,9 +5,7 @@ import {
   WalletIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
-import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { Text, useText } from 'preact-i18n'
-import { useSignMessage } from 'wagmi'
 import { useSnapshot } from 'valtio'
 import Button from 'components/Button'
 import LanguageStore from 'stores/LanguageStore'
@@ -32,6 +30,7 @@ import classnames, {
   wordBreak,
 } from 'classnames/tailwind'
 import message from 'helpers/message'
+import signMessage from 'helpers/signMessage'
 
 const container = classnames(
   display('flex'),
@@ -68,20 +67,18 @@ export default function () {
   const { language } = useSnapshot(LanguageStore)
   const { signatures } = useSnapshot(SignatureStore)
   const signature = signatures[language]
-  const { signMessageAsync: sign } = useSignMessage()
   const { connectWallet } = useText('wallet.buttons.connectWallet')
   const { buyToken } = useText('wallet.buttons.buyToken')
   const { createSignature } = useText('wallet.buttons.createSignature')
   return (
     <WalletContext.Consumer>
-      {({ address, connected, name, ownsToken }) => (
+      {({ address, connected, name, ownsToken, connect }) => (
         <div className={container}>
           {!connected && (
-            <ConnectButton
-              label={connectWallet}
-              accountStatus="address"
-              chainStatus="none"
-              showBalance={false}
+            <Button
+              title={connectWallet}
+              icon={<WalletIcon className={icon} />}
+              onClick={connect}
             />
           )}
           {connected && (
@@ -119,9 +116,10 @@ export default function () {
                   icon={<KeyIcon className={icon} />}
                   onClick={async () => {
                     try {
-                      SignatureStore.signatures[language] = await sign({
-                        message: message(),
-                      })
+                      SignatureStore.signatures[language] = await signMessage(
+                        message(),
+                        address as string
+                      )
                     } catch (error) {
                       console.error(error)
                     }

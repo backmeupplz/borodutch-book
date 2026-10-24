@@ -1,5 +1,5 @@
-import { PersistableStore } from '@big-whale-labs/stores'
 import { proxy } from 'valtio'
+import PersistableStore from 'helpers/PersistableStore'
 import Theme from 'models/Theme'
 
 class ThemeStore extends PersistableStore {

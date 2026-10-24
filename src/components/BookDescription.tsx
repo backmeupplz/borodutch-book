@@ -30,7 +30,6 @@ import classnames, {
   overflow,
   width,
 } from 'classnames/tailwind'
-import download from 'downloadjs'
 import env from 'helpers/env'
 import message from 'helpers/message'
 
@@ -114,7 +113,11 @@ function DownloadButtonsSuspended() {
                 return resp.blob()
               })
               .then(function (blob) {
-                return download(blob, `wdlaty.${format}`)
+                const link = document.createElement('a')
+                link.href = URL.createObjectURL(blob)
+                link.download = `wdlaty.${format}`
+                link.click()
+                setTimeout(() => URL.revokeObjectURL(link.href), 1000)
               })
               .catch((error) => {
                 if (error instanceof Error) {

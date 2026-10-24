@@ -2,15 +2,36 @@ name: Build and lint code
 on:
   pull_request:
     types: [synchronize, opened]
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   build-and-lint-code:
-    runs-on: ubuntu-latest
+    # Our own PRs run on the Mac runners; outsiders' PRs (AGit via the github bot) stay on Linux
+    runs-on: ${{ contains(fromJSON('["backmeupplz","renovate","claude"]'), github.event.pull_request.user.login) && 'macos-latest' || 'ubuntu-latest' }}
     steps:
+      # Skip the ~130 MB of cover images (public/covers): build and lint never read them, and fetching them was half the job
       - uses: actions/checkout@v4
-      # Node 22: vite 6 and yarn 4 need 18+, the shared Borodutch/build-and-lint-code action pins 16
-      - uses: actions/setup-node@v4
         with:
-          node-version: '22'
-      - run: corepack enable && yarn install --immutable
-      - run: yarn build
-      - run: yarn lint
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/public/covers/
+      # Mac: Homebrew bun; its global package cache persists between runs, so a warm install is mostly hardlinks
+      - if: runner.os == 'macOS'
+        run: echo /opt/homebrew/bin >> "$GITHUB_PATH"
+      - if: runner.os == 'Linux'
+        uses: oven-sh/setup-bun@v2
+      # Linux caches node_modules (a hit skips the install)
+      - id: modules
+        if: runner.os == 'Linux'
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: modules-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+      - if: steps.modules.outputs.cache-hit != 'true'
+        run: bun install --frozen-lockfile
+      # Sequential: the build regenerates src/classnames/tailwind.ts, which lint checks
+      - run: bun run build
+      - run: bun run lint
