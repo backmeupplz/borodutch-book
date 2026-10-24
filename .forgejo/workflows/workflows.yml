@@ -6,4 +6,11 @@ jobs:
   build-and-lint-code:
     runs-on: ubuntu-latest
     steps:
-      - uses: Borodutch/build-and-lint-code@v1.0.3
+      - uses: actions/checkout@v4
+      # Node 22: vite 6 and yarn 4 need 18+, the shared Borodutch/build-and-lint-code action pins 16
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: corepack enable && yarn install --immutable
+      - run: yarn build
+      - run: yarn lint

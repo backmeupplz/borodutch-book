@@ -1,7 +1,7 @@
 import {
   ArrowDownTrayIcon,
-  BookOpenIcon,
   ArrowUpRightIcon,
+  BookOpenIcon,
 } from '@heroicons/react/24/outline'
 import { Text } from 'components/Text'
 import { toast } from 'react-toastify'

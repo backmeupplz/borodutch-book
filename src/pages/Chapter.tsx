@@ -50,9 +50,8 @@ function ChapterSuspended({ slug }: { slug: string }) {
     window.scrollTo({ top: y, behavior: 'smooth' })
   }
   useEffect(() => {
-    const offset = document
-      .getElementById('navbar')
-      ?.getBoundingClientRect().height
+    const offset = document.getElementById('navbar')?.getBoundingClientRect()
+      .height
     _scrollTo(anchor, offset)
   }, [anchor, chapter])
   return (
