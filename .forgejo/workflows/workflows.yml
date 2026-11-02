@@ -8,7 +8,7 @@ concurrency:
 jobs:
   build-and-lint-code:
     # Our own PRs run on the Mac runners; outsiders' PRs (AGit via the github bot) stay on Linux
-    runs-on: ${{ contains(fromJSON('["backmeupplz","renovate","claude"]'), github.event.pull_request.user.login) && 'macos-latest' || 'ubuntu-latest' }}
+    runs-on: ${{ contains(fromJSON('["backmeupplz","renovate","claude","radiant"]'), github.event.pull_request.user.login) && 'macos-latest' || 'ubuntu-latest' }}
     steps:
       # Skip the ~130 MB of cover images (public/covers): build and lint never read them, and fetching them was half the job
       - uses: actions/checkout@v4
